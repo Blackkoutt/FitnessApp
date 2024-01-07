@@ -1,0 +1,34 @@
+
+:
+java:S1643—"Use a StringBuilder instead.(ŠÀ¢³8÷ùéƒÎ1
+
+java:S1450"_Remove the "productViewModel" field and declare it as a local variable in the relevant methods.(¤ì˜¶ûÿÿÿÿ8œúéƒÎ1
+]	java:S125"<This block of commented-out lines of code should be removed.(å¼²şÿÿÿÿ8ŸúéƒÎ1
+\
+java:S1161 ":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8 úéƒÎ1
+X	java:S125#"<This block of commented-out lines of code should be removed.(Å«†³8¡úéƒÎ1
+X	java:S125."<This block of commented-out lines of code should be removed.( Íâç8¥úéƒÎ1
+]	java:S1251"<This block of commented-out lines of code should be removed.(ÒòàÁûÿÿÿÿ8¦úéƒÎ1
+]	java:S1253"<This block of commented-out lines of code should be removed.(ù˜•Íıÿÿÿÿ8¦úéƒÎ1
+E
+java:S11859"(Remove this method to simply inherit it.(±íòÑ8¦úéƒÎ1
+X	java:S125;"<This block of commented-out lines of code should be removed.(ƒ”·°8¦úéƒÎ1
+s
+java:S1450B"VRemove the "product" field and declare it as a local variable in the relevant methods.(š¥äø8¨úéƒÎ1
+X	java:S125C"<This block of commented-out lines of code should be removed.(­êÑ8©úéƒÎ1
+X	java:S125O"<This block of commented-out lines of code should be removed.(”™ûÈ8ªúéƒÎ1
+Y	java:S125‰"<This block of commented-out lines of code should be removed.(õ–Ö8«úéƒÎ1
+Y	java:S125"<This block of commented-out lines of code should be removed.(»æãü8¬úéƒÎ1
+I
+java:S1481"&Remove this unused "a" local variable.(–ÎåÌûÿÿÿÿ8¬úéƒÎ1
+Y	java:S125œ"<This block of commented-out lines of code should be removed.(›×‚ë8®úéƒÎ1
+Y	java:S125¡"<This block of commented-out lines of code should be removed.(¡é††8®úéƒÎ1
+^	java:S125¼"<This block of commented-out lines of code should be removed.(ÁœŒ¾ùÿÿÿÿ8°úéƒÎ1
+Y	java:S125Î"<This block of commented-out lines of code should be removed.(’’’8±úéƒÎ1
+Y	java:S125Ô"<This block of commented-out lines of code should be removed.(Õä˜Ç8²úéƒÎ1
+I
+java:S1481Õ"&Remove this unused "a" local variable.(–ÎåÌûÿÿÿÿ8²úéƒÎ1
+H
+java:S1068B"+Remove this unused "product" private field.(š¥äø8²úéƒÎ1
+F
+java:S1068¯"(Remove this unused "mans" private field.(¤Š…8²úéƒÎ1

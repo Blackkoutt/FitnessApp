@@ -1,0 +1,11 @@
+
+k	java:S117w"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¨ÓÊüÿÿÿÿ
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(÷‡¤ú
+¯
+java:S6548,"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ø¯Ş
+A
+java:S1481G"&Remove this unused "b" local variable.(¬Ú®Èıÿÿÿÿ
+I
+java:S1481r".Remove this unused "detailsId" local variable.(¶ŞÚÂúÿÿÿÿ
+t
+java:S1128"XRemove this unused import 'com.example.fitnessapp.Database.Models.ProductWithRelations'.(ú¾A8ñÆ‘ƒÎ1

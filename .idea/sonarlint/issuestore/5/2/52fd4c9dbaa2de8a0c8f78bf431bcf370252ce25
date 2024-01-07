@@ -1,0 +1,4 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ŠÀéÉüÿÿÿÿ
+w	java:S116"[Rename this field "publication_date" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸ûÓò8™†î‡Î1
+o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ú˜óþÿÿÿÿ8æåó‡Î1

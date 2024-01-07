@@ -1,0 +1,23 @@
+
+X	java:S125("<This block of commented-out lines of code should be removed.(„íşá8‚Ã¾‰Î1
+\
+java:S1161+":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8ƒÃ¾‰Î1
+W	java:S1251"<This block of commented-out lines of code should be removed.(¾Ù‰b8„Ã¾‰Î1
+E
+java:S1185Z"(Remove this method to simply inherit it.(±íòÑ8Ã¾‰Î1
+X	java:S125\"<This block of commented-out lines of code should be removed.(ƒ”·°8Ã¾‰Î1
+p
+java:S1450g"SRemove the "post" field and declare it as a local variable in the relevant methods.(¥Ã·•8’Ã¾‰Î1
+X	java:S125f"<This block of commented-out lines of code should be removed.(³ü±á8’Ã¾‰Î1
+]	java:S125l"<This block of commented-out lines of code should be removed.(œÅ¬€ıÿÿÿÿ8“Ã¾‰Î1
+W	java:S125{"<This block of commented-out lines of code should be removed.(·Õ`8”Ã¾‰Î1
+^	java:S125ˆ"<This block of commented-out lines of code should be removed.(¨“šĞüÿÿÿÿ8šÃ¾‰Î1
+y
+java:S1450Ù"VRemove the "comment" field and declare it as a local variable in the relevant methods.(‡Öºäÿÿÿÿÿ8 Ã¾‰Î1
+Y	java:S125Ø"<This block of commented-out lines of code should be removed.(³ü±á8¡Ã¾‰Î1
+^	java:S125Ş"<This block of commented-out lines of code should be removed.(œÅ¬€ıÿÿÿÿ8¡Ã¾‰Î1
+X	java:S125é"<This block of commented-out lines of code should be removed.(·Õ`8¢Ã¾‰Î1
+E
+java:S1068g"(Remove this unused "post" private field.(¥Ã·•8£Ã¾‰Î1
+N
+java:S1068Ù"+Remove this unused "comment" private field.(‡Öºäÿÿÿÿÿ8£Ã¾‰Î1

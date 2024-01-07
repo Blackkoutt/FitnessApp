@@ -1,5 +1,6 @@
 package com.example.fitnessapp.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
@@ -25,10 +27,15 @@ import com.example.fitnessapp.REST.PostContainer;
 import com.example.fitnessapp.REST.PostService;
 import com.example.fitnessapp.REST.RetrofitInstance;
 import com.example.fitnessapp.databinding.FragmentHomeBinding;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,8 +43,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
-
-    //private FragmentHomeBinding binding;
     private View view;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -45,20 +50,10 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         fetchPostsData();
         return view;
-        /*HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;*/
     }
     private void fetchPostsData(){
         PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
         Call<PostContainer> postApiCall = postService.findPosts();
-
         postApiCall.enqueue(new Callback<PostContainer>() {
             @Override
             public void onResponse(Call<PostContainer> call, Response<PostContainer> response) {
@@ -76,6 +71,36 @@ public class HomeFragment extends Fragment {
                         BaseTransientBottomBar.LENGTH_LONG).show();
             }
         });
+    }
+    private void addCommentToPost(Post post, List<Comment> comments, CommentAdapter adapter) {
+        PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
+
+        Call<Void> addCommentCall = postService.addComment(post.getId(), comments);
+        addCommentCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("API Success", "Comment added successfully");
+                    updateCommentView(post, comments, adapter);
+                } else {
+                    Log.e("API Error", "Error adding comment: " + response.message());
+                    Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                            BaseTransientBottomBar.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                String errorMessage = "Error: " + t.getMessage();
+                Log.e("API Error", errorMessage);
+                Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                        BaseTransientBottomBar.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void updateCommentView(Post post, List<Comment> comments, CommentAdapter adapter){
+        post.setCommentList(comments);
+        adapter.notifyDataSetChanged();
     }
     private void setupPostListView(List<Post> postList){
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
@@ -97,22 +122,15 @@ public class HomeFragment extends Fragment {
         private final TextView postDescriptionTextView;
         private final TextView postPublicationDateTextView;
         private final WebView webView;
+        private final TextInputEditText userName;
+        private final TextInputEditText commentContent;
+        private final MaterialButton buttonAddComment;
         private final RecyclerView commentRecyclerView;
+        private final CommentAdapter adapter;
 
-        //private final ImageView bookImageView;
         private Post post;
         public PostHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.post_list_item, parent, false));
-
-            // Po kliknięciu w element listy tworzona jest nowa aktywność do wyświetlenia szczegółów ksiązki
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                    intent.putExtra("BOOK_EXTRA", book);
-                    startActivity(intent);
-                }
-            });*/
 
             postTitleTextView = itemView.findViewById(R.id.post_title);
             postDescriptionTextView = itemView.findViewById(R.id.post_description);
@@ -120,7 +138,12 @@ public class HomeFragment extends Fragment {
             postPublicationDateTextView = itemView.findViewById(R.id.post_pub_date);
             webView = itemView.findViewById(R.id.webView);
             commentRecyclerView = itemView.findViewById(R.id.comment_recyclerview);
-            //bookImageView = itemView.findViewById(R.id.img_cover);
+            userName = itemView.findViewById(R.id.text_input_EditText_name);
+            commentContent = itemView.findViewById(R.id.text_input_EditText_comment_content);
+
+            adapter = new CommentAdapter();
+            buttonAddComment = itemView.findViewById(R.id.post_comment_button);
+
         }
         public void bind(Post post){
             this.post = post;
@@ -134,10 +157,32 @@ public class HomeFragment extends Fragment {
                 postPublicationDateTextView.setText(getString(R.string.publication_date)+" "+post.getPublicationDate());
 
                 //RecyclerView commentRecyclerView = view.findViewById(R.id.comment_recyclerview);
-                final CommentAdapter adapter = new CommentAdapter();
+                //final
                 adapter.setComments(post.getCommentList());
                 commentRecyclerView.setAdapter(adapter);
                 commentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                buttonAddComment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String newUserName = String.valueOf(userName.getText());
+                        String newCommentContent = String.valueOf(commentContent.getText());
+                        if(newUserName!=""&&newCommentContent!=""){
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                            String currentDate = sdf.format(new Date());
+                            Comment newComment = new Comment(newUserName, currentDate, newCommentContent);
+                            List<Comment> commentList = post.getCommentList();
+                            commentList.add(0,newComment);
+                            addCommentToPost(post, commentList, adapter);
+
+                            userName.setText("");
+                            commentContent.setText("");
+                            userName.clearFocus();
+                            commentContent.clearFocus();
+                            InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
+                    }
+                });
 
             }
         }
@@ -218,19 +263,9 @@ public class HomeFragment extends Fragment {
         public CommentHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.comment_list_item, parent, false));
 
-            // Po kliknięciu w element listy tworzona jest nowa aktywność do wyświetlenia szczegółów ksiązki
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-                    intent.putExtra("BOOK_EXTRA", book);
-                    startActivity(intent);
-                }
-            });*/
             commentAuthorTextView = itemView.findViewById(R.id.comment_author);
             commentPublicationDateTextView = itemView.findViewById(R.id.comment_publication_date);
             commentContentTextView = itemView.findViewById(R.id.comment_content);
-            //bookImageView = itemView.findViewById(R.id.img_cover);
         }
         public void bind(Comment comment){
             this.comment = comment;

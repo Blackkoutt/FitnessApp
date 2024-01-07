@@ -1,21 +1,79 @@
 {
-    "posts":{
-        "posts":[
-            {
-                "title": "Jak szybko i bezpiecznie stracić na wadze ?",
-                "description": "Obecność nadwagi może prowadzić do wielu problemów zdrowotnych, takich jak choroby serca, cukrzyca i inne schorzenia. Jeśli zdecydowałeś się na zdrowszy tryb życia i chcesz szybko, ale jednocześnie bezpiecznie schudnąć, to kilka prostych kroków może pomóc Ci rozpocząć tę podróż. Pamiętaj, że każdy organizm jest inny, dlatego ważne jest, aby przed podjęciem jakichkolwiek drastycznych zmian w diecie lub stylu życia skonsultować się z lekarzem.",
-                "author": "Jan Kowalski",
-                "publication_date": "06.01.2024",
-                "video": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/PYZI18eJURA?si=JYf-Q_lvYGTyPwMa\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
-                "comments":[
-                    {
-                        "author": "Anonymous",
-                        "publication_date":"06.01.2024",
-                        "content":"Super poradnik !"
-                    } 
-                ]         
-            }
-        ]
-    }
-    
+	"posts": [
+		{
+			"id": 1,
+			"title": "Jak szybko i bezpiecznie schudnąć?",
+			"description": "Opis pierwszego posta...",
+			"author": "Jan Kowalski",
+			"publication_date": "06.01.2024",
+			"video": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/PYZI18eJURA?si=JYf-Q_lvYGTyPwMa\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
+			"comments": [
+				{
+					"author": "d",
+					"content": "d",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "g",
+					"content": "g",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "com",
+					"content": "com",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "g",
+					"content": "g",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "g",
+					"content": "g",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "f",
+					"content": "f",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "nowy1",
+					"content": "nowy1",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "nowy",
+					"content": "nowy",
+					"publication_date": "07.01.2024"
+				},
+				{
+					"author": "Anonymous",
+					"content": "Super poradnik!",
+					"publication_date": "06.01.2024"
+				},
+				{
+					"author": "a",
+					"content": "a",
+					"publication_date": "07.01.2024"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"title": "Inny post",
+			"description": "Opis drugiego posta...",
+			"author": "Jan Kowalski",
+			"publication_date": "06.01.2024",
+			"video": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/PYZI18eJURA?si=JYf-Q_lvYGTyPwMa\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
+			"comments": [
+				{
+					"author": "Anonymous",
+					"publication_date": "06.01.2024",
+					"content": "Super poradnik!"
+				}
+			]
+		}
+	]
 }
