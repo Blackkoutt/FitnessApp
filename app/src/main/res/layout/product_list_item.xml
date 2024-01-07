@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/item_holder_layout_style">
+    <View
+        style="@style/view_style"/>
+    <LinearLayout
+        style="@style/item_layout">
+
+        <TextView
+            android:id="@+id/product_category"
+            android:text="AAAAAA"
+            style="@style/author_title_text_view"
+            />
+        <TextView
+            android:id="@+id/product_manufacturer"
+            android:text="BBBBBBBBB"
+            android:layout_marginRight="@dimen/title_margin"
+            style="@style/author_title_text_view" />
+        <TextView
+            android:id="@+id/product_unit"
+            android:text="AAAAAA"
+            style="@style/author_title_text_view"
+            />
+        <TextView
+            android:id="@+id/product_name"
+            android:text="AAAAAA"
+            style="@style/author_title_text_view"
+            />
+        <TextView
+            android:id="@+id/product_details"
+            android:text="AAAAAA"
+            style="@style/author_title_text_view"
+            />
+
+    </LinearLayout>
+</LinearLayout>

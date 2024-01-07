@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FitnessApp</string>
+    <string name="title_home">Strona główna</string>
+    <string name="title_products">Produkty</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="author">Author:</string>
+    <string name="publication_date">Data publikacji:</string>
+    <string name="enter_name">Imię i nazwisko</string>
+    <string name="enter_comment">Treść komentarza</string>
+    <string name="add_comment">Dodaj komentarz</string>
+    <string name="other_comments">Pozostałe komentarze</string>
+    <string name="error">Coś poszło nie tak... Spróbuj ponownie później</string>
+</resources>

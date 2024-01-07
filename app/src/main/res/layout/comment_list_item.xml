@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="@dimen/corner_radius"
+    card_view:cardElevation="@dimen/elevation"
+    card_view:cardUseCompatPadding="true">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/comment_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="3dp"
+            android:text="AAAAAAAAAAAAAA"
+            android:layout_marginStart="10dp"
+            />
+        <TextView
+            android:id="@+id/comment_publication_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="AAAAAAAAAAAAAA"
+            android:textStyle="italic"
+            android:layout_below="@+id/comment_author"
+            android:layout_alignStart="@id/comment_author"
+            />
+        <TextView
+            android:id="@+id/comment_content"
+            android:layout_width="wrap_content"
+            android:text="AAAAAAAAAAAAAA"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/comment_publication_date"
+            android:layout_alignStart="@id/comment_publication_date"
+        />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
