@@ -1,15 +1,30 @@
 # Uruchomienie projektu
 
-**1. Instalacja json-server**
+**1. Instalacja  Node.js i npm**
 
    ```
-    npm install -g json-server
+    https://nodejs.org/en
    ```
-**2. Uruchomienie serwera REST**
-> [!NOTE]
-> W terminalu należy przejść do katalogu "rest" następnie wystarczy wpisać polecenie json-server db.json
-> Serwer defaultowo uruchamia się na porcie 3000. http://localhost:3000
+**2. Instalacja frameworku Express**
 
-**3. Uruchomienie aplikacji**
+Otwierając katalog "rest" w terminalu wykonaj polecenie:
+   ```
+    npm install express
+   ```
+**3. Uruchomienie serwera**
 
-Po uruchomieniu serwera json-server można uruchomić aplikację poprzez Android Studio.
+Otwierając katalog "rest" w terminalu wykonaj polecenie:
+   ```
+    node server.js
+   ```
+> [!NOTE]  
+> Serwer defaultowo uruchamia się na porcie 3000 http://localhost:3000.
+> 
+> Udostępnia on endpointy: GET /posts/:id, GET /posts/:id/comments, PUT /posts/:id/comments.
+
+**4. Uruchomienie aplikacji**
+
+Po uruchomieniu serwera server.js można uruchomić aplikację poprzez Android Studio.
+
+> [!TIP]
+> W przypadku usunięcia folderu node_modules można go zainstalować za pomocą polecenia: npm init -y.
