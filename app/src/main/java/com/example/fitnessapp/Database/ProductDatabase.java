@@ -43,7 +43,7 @@ import java.util.concurrent.Executors;
             exportSchema = true)
 public abstract class ProductDatabase extends RoomDatabase {
     private static ProductDatabase databaseInstance;
-    static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
+    public static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
 
     public abstract ProductDao productDao();
     public abstract CategoryDao categoryDao();
@@ -64,11 +64,9 @@ public abstract class ProductDatabase extends RoomDatabase {
 
     private static final RoomDatabase.Callback newCallback1 = new RoomDatabase.Callback(){
 
-
         @Override
-        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            int b=1;
             databaseWriteExecutor.execute(()->{
 
                 // Pobranie Dao
@@ -80,7 +78,7 @@ public abstract class ProductDatabase extends RoomDatabase {
                 ProductDetailsDao productDetailsDAO = databaseInstance.productDetailsDao();
 
                 // Wyczyszczenie tabel i sekwencji
-                categoryDAO.clearTable();
+                /*categoryDAO.clearTable();
                 categoryDAO.resetTableId();
                 manufacturerDAO.clearTable();
                 manufacturerDAO.resetTableId();
@@ -91,7 +89,7 @@ public abstract class ProductDatabase extends RoomDatabase {
                 productDAO.clearTable();
                 productDAO.resetTableId();
                 productDetailsDAO.clearTable();
-                productDetailsDAO.resetTableId();
+                productDetailsDAO.resetTableId();*/
 
                 // Kategoria
                 Category category = new Category("Napój");
@@ -102,11 +100,17 @@ public abstract class ProductDatabase extends RoomDatabase {
                 long manufacturerId = manufacturerDAO.insert(manufacturer);
 
                 // Jednostka miary
-                MeasureUnit measureUnit = new MeasureUnit("ml");
-                long unitId = measureUnitDAO.insert(measureUnit);
+                MeasureUnit measureUnit1 = new MeasureUnit("ml");
+                long unitId1 = measureUnitDAO.insert(measureUnit1);
+
+                MeasureUnit measureUnit2 = new MeasureUnit("szt");
+                long unitId2 = measureUnitDAO.insert(measureUnit2);
+
+                MeasureUnit measureUnit3 = new MeasureUnit("g");
+                long unitId3 = measureUnitDAO.insert(measureUnit3);
 
                 // Produkt
-                Product product = new Product("Sok", manufacturerId, unitId);
+                Product product = new Product("Sok", manufacturerId, unitId1);
                 long productId = productDAO.insert(product);
 
                 // Szczegóły produktu

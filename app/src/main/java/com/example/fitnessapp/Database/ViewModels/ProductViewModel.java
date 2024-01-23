@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
 import com.example.fitnessapp.Database.Repositories.ProductRepository;
 
@@ -21,4 +22,13 @@ public class ProductViewModel extends AndroidViewModel {
         products = productRepository.getAllProducts();
     }
     public LiveData<List<ProductWithRelations>> getAll() {return products;}
+    public long insert (Product product){
+        return productRepository.insert(product);
+    }
+    public void update(Product product){
+        productRepository.update(product);
+    }
+    public void delete(Product product){
+        productRepository.delete(product);
+    }
 }

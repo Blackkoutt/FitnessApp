@@ -10,17 +10,6 @@ public class ProductWithRelations {
     @Embedded
     public Product product;
 
-    /*public ProductWithRelations(Product product,
-                                List<Category> categories,
-                                ProductDetails details,
-                                MeasureUnit unit,
-                                Manufacturer manufacturer){
-        this.product = product;
-        this.categories = categories;
-        this.details = details;
-        this.unit = unit;
-        this.manufacturer = manufacturer;
-    }*/
 
     // Relacja N:N
    @Relation(

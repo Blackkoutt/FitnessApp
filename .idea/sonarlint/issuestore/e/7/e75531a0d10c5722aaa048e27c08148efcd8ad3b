@@ -1,0 +1,6 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(’Ó•
+b
+java:S1128"LRemove this unused import 'com.example.fitnessapp.Database.Dao.CategoryDao'.(áá¦é
+g
+java:S1128	"LRemove this unused import 'com.example.fitnessapp.Database.Models.Category'.(Òî‹Âşÿÿÿÿ

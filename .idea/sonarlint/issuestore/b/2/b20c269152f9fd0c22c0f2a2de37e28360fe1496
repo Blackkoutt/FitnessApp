@@ -1,23 +1,26 @@
 
-X	java:S125("<This block of commented-out lines of code should be removed.(„íşá8‚Ã¾‰Î1
+l
+java:S1192E"JDefine a constant instead of duplicating this literal "API Error" 3 times.(Î¹´àıÿÿÿÿ8¦ßÁ«Î1
+F
+java:S1604¤"(Make this anonymous inner class a lambda(ŸÊ³—8§ßÁ«Î1
+_
+java:S4973©"<Strings and Boxed types should be compared using "equals()".(úï™‡ıÿÿÿÿ8¨ßÁ«Î1
+_
+java:S4973©"<Strings and Boxed types should be compared using "equals()".(úï™‡ıÿÿÿÿ8¨ßÁ«Î1
 \
-java:S1161+":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8ƒÃ¾‰Î1
-W	java:S1251"<This block of commented-out lines of code should be removed.(¾Ù‰b8„Ã¾‰Î1
+java:S11610":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8¸àÁ«Î1
 E
-java:S1185Z"(Remove this method to simply inherit it.(±íòÑ8Ã¾‰Î1
-X	java:S125\"<This block of commented-out lines of code should be removed.(ƒ”·°8Ã¾‰Î1
-p
-java:S1450g"SRemove the "post" field and declare it as a local variable in the relevant methods.(¥Ã·•8’Ã¾‰Î1
-X	java:S125f"<This block of commented-out lines of code should be removed.(³ü±á8’Ã¾‰Î1
-]	java:S125l"<This block of commented-out lines of code should be removed.(œÅ¬€ıÿÿÿÿ8“Ã¾‰Î1
-W	java:S125{"<This block of commented-out lines of code should be removed.(·Õ`8”Ã¾‰Î1
-^	java:S125ˆ"<This block of commented-out lines of code should be removed.(¨“šĞüÿÿÿÿ8šÃ¾‰Î1
+java:S1185s"(Remove this method to simply inherit it.(±íòÑ8ÁàÁ«Î1
+X	java:S125u"<This block of commented-out lines of code should be removed.(ƒ”·°8ÁàÁ«Î1
+q
+java:S1450ƒ"SRemove the "post" field and declare it as a local variable in the relevant methods.(¥Ã·•8ÃàÁ«Î1
+^	java:S125Ÿ"<This block of commented-out lines of code should be removed.(¨“šĞüÿÿÿÿ8ÉàÁ«Î1
 y
-java:S1450Ù"VRemove the "comment" field and declare it as a local variable in the relevant methods.(‡Öºäÿÿÿÿÿ8 Ã¾‰Î1
-Y	java:S125Ø"<This block of commented-out lines of code should be removed.(³ü±á8¡Ã¾‰Î1
-^	java:S125Ş"<This block of commented-out lines of code should be removed.(œÅ¬€ıÿÿÿÿ8¡Ã¾‰Î1
-X	java:S125é"<This block of commented-out lines of code should be removed.(·Õ`8¢Ã¾‰Î1
+java:S1450†"VRemove the "comment" field and declare it as a local variable in the relevant methods.(‡Öºäÿÿÿÿÿ8“üí«Î1
+Y	java:S125…"<This block of commented-out lines of code should be removed.(³ü±á8“üí«Î1
 E
-java:S1068g"(Remove this unused "post" private field.(¥Ã·•8£Ã¾‰Î1
+java:S3398K"#Move this method into "PostHolder".(¬›ÿşÿÿÿÿ8ÒàÁ«Î1
+F
+java:S1068ƒ"(Remove this unused "post" private field.(¥Ã·•8ÒàÁ«Î1
 N
-java:S1068Ù"+Remove this unused "comment" private field.(‡Öºäÿÿÿÿÿ8£Ã¾‰Î1
+java:S1068†"+Remove this unused "comment" private field.(‡Öºäÿÿÿÿÿ8–üí«Î1

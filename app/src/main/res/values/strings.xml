@@ -10,4 +10,32 @@
     <string name="add_comment">Dodaj komentarz</string>
     <string name="other_comments">Pozostałe komentarze</string>
     <string name="error">Coś poszło nie tak... Spróbuj ponownie później</string>
+
+    <string name="product_name">Nazwa produktu</string>
+    <string name="product_category">Kategoria produktu</string>
+    <string name="product_manufacturer">Producent produktu</string>
+    <string name="product_unit">Jednostka miary</string>
+    <string name="calories_amount">Ilość kalorii w 100g</string>
+    <string name="protein_amount">Ilość białka w 100g</string>
+    <string name="carbohydrates_amount">Ilość węglowodanów w 100g</string>
+    <string name="fat_amount">Ilość tłuszczy w 100g</string>
+
+    <string name="header_add">Dodaj produkt</string>
+    <string name="header_edit">Edytuj produkt</string>
+
+    <string name="add_product_buton">Dodaj produkt</string>
+    <string name="save_edit_product_button">Zapisz produkt</string>
+
+    <string name="product_added_succesful">Pomyślnie dodano produkt do listy</string>
+
+    <string name="product_delete_question">Czy napewno chcesz usunąć ten produkt?</string>
+    <string name="formatted_product_info">Producent: %1$s\nNazwa: %2$s</string>
+
+    <string name="product_deleted">Pomyślnie usunięto produkt</string>
+    <string name="product_modified">Pomyślnie zmodyfikowano produkt</string>
+    <string name="empty_not_saved">Produkt nie został zapisany ponieważ w formularzu były puste pola</string>
+
+
+    <string name="yes_button">TAK</string>
+    <string name="no_button">NIE</string>
 </resources>

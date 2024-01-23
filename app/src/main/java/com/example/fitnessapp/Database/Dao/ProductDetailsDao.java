@@ -2,12 +2,15 @@ package com.example.fitnessapp.Database.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.MeasureUnit;
+import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductDetails;
 
 import java.util.List;
@@ -22,4 +25,9 @@ public interface ProductDetailsDao {
     void clearTable();
     @Query("DELETE FROM sqlite_sequence WHERE name='productDetails'")
     void resetTableId();
+
+    @Delete
+    void delete(ProductDetails productDetails);
+    @Update
+    void update(ProductDetails details);
 }
