@@ -67,3 +67,13 @@ v
 Fapp/src/main/java/com/example/fitnessapp/Database/Models/Category.java,6\3\639de9848029cd2812e1797d8a8f1eacdacf7475
 t
 Dapp/src/main/java/com/example/fitnessapp/AddEditProductActivity.java,a\2\a2741b426e7c8be73967a58a45bec6f432bdd7af
+}
+Mapp/src/main/java/com/example/fitnessapp/Database/Dao/ProductCategoryDao.java,9\7\971e91085a01e724eef12af9cc6c4dca0f53f5ba
+ç
+]app/src/main/java/com/example/fitnessapp/Database/Repositories/ProductCategoryRepository.java,3\d\3dce599ca1b8a685a34a44e870f39839fe7c6e7f
+ä
+Zapp/src/main/java/com/example/fitnessapp/Database/ViewModels/ProductCategoryViewModel.java,a\3\a3af883c2eb1be2eddf10bcee6337a7a526187dd
+u
+Eapp/src/main/java/com/example/fitnessapp/Database/Dao/ProductDao.java,4\a\4a8932a64478de40962429a1fab140ed722d9867
+â
+Yapp/src/main/java/com/example/fitnessapp/Database/ViewModels/ProductDetailsViewModel.java,5\1\516b61019c8d5f73d91d74887a6d07f46da55eac

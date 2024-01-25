@@ -44,10 +44,12 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private View view;
+    private View activityRootView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        activityRootView = getActivity() != null ? getActivity().getWindow().getDecorView().getRootView() : null;
         fetchPostsData();
         return view;
     }
@@ -67,8 +69,11 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call<PostContainer> call, Throwable t) {
                 String errorMessage = "Error: " + t.getMessage();
                 Log.e("API Error", errorMessage);
-                Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
-                        BaseTransientBottomBar.LENGTH_LONG).show();
+
+                Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
+                  BaseTransientBottomBar.LENGTH_LONG).show();
+                //Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                //        BaseTransientBottomBar.LENGTH_LONG).show();
             }
         });
     }
@@ -93,8 +98,10 @@ public class HomeFragment extends Fragment {
             public void onFailure(Call<Void> call, Throwable t) {
                 String errorMessage = "Error: " + t.getMessage();
                 Log.e("API Error", errorMessage);
-                Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
                         BaseTransientBottomBar.LENGTH_LONG).show();
+                //Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                   //     BaseTransientBottomBar.LENGTH_LONG).show();
             }
         });
     }

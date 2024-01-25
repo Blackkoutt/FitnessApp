@@ -94,6 +94,8 @@ public abstract class ProductDatabase extends RoomDatabase {
                 // Kategoria
                 Category category = new Category("Napój");
                 long categoryId = categoryDAO.insert(category);
+                Category category1 = new Category("Nabiał");
+                long categoryId1 = categoryDAO.insert(category1);
 
                 // Producent
                 Manufacturer manufacturer = new Manufacturer("Hortex");

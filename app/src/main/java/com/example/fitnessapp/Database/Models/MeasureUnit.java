@@ -3,8 +3,10 @@ package com.example.fitnessapp.Database.Models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "measureUnit")
-public class MeasureUnit {
+public class MeasureUnit implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long measureUnitId;
     private String name;

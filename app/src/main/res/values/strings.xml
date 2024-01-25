@@ -9,7 +9,7 @@
     <string name="enter_comment">Treść komentarza</string>
     <string name="add_comment">Dodaj komentarz</string>
     <string name="other_comments">Pozostałe komentarze</string>
-    <string name="error">Coś poszło nie tak... Spróbuj ponownie później</string>
+    <string name="error">Nie udało się połączyć z API. Spróbuj ponownie później</string>
 
     <string name="product_name">Nazwa produktu</string>
     <string name="product_category">Kategoria produktu</string>
@@ -22,6 +22,19 @@
 
     <string name="header_add">Dodaj produkt</string>
     <string name="header_edit">Edytuj produkt</string>
+
+    <string name="product_name_label">Nazwa: %1$s</string>
+    <string name="product_category_label">Kategorie: %1$s</string>
+    <string name="product_manufacturer_label">Producent: %1$s</string>
+    <string name="product_unit_label">Jednostka: %1$s</string>
+    <string name="product_protein_label">Ilość białka w 100 g: %1$s g</string>
+    <string name="product_carbohydrates_label">Ilość węglowodanów w 100 g: %1$s g</string>
+    <string name="product_fat_label">Ilość tłuszczy w 100 g: %1$s g</string>
+    <string name="product_calorific_label">Wartość odżywcza w 100 g: %1$s kcal</string>
+
+    <string name="product_details_header">Szczegóły produktu</string>
+    <string name="general_data_header">Dane ogólne</string>
+    <string name="nutri_value_header">Wartości odżywcze</string>
 
     <string name="add_product_buton">Dodaj produkt</string>
     <string name="save_edit_product_button">Zapisz produkt</string>
@@ -38,4 +51,9 @@
 
     <string name="yes_button">TAK</string>
     <string name="no_button">NIE</string>
+    <string name="confirm_button">Zatwierdź</string>
+    <string name="cancel_button">Anuluj</string>
+    <string name="clear_button">Wyczyść</string>
+
+    <string name="category_dialog_header">Wybierz kategorię</string>
 </resources>

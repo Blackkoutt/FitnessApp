@@ -1,21 +1,47 @@
 
-J
-java:S1604-"(Make this anonymous inner class a lambda(“«ì×ıÿÿÿÿ8€Ù¡³Ó1
-9
-java:S1643X"Use a StringBuilder instead.(ŠÀ¢³8Ù¡³Ó1
-
-java:S1450"_Remove the "productViewModel" field and declare it as a local variable in the relevant methods.(¤ì˜¶ûÿÿÿÿ8úÙ¡³Ó1
+m	java:S117V"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı‰Ã¾8ÆÉæÁÓ1
+K
+java:S1604‡"(Make this anonymous inner class a lambda(“«ì×ıÿÿÿÿ8ÆÉæÁÓ1
+K
+java:S1604³"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8ÆÉæÁÓ1
+K
+java:S1604½"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8ÆÉæÁÓ1
+F
+java:S1604¬"(Make this anonymous inner class a lambda(”™ûÈ8ÆÉæÁÓ1
+:
+java:S1643è"Use a StringBuilder instead.(ŠÀ¢³8ÆÉæÁÓ1
+l
+java:S1874A"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8òÉæÁÓ1
+Z
+java:S1874B"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8óÉæÁÓ1
+„
+java:S3252Z"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8ôÉæÁÓ1
+„
+java:S3252k"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8õÉæÁÓ1
+„
+java:S3252p"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8õÉæÁÓ1
 \
-java:S1161":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8Ú¡³Ó1
+java:S1161u":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8õÉæÁÓ1
+\
+java:S1874">Remove this use of "startActivityForResult"; it is deprecated.(À€íÕ8şÉæÁÓ1
+^	java:S125‹"<This block of commented-out lines of code should be removed.(ôÂé¹üÿÿÿÿ8şÉæÁÓ1
+F
+java:S1185”"(Remove this method to simply inherit it.(±íòÑ8ÿÉæÁÓ1
+…
+java:S3252º"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8„ÊæÁÓ1
+¤
+java:S1186¿"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8„ÊæÁÓ1
+Y	java:S125Ì"<This block of commented-out lines of code should be removed.(’Í„Ÿ8…ÊæÁÓ1
+^	java:S125Ñ"<This block of commented-out lines of code should be removed.(âœÜçüÿÿÿÿ8…ÊæÁÓ1
 [
-java:S18741">Remove this use of "startActivityForResult"; it is deprecated.(À€íÕ8µ‚ğ³Ó1
-E
-java:S11858"(Remove this method to simply inherit it.(±íòÑ8²ùî³Ó1
-s
-java:S1450@"VRemove the "product" field and declare it as a local variable in the relevant methods.(š¥äø8´ùî³Ó1
-H
-java:S1481Q"&Remove this unused "a" local variable.(–ÎåÌûÿÿÿÿ8µùî³Ó1
-H
-java:S1068@"+Remove this unused "product" private field.(š¥äø8¹ùî³Ó1
-E
-java:S1068`"(Remove this unused "mans" private field.(¤Š…8¹ùî³Ó1
+java:S1874Û">Remove this use of "startActivityForResult"; it is deprecated.(Å¥Ş 8†ÊæÁÓ1
+S
+java:S1854ä"5Remove this useless assignment to local variable "d".(§â»ı8†ÊæÁÓ1
+I
+java:S1481à"&Remove this unused "a" local variable.(–ÎåÌûÿÿÿÿ8†ÊæÁÓ1
+D
+java:S1481ä"&Remove this unused "d" local variable.(§â»ı8‡ÊæÁÓ1
+T
+java:S1068:"2Remove this unused "editedCategory" private field.(½¼’ùÿÿÿÿ8‰ÊæÁÓ1
+F
+java:S1068ğ"(Remove this unused "mans" private field.(¤Š…8‰ÊæÁÓ1

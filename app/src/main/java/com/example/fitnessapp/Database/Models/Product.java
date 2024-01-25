@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 //@Entity(tableName = "product")
 @Entity(tableName = "product"/*, foreignKeys = {
         @ForeignKey(
@@ -13,7 +15,7 @@ import androidx.room.PrimaryKey;
                 onDelete = ForeignKey.CASCADE
         )
 }*/)
-public class Product {
+public class Product implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long productId;
     private String name;

@@ -1,8 +1,10 @@
 package com.example.fitnessapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -62,11 +64,17 @@ public class AddEditProductActivity extends AppCompatActivity {
     private String selectedCategory;
     private String selectedUnit;
     private TextView headerTextView;
+    private List<String> categoryNames;
+    private List<Category> selectedCategoriesList;
+    private boolean[] selectedCategoriesBool;
+    private List<String> actualProductCategoryNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_product);
+        selectedCategoriesList = new ArrayList<Category>();
+        actualProductCategoryNames = new ArrayList<String>();
 
         headerTextView = findViewById(R.id.header_edit_add);
 
@@ -100,14 +108,25 @@ public class AddEditProductActivity extends AppCompatActivity {
         categoryViewModel.getAll().observe(this, categories -> {
             if (categories != null && !categories.isEmpty()) {
                 categoriesList = categories;
-                List<String> categoryNames = new ArrayList<>();
-                for (Category category : categories) {
+                categoryNames = new ArrayList<>();
+                selectedCategoriesBool = new boolean[categoriesList.size()];
+                // tutaj ustawić wartośic true jest jest juz na liscie
+                for (Category category : categoriesList) {
                     categoryNames.add(category.getName());
                 }
+                for(int i=0;i<selectedCategoriesBool.length;i++){
+                    if(actualProductCategoryNames.contains(categoryNames.get(i))){
+                        selectedCategoriesList.add(categoriesList.get(i));
+                        selectedCategoriesBool[i]=true;
+                    }
+                }
 
-                ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, R.layout.select_item, categoryNames);
-                selectCategory.setAdapter(categoryAdapter);
+                /*ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, R.layout.select_item, categoryNames);
+                selectCategory.setAdapter(categoryAdapter);*/
             }
+        });
+        selectCategory.setOnClickListener(v->{
+            showCategoryDialog();
         });
         // Ustawienie onclickListenera
         selectCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -163,9 +182,32 @@ public class AddEditProductActivity extends AppCompatActivity {
         if(extras != null){
             headerTextView.setText(R.string.header_edit);
             selectManufacturers.setText(extras.getString(EXTRA_EDIT_MANUFACTURER_NAME));
-            selectCategory.setText(extras.getString(EXTRA_EDIT_CATEGORY_NAME));
+            selectedManufacturer = extras.getString(EXTRA_EDIT_MANUFACTURER_NAME);
+
+            // ustawic liste
+            // ustawić wartości true w tablicy boolean
+            actualProductCategoryNames = extras.getStringArrayList(EXTRA_EDIT_CATEGORY_NAME);
+            StringBuilder stringBuilder = new StringBuilder();
+            for(int i=0; i<actualProductCategoryNames.size(); i++){
+                stringBuilder.append(actualProductCategoryNames .get(i));
+                if(i != actualProductCategoryNames.size() - 1){
+                    stringBuilder.append(", ");
+                }
+            }
+            selectCategory.setText(stringBuilder.toString());
+
+            //selectCategory.setText(extras.getString(EXTRA_EDIT_CATEGORY_NAME));
+            /*StringBuilder stringBuilder = new StringBuilder();
+            for(int i=0; i<selectedCategoriesList.size(); i++){
+                stringBuilder.append(selectedCategoriesList.get(i).getName());
+                if(i != selectedCategoriesList.size() - 1){
+                    stringBuilder.append(", ");
+                }
+            }*/
+
             productName.setText(extras.getString(EXTRA_EDIT_PRODUCT_NAME));
             selectUnit.setText(extras.getString(EXTRA_EDIT_UNIT_NAME));
+            selectedUnit = extras.getString(EXTRA_EDIT_UNIT_NAME);
             caloriesAmount.setText(extras.getString(EXTRA_EDIT_CALORIES_AMOUNT));
             proteinAmount.setText(extras.getString(EXTRA_EDIT_PROTEIN_AMOUNT));
             carbohydratesAmount.setText(extras.getString(EXTRA_EDIT_CARBOHYDRATES_AMOUNT));
@@ -176,23 +218,81 @@ public class AddEditProductActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.save_product_button);
         saveButton.setOnClickListener(this::onSaveButtonClick);
     }
+    private void showCategoryDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddEditProductActivity.this);
+
+        builder.setTitle(R.string.category_dialog_header);
+        builder.setCancelable(false);
+        CharSequence[] categoryNamesArray = categoryNames.toArray(new CharSequence[categoryNames.size()]);
+        builder.setMultiChoiceItems(categoryNamesArray, selectedCategoriesBool, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if(isChecked){
+                    selectedCategoriesList.add(categoriesList.get(which));
+                }
+                else{
+                    selectedCategoriesList.remove(categoriesList.get(which));
+                }
+            }
+        }).setPositiveButton(R.string.confirm_button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for(int i=0; i<selectedCategoriesList.size(); i++){
+                    stringBuilder.append(selectedCategoriesList.get(i).getName());
+                    if(i != selectedCategoriesList.size() - 1){
+                        stringBuilder.append(", ");
+                    }
+                }
+                selectCategory.setText(stringBuilder.toString());
+            }
+        }).setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).setNeutralButton(R.string.clear_button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                selectedCategoriesList.clear();
+                for(int i=0;i<selectedCategoriesBool.length;i++){
+                    selectedCategoriesBool[i]=false;
+                }
+                selectCategory.setText("");
+            }
+        });
+        builder.show();
+
+    }
     private void onSaveButtonClick(View v) {
-        Category category = categoriesList.stream().filter(cat -> cat.getName().equals(selectedCategory))
-                .findFirst().orElse(null);
+        /*Category category = categoriesList.stream().filter(cat -> cat.getName().equals(selectedCategory))
+                .findFirst().orElse(null);*/
         Manufacturer manufacturer = manufacturerList.stream().filter(man -> man.getName().equals(selectedManufacturer))
                 .findFirst().orElse(null);
         MeasureUnit unit = unitsList.stream().filter(un -> un.getName().equals(selectedUnit))
                 .findFirst().orElse(null);
+        long[] categoryIds = new long [selectedCategoriesList.size()];
+
+        for(int i=0;i<selectedCategoriesList.size();i++){
+            categoryIds[i] = selectedCategoriesList.get(i).getCategoryId();
+        }
+        /*for(Category cat: selectedCategoriesList){
+            categoryIds.add(cat.getCategoryId());
+        }*/
 
         Intent replyIntent = new Intent();
 
         // Wiecej warunków
-        if(!IsFormValid(category, manufacturer, unit)){
+        if(!IsFormValid(categoryIds, manufacturer, unit)){
             setResult(RESULT_CANCELED, replyIntent);
         }
         else{
+
             replyIntent.putExtra(EXTRA_EDIT_MANUFACTURER_ID, String.valueOf(manufacturer.getManufacturerId()));
-            replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, String.valueOf(category.getCategoryId()));
+           // replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, String.valueOf(category.getCategoryId()));
+            //replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, new ArrayList<>(categoryIds));
+            //replyIntent.putLongArrayListExtra(EXTRA_EDIT_CATEGORY_ID, new ArrayList<>(categoryIds));
+            replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, categoryIds);
             replyIntent.putExtra(EXTRA_EDIT_PRODUCT_NAME, productName.getText().toString());
             replyIntent.putExtra(EXTRA_EDIT_UNIT_ID, String.valueOf(unit.getMeasureUnitId()));
             replyIntent.putExtra(EXTRA_EDIT_CALORIES_AMOUNT, caloriesAmount.getText().toString());
@@ -203,8 +303,8 @@ public class AddEditProductActivity extends AppCompatActivity {
         }
         finish();
     }
-    private boolean IsFormValid(Category cat, Manufacturer man, MeasureUnit unit){
-        return cat != null && man!=null && unit!=null && !TextUtils.isEmpty(productName.getText()) &&
+    private boolean IsFormValid(long[] catIds, Manufacturer man, MeasureUnit unit){
+        return catIds.length != 0 && man!=null && unit!=null && !TextUtils.isEmpty(productName.getText()) &&
                 !TextUtils.isEmpty(caloriesAmount.getText()) && !TextUtils.isEmpty(proteinAmount.getText()) &&
                 !TextUtils.isEmpty(carbohydratesAmount.getText()) && !TextUtils.isEmpty(fatAmount.getText());
     }

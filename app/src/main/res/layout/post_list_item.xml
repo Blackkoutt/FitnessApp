@@ -7,8 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     card_view:cardCornerRadius="@dimen/corner_radius"
     card_view:cardElevation="@dimen/elevation"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     card_view:cardUseCompatPadding="true">
     <RelativeLayout
         android:layout_width="match_parent"

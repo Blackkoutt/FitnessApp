@@ -1,51 +1,26 @@
 
-v
-java:S2293!"YReplace the type specification in this constructor call with the diamond operator ("<>").(çˆ•£8õ…ĞµÓ1
-v
-java:S2293,"YReplace the type specification in this constructor call with the diamond operator ("<>").(ìòÏ8õ…ĞµÓ1
-{
-java:S2293:"YReplace the type specification in this constructor call with the diamond operator ("<>").(í¨ÙÉıÿÿÿÿ8õ…ĞµÓ1
 E
-java:S1604#"(Make this anonymous inner class a lambda(™²Ä˜8õ…ĞµÓ1
+java:S1604Y"(Make this anonymous inner class a lambda(™²Ä˜8ñÄƒ½Ó1
 J
-java:S1604."(Make this anonymous inner class a lambda(·ÿĞúÿÿÿÿ8õ…ĞµÓ1
-J
-java:S1604<"(Make this anonymous inner class a lambda(Š…½½ıÿÿÿÿ8õ…ĞµÓ1
+java:S1604q"(Make this anonymous inner class a lambda(·ÿĞúÿÿÿÿ8ñÄƒ½Ó1
+K
+java:S1604"(Make this anonymous inner class a lambda(Š…½½ıÿÿÿÿ8ñÄƒ½Ó1
+‚
+java:S14506"`Remove the "categoryViewModel" field and declare it as a local variable in the relevant methods.(‘ª—æøÿÿÿÿ8¿Åƒ½Ó1
 
-java:S1450"]Remove the "caloriesAmount" field and declare it as a local variable in the relevant methods.(«™Ïİøÿÿÿÿ8›†ĞµÓ1
-„
-java:S1450"bRemove the "carbohydratesAmount" field and declare it as a local variable in the relevant methods.(ØÌÚ­üÿÿÿÿ8„³ÓµÓ1
-u
-java:S1450"XRemove the "fatAmount" field and declare it as a local variable in the relevant methods.(š†ò®8„³ÓµÓ1
-v
-java:S1450"ZRemove the "productName" field and declare it as a local variable in the relevant methods.(Àæúg8›†ĞµÓ1
-y
-java:S1450"\Remove the "proteinAmount" field and declare it as a local variable in the relevant methods.(ÂÔ†·8„³ÓµÓ1
-
-java:S1450"]Remove the "selectCategory" field and declare it as a local variable in the relevant methods.(²Ç­‡ûÿÿÿÿ8›†ĞµÓ1
-
-java:S1450"bRemove the "selectManufacturers" field and declare it as a local variable in the relevant methods.(™·¾8›†ĞµÓ1
+java:S1450@"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ8¿Åƒ½Ó1
+
+java:S14507"dRemove the "manufacturerViewModel" field and declare it as a local variable in the relevant methods.(¦¶ 8ÀÅƒ½Ó1
 {
-java:S1450"YRemove the "selectUnit" field and declare it as a local variable in the relevant methods.(Â­ıÿÿÿÿ8›†ĞµÓ1
-Z
-java:S1854&"8Remove this useless assignment to local variable "item".(¨ĞĞÿÿÿÿÿ8£†ĞµÓ1
-K
-java:S1481&")Remove this unused "item" local variable.(¨ĞĞÿÿÿÿÿ8£†ĞµÓ1
-Z
-java:S18541"8Remove this useless assignment to local variable "item".(¨ĞĞÿÿÿÿÿ8¤†ĞµÓ1
-K
-java:S14811")Remove this unused "item" local variable.(¨ĞĞÿÿÿÿÿ8¤†ĞµÓ1
-Z
-java:S1854?"8Remove this useless assignment to local variable "item".(¨ĞĞÿÿÿÿÿ8¥†ĞµÓ1
-K
-java:S1481?")Remove this unused "item" local variable.(¨ĞĞÿÿÿÿÿ8¥†ĞµÓ1
-K
-java:S1068"/Remove this unused "productName" private field.(Àæúg8¦†ĞµÓ1
-T
-java:S1068"2Remove this unused "caloriesAmount" private field.(«™Ïİøÿÿÿÿ8¦†ĞµÓ1
-N
-java:S1068"1Remove this unused "proteinAmount" private field.(ÂÔ†·8¦†ĞµÓ1
-Y
-java:S1068"7Remove this unused "carbohydratesAmount" private field.(ØÌÚ­üÿÿÿÿ8¦†ĞµÓ1
-J
-java:S1068"-Remove this unused "fatAmount" private field.(š†ò®8¦†ĞµÓ1
+java:S14509"YRemove the "saveButton" field and declare it as a local variable in the relevant methods.(Éÿ¤ûÿÿÿÿ8ÀÅƒ½Ó1
+
+java:S1450/"]Remove the "selectCategory" field and declare it as a local variable in the relevant methods.(²Ç­‡ûÿÿÿÿ8ÀÅƒ½Ó1
+
+java:S1450."bRemove the "selectManufacturers" field and declare it as a local variable in the relevant methods.(™·¾8ÀÅƒ½Ó1
+{
+java:S14501"YRemove the "selectUnit" field and declare it as a local variable in the relevant methods.(Â­ıÿÿÿÿ8ÀÅƒ½Ó1
+~
+java:S14508"\Remove the "unitViewModel" field and declare it as a local variable in the relevant methods.(ŠĞÿôúÿÿÿÿ8ÁÅƒ½Ó1
+t
+java:S3776C"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¨Œşÿÿÿÿ8ÓÅƒ½Ó1
+p	java:S100Î"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(àŸËÕûÿÿÿÿ8ôÅƒ½Ó1

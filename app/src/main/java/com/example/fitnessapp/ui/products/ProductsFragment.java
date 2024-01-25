@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
@@ -35,11 +37,13 @@ import com.example.fitnessapp.Database.Models.ProductWithRelations;
 import com.example.fitnessapp.Database.ViewModels.ProductCategoryViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
+import com.example.fitnessapp.ProductDetailsActivity;
 import com.example.fitnessapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsFragment extends Fragment {
@@ -51,6 +55,7 @@ public class ProductsFragment extends Fragment {
     public static final String EXTRA_EDIT_PROTEIN_AMOUNT= "EXTRA_EDIT_PROTEIN_AMOUNT";
     public static final String EXTRA_EDIT_CARBOHYDRATES_AMOUNT= "EXTRA_EDIT_CARBOHYDRATES_AMOUNT";
     public static final String EXTRA_EDIT_FAT_AMOUNT= "EXTRA_EDIT_FAT_AMOUNT";
+    public static final String EXTRA_PRODUCT_DETAILS= "EXTRA_PRODUCT_DETAILS";
     private ProductViewModel productViewModel;
     private ProductCategoryViewModel productCategoryViewModel;
     private ProductDetailsViewModel productDetailsViewModel;
@@ -67,8 +72,7 @@ public class ProductsFragment extends Fragment {
 
         if(resultCode == RESULT_OK){
             long manufacturerId = Long.parseLong(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_MANUFACTURER_ID));
-            // to pewnie też do poprawy !!!!
-            long categoryId = Long.parseLong(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_CATEGORY_ID));
+            long[] categoryIds = data.getLongArrayExtra(AddEditProductActivity.EXTRA_EDIT_CATEGORY_ID);
             String productName = data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_PRODUCT_NAME);
             long unitId = Long.parseLong(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_UNIT_ID));
             float caloriesAmount = Float.parseFloat(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_CALORIES_AMOUNT));
@@ -76,6 +80,7 @@ public class ProductsFragment extends Fragment {
             float carbohydratesAmount = Float.parseFloat(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_CARBOHYDRATES_AMOUNT));
             float fatAmount = Float.parseFloat(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_FAT_AMOUNT));
 
+            // Dodawanie produktu
             if(requestCode == NEW_PRODUCT_ACTIVITY_REQUEST_CODE){
                 Product product = new Product(productName, manufacturerId, unitId);
                 long productId = productViewModel.insert(product);
@@ -83,19 +88,27 @@ public class ProductsFragment extends Fragment {
                 ProductDetails productDetails = new ProductDetails(caloriesAmount, carbohydratesAmount, fatAmount , proteinAmount, productId);
                 productDetailsViewModel.insert(productDetails);
 
-                ProductCategory product_category = new ProductCategory(productId, categoryId);
-                productCategoryViewModel.insert(product_category);
+                for(long categoryId : categoryIds){
+                    ProductCategory product_category = new ProductCategory(productId, categoryId);
+                    productCategoryViewModel.insert(product_category);
+                }
+
 
                 Snackbar.make(fragmentView.findViewById(R.id.coordinator_layout), getString(R.string.product_added_succesful),
                         Snackbar.LENGTH_LONG).show();
             }
+            // Edycja produktu
             else{
                 editedProduct.setManufacturerId(manufacturerId);
                 editedProduct.setMeasureUnitId(unitId);
                 editedProduct.setName(productName);
                 productViewModel.update(editedProduct);
 
-                // category!!!!!
+                productCategoryViewModel.delete(editedProduct.getProductId());
+                for(long categoryId : categoryIds){
+                    ProductCategory product_category = new ProductCategory(editedProduct.getProductId(), categoryId);
+                    productCategoryViewModel.insert(product_category);
+                }
 
                 editedDetails.setCalorificValue(caloriesAmount);
                 editedDetails.setProtein(proteinAmount);
@@ -155,8 +168,8 @@ public class ProductsFragment extends Fragment {
 
         private ProductWithRelations product;
         private TextView categoryTextView;
-        private TextView unitTextView;
-        private TextView detailsTextView;
+        //private TextView unitTextView;
+        private TextView calorificValueTextView;
         private TextView productManufacturerTextView;
         private TextView productNameTextView;
         public ProductHolder(LayoutInflater inflater, ViewGroup parent){
@@ -165,8 +178,8 @@ public class ProductsFragment extends Fragment {
             productManufacturerTextView = itemView.findViewById(R.id.product_manufacturer);
             productNameTextView = itemView.findViewById(R.id.product_name);
             categoryTextView = itemView.findViewById(R.id.product_category);
-            unitTextView = itemView.findViewById(R.id.product_unit);
-            detailsTextView = itemView.findViewById(R.id.product_details);
+            //unitTextView = itemView.findViewById(R.id.product_unit);
+            calorificValueTextView = itemView.findViewById(R.id.product_calorificValue);
 
             itemView.setOnClickListener(this::onClickItem);
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -197,6 +210,26 @@ public class ProductsFragment extends Fragment {
                     return true;
                 }
             });
+            itemView.setOnTouchListener(new View.OnTouchListener() {
+                GestureDetector gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                        Intent intent = new Intent(getActivity(), ProductDetailsActivity.class);
+                        intent.putExtra("EXTRA_PRODUCT_DETAILS", product);
+                        startActivity(intent);
+
+                        return super.onFling(e1, e2, velocityX, velocityY);
+                    }
+                });
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    // Bez tego nie obsługiwany jest event click i long click
+                    if (gestureDetector.onTouchEvent(event)) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
         private void onClickItem(View view) {
@@ -205,8 +238,14 @@ public class ProductsFragment extends Fragment {
             editedDetails = product.details;
             Intent intent = new Intent(getActivity(), AddEditProductActivity.class);
             Bundle extras = new Bundle();
+
             // Kategori może być wiele - trzeba naprawić !!!!!
-            //extras.putString(EXTRA_EDIT_CATEGORY_NAME, product.categories);
+            ArrayList<String> actualCategoryNames = new ArrayList<String>();
+            for(Category cat: product.categories){
+                actualCategoryNames.add(cat.getName());
+            }
+            extras.putStringArrayList(EXTRA_EDIT_CATEGORY_NAME, actualCategoryNames);
+
             extras.putString(EXTRA_EDIT_MANUFACTURER_NAME, product.manufacturer.getName());
             extras.putString(EXTRA_EDIT_PRODUCT_NAME, product.product.getName());
             extras.putString(EXTRA_EDIT_UNIT_NAME, product.unit.getName());
@@ -221,17 +260,18 @@ public class ProductsFragment extends Fragment {
 
         public void bind(ProductWithRelations product){
             this.product = product;
-            int a=1;
-            productManufacturerTextView.setText("Producent:"+product.manufacturer.getName());
-            productNameTextView.setText("Produkt: "+product.product.getName());
-            unitTextView.setText("Jednostka: "+product.unit.getName());
-            ProductDetails d = product.details;
-            detailsTextView.setText("Białko: "+product.details.getProtein());
+
+            productNameTextView.setText(product.product.getName());
             String categoryNameText ="";
-            for(Category cat : product.categories){
-                categoryNameText+=cat.getName()+" ";
+            for(int i=0;i<product.categories.size();i++){
+                categoryNameText+=product.categories.get(i).getName();
+                if(i!=product.categories.size()-1){
+                    categoryNameText+=", ";
+                }
             }
-            categoryTextView.setText("Kategorie: "+categoryNameText);
+            categoryTextView.setText(getResources().getString(R.string.product_category_label, categoryNameText));
+            productManufacturerTextView.setText(getResources().getString(R.string.product_manufacturer_label, product.manufacturer.getName()));
+            calorificValueTextView.setText(getResources().getString(R.string.product_calorific_label, String.valueOf(product.details.getCalorificValue())));
         }
     }
 

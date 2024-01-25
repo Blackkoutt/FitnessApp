@@ -11,4 +11,5 @@
     <color name="buttonColor">#a1887f</color>
     <color name="blue">#2b678a</color>
     <color name="dark_gray">#3b3b3b</color>
+    <color name="light_gray">#dedede</color>
 </resources>
