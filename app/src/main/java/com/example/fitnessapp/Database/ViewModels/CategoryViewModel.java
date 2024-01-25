@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnessapp.Database.Models.Category;
+import com.example.fitnessapp.Database.Models.Manufacturer;
 import com.example.fitnessapp.Database.Models.MeasureUnit;
 import com.example.fitnessapp.Database.Repositories.CategoryRepository;
 import com.example.fitnessapp.Database.Repositories.MeasureUnitRepository;
@@ -23,4 +24,7 @@ public class CategoryViewModel extends AndroidViewModel {
         categories = categoryRepository.getAllCategories();
     }
     public LiveData<List<Category>> getAll() {return categories;}
+    public void insert (Category category){
+        categoryRepository.insert(category);
+    }
 }

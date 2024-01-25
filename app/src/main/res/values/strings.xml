@@ -58,4 +58,12 @@
     <string name="category_dialog_header">Wybierz kategorię</string>
 
     <string name="required_error">Pole jest wymagane</string>
+
+    <string name="add_manufacturer">Dodaj producenta</string>
+    <string name="add_category">Dodaj kategorię</string>
+
+    <string name="add_string">Dodaj</string>
+
+    <string name="manufacturer_name">Nazwa producenta</string>
+    <string name="category_name">Nazwa produktu</string>
 </resources>

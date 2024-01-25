@@ -69,6 +69,9 @@ public class AddEditProductActivity extends AppCompatActivity {
     private List<Category> selectedCategoriesList;
     private boolean[] selectedCategoriesBool;
     private List<String> actualProductCategoryNames;
+    private Button addCategoryButton;
+    private Button addManufacturerButton;
+    public static final String ADD_MAN_CAT_ACTIVITY_REQUEST_CODE = "ADD_MAN_CAT_ACTIVITY_REQUEST_CODE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,11 @@ public class AddEditProductActivity extends AppCompatActivity {
         actualProductCategoryNames = new ArrayList<String>();
 
         headerTextView = findViewById(R.id.header_edit_add);
+
+        addCategoryButton = findViewById(R.id.add_category_button);
+        addCategoryButton.setOnClickListener(this::onClickAddCategory);
+        addManufacturerButton = findViewById(R.id.add_manufacturer_button);
+        addManufacturerButton.setOnClickListener(this::onClickAddManufacturer);
 
         // Select Producentów
         selectManufacturers = findViewById(R.id.select_manufacturer);
@@ -219,6 +227,19 @@ public class AddEditProductActivity extends AppCompatActivity {
         saveButton = findViewById(R.id.save_product_button);
         saveButton.setOnClickListener(this::onSaveButtonClick);
     }
+
+    private void onClickAddManufacturer(View view) {
+        Intent intent = new Intent(this, AddCategoryManufacturerActivity.class);
+        intent.putExtra(ADD_MAN_CAT_ACTIVITY_REQUEST_CODE, "NEW_MANUFACTURER");
+        startActivity(intent);
+    }
+
+    private void onClickAddCategory(View view) {
+        Intent intent = new Intent(this, AddCategoryManufacturerActivity.class);
+        intent.putExtra(ADD_MAN_CAT_ACTIVITY_REQUEST_CODE, "NEW_CATEGORY");
+        startActivity(intent);
+    }
+
     private void showCategoryDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(AddEditProductActivity.this);
 

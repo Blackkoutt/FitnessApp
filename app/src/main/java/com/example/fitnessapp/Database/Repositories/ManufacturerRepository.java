@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnessapp.Database.Dao.ManufacturerDao;
+import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.Manufacturer;
 import com.example.fitnessapp.Database.ProductDatabase;
 
@@ -20,4 +21,5 @@ public class ManufacturerRepository {
         manufacturers = manufacturerDao.getAll();
     }
     public LiveData<List<Manufacturer>> getAllManufacturers(){return manufacturers; }
+    public void insert(Manufacturer manufacturer) {ProductDatabase.databaseWriteExecutor.execute(()->manufacturerDao.insert(manufacturer));}
 }
