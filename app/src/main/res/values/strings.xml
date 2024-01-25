@@ -56,4 +56,6 @@
     <string name="clear_button">Wyczyść</string>
 
     <string name="category_dialog_header">Wybierz kategorię</string>
+
+    <string name="required_error">Pole jest wymagane</string>
 </resources>

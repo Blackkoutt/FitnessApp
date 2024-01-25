@@ -26,6 +26,7 @@ import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
 import com.example.fitnessapp.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -265,8 +266,6 @@ public class AddEditProductActivity extends AppCompatActivity {
 
     }
     private void onSaveButtonClick(View v) {
-        /*Category category = categoriesList.stream().filter(cat -> cat.getName().equals(selectedCategory))
-                .findFirst().orElse(null);*/
         Manufacturer manufacturer = manufacturerList.stream().filter(man -> man.getName().equals(selectedManufacturer))
                 .findFirst().orElse(null);
         MeasureUnit unit = unitsList.stream().filter(un -> un.getName().equals(selectedUnit))
@@ -276,22 +275,12 @@ public class AddEditProductActivity extends AppCompatActivity {
         for(int i=0;i<selectedCategoriesList.size();i++){
             categoryIds[i] = selectedCategoriesList.get(i).getCategoryId();
         }
-        /*for(Category cat: selectedCategoriesList){
-            categoryIds.add(cat.getCategoryId());
-        }*/
 
         Intent replyIntent = new Intent();
 
         // Wiecej warunków
-        if(!IsFormValid(categoryIds, manufacturer, unit)){
-            setResult(RESULT_CANCELED, replyIntent);
-        }
-        else{
-
+        if(IsFormValid(categoryIds, manufacturer, unit)){
             replyIntent.putExtra(EXTRA_EDIT_MANUFACTURER_ID, String.valueOf(manufacturer.getManufacturerId()));
-           // replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, String.valueOf(category.getCategoryId()));
-            //replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, new ArrayList<>(categoryIds));
-            //replyIntent.putLongArrayListExtra(EXTRA_EDIT_CATEGORY_ID, new ArrayList<>(categoryIds));
             replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, categoryIds);
             replyIntent.putExtra(EXTRA_EDIT_PRODUCT_NAME, productName.getText().toString());
             replyIntent.putExtra(EXTRA_EDIT_UNIT_ID, String.valueOf(unit.getMeasureUnitId()));
@@ -300,12 +289,60 @@ public class AddEditProductActivity extends AppCompatActivity {
             replyIntent.putExtra(EXTRA_EDIT_CARBOHYDRATES_AMOUNT, carbohydratesAmount.getText().toString());
             replyIntent.putExtra(EXTRA_EDIT_FAT_AMOUNT, fatAmount.getText().toString());
             setResult(RESULT_OK, replyIntent);
+            finish();
         }
-        finish();
     }
+
     private boolean IsFormValid(long[] catIds, Manufacturer man, MeasureUnit unit){
-        return catIds.length != 0 && man!=null && unit!=null && !TextUtils.isEmpty(productName.getText()) &&
-                !TextUtils.isEmpty(caloriesAmount.getText()) && !TextUtils.isEmpty(proteinAmount.getText()) &&
-                !TextUtils.isEmpty(carbohydratesAmount.getText()) && !TextUtils.isEmpty(fatAmount.getText());
+        if(catIds.length == 0 ){
+            FocusListener(R.id.text_input_product_category, selectCategory);
+            return false;
+        }
+        if(man==null){
+            FocusListener(R.id.text_input_product_manufacturer, selectManufacturers);
+            return false;
+        }
+        if(unit==null){
+            FocusListener(R.id.text_input_product_unit, selectUnit);
+            return false;
+        }
+        if(TextUtils.isEmpty(productName.getText())){
+            FocusListener(R.id.text_input_product_name, productName);
+            return false;
+        }
+        if(TextUtils.isEmpty(caloriesAmount.getText())){
+            FocusListener(R.id.text_input_product_calorificValue, caloriesAmount);
+            return false;
+        }
+        if(TextUtils.isEmpty(proteinAmount.getText())){
+            FocusListener(R.id.text_input_product_proteinValue, proteinAmount);
+            return false;
+        }
+        if(TextUtils.isEmpty(carbohydratesAmount.getText())){
+            FocusListener(R.id.text_input_product_carbohydratesValue, carbohydratesAmount);
+            return false;
+        }
+        if(TextUtils.isEmpty(fatAmount.getText())){
+            FocusListener(R.id.text_input_product_fatValue, fatAmount);
+            return false;
+        }
+        return true;
+    }
+    private void FocusListener(int id, TextView textView){
+        TextInputLayout textInputLayout = findViewById(id);
+        textInputLayout.setHelperText(getString(R.string.required_error));
+        textView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(TextUtils.isEmpty(textView.getText())){
+                        textInputLayout.setHelperText(getString(R.string.required_error));
+                    }
+                    else{
+                        textInputLayout.setHelperText("");
+                    }
+                }
+            }
+        });
     }
 }
