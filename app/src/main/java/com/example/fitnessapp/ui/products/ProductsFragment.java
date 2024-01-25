@@ -39,6 +39,7 @@ import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
 import com.example.fitnessapp.ProductDetailsActivity;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -173,6 +174,7 @@ public class ProductsFragment extends Fragment {
         private TextView productManufacturerTextView;
         private TextView productNameTextView;
         public ProductHolder(LayoutInflater inflater, ViewGroup parent){
+            //super(itemView);
             super(inflater.inflate(R.layout.product_list_item, parent, false));
 
             productManufacturerTextView = itemView.findViewById(R.id.product_manufacturer);
@@ -282,7 +284,7 @@ public class ProductsFragment extends Fragment {
         @NonNull
         @Override
         public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ProductHolder(getLayoutInflater(), parent);
+            return new ProductsFragment.ProductHolder(getLayoutInflater(), parent);
         }
 
         @Override
@@ -292,7 +294,7 @@ public class ProductsFragment extends Fragment {
                 holder.bind(product);
             }
             else {
-                Log.d("MainActivity", "No books");
+                Log.d("MainActivity", "No products");
             }
         }
 

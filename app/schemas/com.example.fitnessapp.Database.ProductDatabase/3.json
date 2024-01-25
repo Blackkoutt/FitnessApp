@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 3,
-    "identityHash": "d32d2dbffac748f650909afdcce16b0d",
+    "identityHash": "f0395dd4097916f7707dc400fe951d8c",
     "entities": [
       {
         "tableName": "category",
@@ -144,7 +144,17 @@
             "categoryId"
           ]
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_ProductCategory_categoryId",
+            "unique": false,
+            "columnNames": [
+              "categoryId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_ProductCategory_categoryId` ON `${TABLE_NAME}` (`categoryId`)"
+          }
+        ],
         "foreignKeys": []
       },
       {
@@ -195,7 +205,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd32d2dbffac748f650909afdcce16b0d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f0395dd4097916f7707dc400fe951d8c')"
     ]
   }
 }
