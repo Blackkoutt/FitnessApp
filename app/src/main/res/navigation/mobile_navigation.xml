@@ -22,4 +22,9 @@
         android:name="com.example.fitnessapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_stepCounter"
+        android:name="com.example.fitnessapp.ui.stepCounter.StepCounterFragment"
+        android:label="Step Counter"
+        tools:layout="@layout/step_counter" />
 </navigation>
