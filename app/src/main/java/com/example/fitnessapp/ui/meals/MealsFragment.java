@@ -1,5 +1,6 @@
 package com.example.fitnessapp.ui.meals;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import com.example.fitnessapp.ui.products.ProductsFragment;
 import org.w3c.dom.Text;
 
 import java.time.DateTimeException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -35,6 +37,7 @@ public class MealsFragment extends Fragment {
     private LocalDate selectedDate;
     private RecyclerView recyclerView;
     private MealsFragment.CalendarAdapter adapter;
+    private  View lastClickedParentView = null;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -51,38 +54,36 @@ public class MealsFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 7));
         selectedDate = LocalDate.now();
 
-        setMonthView();
+        setWeekView();
 
-        previousMonthButton.setOnClickListener(this::setPreviousMonth);
-        nextMonthButton.setOnClickListener(this::setNextMonth);
+        previousMonthButton.setOnClickListener(this::setPreviousWeek);
+        nextMonthButton.setOnClickListener(this::setNextWeek);
 
         return view;
     }
-    private void setMonthView(){
+    private void setWeekView(){
         monthViewTextView.setText(monthYearFromDate(selectedDate));
-        ArrayList<String> daysInMonth = getDaysInMonthArray(selectedDate);
-        adapter.setDays(daysInMonth);
+        ArrayList<LocalDate> days = getDaysInWeekArray(selectedDate);
+        adapter.setDays(days);
     }
 
-    private ArrayList<String> getDaysInMonthArray(LocalDate date) {
-        ArrayList<String> daysInMonthArray = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
+    private ArrayList<LocalDate> getDaysInWeekArray(LocalDate date) {
+        ArrayList<LocalDate> days = new ArrayList<>();
+        LocalDate current = sundayForMonday(date);
 
-        int daysInMonth = yearMonth.lengthOfMonth();
-
-        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-
-        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-
-        for(int i=1; i<= 42; i++){
-            if(i<dayOfWeek || i+1>daysInMonth + dayOfWeek){
-                daysInMonthArray.add("");
-            }
-            else{
-                daysInMonthArray.add(String.valueOf(i+1 - dayOfWeek));
-            }
+        for (int i = 0; i < 7; i++) {
+            days.add(current);
+            current = current.plusDays(1);
         }
-        return daysInMonthArray;
+
+        return days;
+    }
+
+    private LocalDate sundayForMonday(LocalDate current) {
+        while (current.getDayOfWeek() != DayOfWeek.MONDAY) {
+            current = current.minusDays(1);
+        }
+        return current;
     }
 
     private String monthYearFromDate(LocalDate date){
@@ -90,32 +91,49 @@ public class MealsFragment extends Fragment {
         return date.format(formatter);
     }
 
-    private void setNextMonth(View view) {
-        selectedDate = selectedDate.plusMonths(1);
-        setMonthView();
+    private void setNextWeek(View view) {
+        selectedDate = selectedDate.plusWeeks(1);
+        setWeekView();
     }
 
-    private void setPreviousMonth(View view) {
-        selectedDate = selectedDate.minusMonths(1);
-        setMonthView();
+    private void setPreviousWeek(View view) {
+        selectedDate = selectedDate.minusWeeks(1);
+        setWeekView();
     }
 
     private class CalendarViewHolder extends RecyclerView.ViewHolder {
-        private String dayOfMonth;
+        private LocalDate dayOfWeek;
+        private final View parentView;
         private final TextView dayOfMonthTextView;
-       public  CalendarViewHolder(LayoutInflater inflater, ViewGroup parent){
+        public  CalendarViewHolder(LayoutInflater inflater, ViewGroup parent){
            super(inflater.inflate(R.layout.calendar_cell, parent, false));
            dayOfMonthTextView = itemView.findViewById(R.id.cellDayText);
+           parentView = itemView.findViewById(R.id.parentView);
            ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
-           layoutParams.height = (int) (parent.getHeight() * 0.166666666);
+           layoutParams.height = (int) (parent.getHeight());
+           itemView.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   if(lastClickedParentView!=null){
+                       lastClickedParentView.setBackgroundColor(Color.WHITE);
+                   }
+                   parentView.setBackgroundColor(Color.LTGRAY);
+                   lastClickedParentView = parentView;
+               }
+           });
        }
-        public void bind(String dayOfMonth){
-            this.dayOfMonth= dayOfMonth;
-            dayOfMonthTextView.setText(dayOfMonth);
+        public void bind(LocalDate day){
+           if(day == null){
+               dayOfMonthTextView.setText("");
+           }
+           else{
+               this.dayOfWeek= day;
+               dayOfMonthTextView.setText(String.valueOf(dayOfWeek.getDayOfMonth()));
+           }
         }
     }
     private class CalendarAdapter extends RecyclerView.Adapter<MealsFragment.CalendarViewHolder> {
-        private ArrayList<String> daysOfMonth;
+        private ArrayList<LocalDate> daysOfWeek;
         @NonNull
         @Override
         public CalendarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -124,9 +142,9 @@ public class MealsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
-            if(daysOfMonth != null){
-                String dayString = daysOfMonth.get(position);
-                holder.bind(dayString);
+            if(daysOfWeek != null){
+                LocalDate day = daysOfWeek.get(position);
+                holder.bind(day);
             }
             else {
                 Log.d("MainActivity", "No days");
@@ -135,10 +153,10 @@ public class MealsFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return daysOfMonth.size();
+            return daysOfWeek.size();
         }
-        void setDays(ArrayList<String> days){
-            this.daysOfMonth = days;
+        void setDays(ArrayList<LocalDate> days){
+            this.daysOfWeek = days;
             notifyDataSetChanged();
         }
     }

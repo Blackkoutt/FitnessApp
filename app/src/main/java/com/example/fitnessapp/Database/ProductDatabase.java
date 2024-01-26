@@ -7,16 +7,24 @@ import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.fitnessapp.Database.Dao.CategoryDao;
 import com.example.fitnessapp.Database.Dao.ManufacturerDao;
+import com.example.fitnessapp.Database.Dao.MealCategoryDao;
+import com.example.fitnessapp.Database.Dao.MealDao;
+import com.example.fitnessapp.Database.Dao.MealProductDao;
 import com.example.fitnessapp.Database.Dao.MeasureUnitDao;
 import com.example.fitnessapp.Database.Dao.ProductCategoryDao;
 import com.example.fitnessapp.Database.Dao.ProductDao;
 import com.example.fitnessapp.Database.Dao.ProductDetailsDao;
 import com.example.fitnessapp.Database.Models.Category;
+import com.example.fitnessapp.Database.Models.Converters;
 import com.example.fitnessapp.Database.Models.Manufacturer;
+import com.example.fitnessapp.Database.Models.Meal;
+import com.example.fitnessapp.Database.Models.MealCategory;
+import com.example.fitnessapp.Database.Models.MealProduct;
 import com.example.fitnessapp.Database.Models.MeasureUnit;
 import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductCategory;
@@ -29,6 +37,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {
+                Meal.class,
+                MealCategory.class,
+                MealProduct.class,
                 Category.class,
                 Product.class,
                 Manufacturer.class,
@@ -36,16 +47,20 @@ import java.util.concurrent.Executors;
                 ProductCategory.class,
                 ProductDetails.class
             },
-            version = 3,
+            version = 2,
             autoMigrations = {
-                @AutoMigration(from = 1, to = 3)
+                @AutoMigration(from = 1, to = 2)
             },
             exportSchema = true)
+@TypeConverters({Converters.class})
 public abstract class ProductDatabase extends RoomDatabase {
     private static ProductDatabase databaseInstance;
     public static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
 
     public abstract ProductDao productDao();
+    public abstract MealDao mealDao();
+    public abstract MealCategoryDao mealCategoryDao();
+    public abstract MealProductDao mealProductDao();
     public abstract CategoryDao categoryDao();
     public abstract ManufacturerDao manufacturerDao();
     public abstract MeasureUnitDao measureUnitDao();

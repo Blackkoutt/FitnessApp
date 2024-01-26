@@ -7,14 +7,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 //@Entity(tableName = "product")
-@Entity(tableName = "product"/*, foreignKeys = {
-        @ForeignKey(
-                entity = Manufacturer.class,
-                parentColumns = "manufacturerId",
-                childColumns = "manufacturerId",
-                onDelete = ForeignKey.CASCADE
-        )
-}*/)
+@Entity(tableName = "product")
 public class Product implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long productId;
