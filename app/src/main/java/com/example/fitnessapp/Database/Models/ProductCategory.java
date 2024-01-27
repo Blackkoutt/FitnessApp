@@ -1,8 +1,9 @@
 package com.example.fitnessapp.Database.Models;
 
 import androidx.room.Entity;
+import androidx.room.Index;
 
-@Entity(primaryKeys = {"productId", "categoryId"})
+@Entity(primaryKeys = {"productId", "categoryId"},  indices = {@Index("categoryId")})
 public class ProductCategory {
     private long productId;
     private long categoryId;

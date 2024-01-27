@@ -1,0 +1,21 @@
+
+1
+java:S16430"Use a StringBuilder instead.(ƒã¤}
+
+java:S1450"fRemove the "productCaloriesTextView" field and declare it as a local variable in the relevant methods.(–Í›õÿÿÿÿÿ
+
+java:S1450"kRemove the "productCarbohydratesTextView" field and declare it as a local variable in the relevant methods.(óÂ®Ï
+
+java:S1450"fRemove the "productCategoryTextView" field and declare it as a local variable in the relevant methods.(†‡”Îÿÿÿÿÿ
+|
+java:S1450"aRemove the "productFatTextView" field and declare it as a local variable in the relevant methods.(‘Ôÿÿÿÿÿ
+…
+java:S1450"jRemove the "productManufacturerTextView" field and declare it as a local variable in the relevant methods.(¥æ­äıÿÿÿÿ
+w
+java:S1450"bRemove the "productNameTextView" field and declare it as a local variable in the relevant methods.(ƒ¬
+€
+java:S1450"eRemove the "productProteinTextView" field and declare it as a local variable in the relevant methods.(Õ§ş„üÿÿÿÿ
+}
+java:S1450"bRemove the "productUnitTextView" field and declare it as a local variable in the relevant methods.(ŸÍà˜úÿÿÿÿ
+W
+java:S1874&"<Remove this use of "getSerializableExtra"; it is deprecated.(Û­õÕüÿÿÿÿ

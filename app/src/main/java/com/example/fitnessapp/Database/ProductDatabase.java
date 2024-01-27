@@ -1,5 +1,7 @@
 package com.example.fitnessapp.Database;
 
+import static android.provider.Settings.System.getString;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -7,21 +9,30 @@ import androidx.room.AutoMigration;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.fitnessapp.Database.Dao.CategoryDao;
 import com.example.fitnessapp.Database.Dao.ManufacturerDao;
+import com.example.fitnessapp.Database.Dao.MealCategoryDao;
+import com.example.fitnessapp.Database.Dao.MealDao;
+import com.example.fitnessapp.Database.Dao.MealProductDao;
 import com.example.fitnessapp.Database.Dao.MeasureUnitDao;
 import com.example.fitnessapp.Database.Dao.ProductCategoryDao;
 import com.example.fitnessapp.Database.Dao.ProductDao;
 import com.example.fitnessapp.Database.Dao.ProductDetailsDao;
 import com.example.fitnessapp.Database.Models.Category;
+import com.example.fitnessapp.Database.Models.Converters;
 import com.example.fitnessapp.Database.Models.Manufacturer;
+import com.example.fitnessapp.Database.Models.Meal;
+import com.example.fitnessapp.Database.Models.MealCategory;
+import com.example.fitnessapp.Database.Models.MealProduct;
 import com.example.fitnessapp.Database.Models.MeasureUnit;
 import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductCategory;
 import com.example.fitnessapp.Database.Models.ProductDetails;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
+import com.example.fitnessapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +40,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {
+                Meal.class,
+                MealCategory.class,
+                MealProduct.class,
                 Category.class,
                 Product.class,
                 Manufacturer.class,
@@ -41,19 +55,25 @@ import java.util.concurrent.Executors;
                 @AutoMigration(from = 1, to = 3)
             },
             exportSchema = true)
+@TypeConverters({Converters.class})
 public abstract class ProductDatabase extends RoomDatabase {
     private static ProductDatabase databaseInstance;
     public static final ExecutorService databaseWriteExecutor = Executors.newSingleThreadExecutor();
 
     public abstract ProductDao productDao();
+    public abstract MealDao mealDao();
+    public abstract MealCategoryDao mealCategoryDao();
+    public abstract MealProductDao mealProductDao();
     public abstract CategoryDao categoryDao();
     public abstract ManufacturerDao manufacturerDao();
     public abstract MeasureUnitDao measureUnitDao();
     public abstract ProductDetailsDao productDetailsDao();
     public abstract ProductCategoryDao productCategoryDao();
+    private static Context _context;
 
     public static ProductDatabase getDatabase(final Context context){
         if(databaseInstance == null){
+            _context = context;
             databaseInstance = Room.databaseBuilder(context.getApplicationContext(),
                     ProductDatabase.class, "my_db")
                     .addCallback(newCallback1)
@@ -76,6 +96,9 @@ public abstract class ProductDatabase extends RoomDatabase {
                 ProductCategoryDao productCategoryDAO = databaseInstance.productCategoryDao();
                 ProductDao productDAO = databaseInstance.productDao();
                 ProductDetailsDao productDetailsDAO = databaseInstance.productDetailsDao();
+                MealDao mealDao = databaseInstance.mealDao();
+                MealCategoryDao mealCategoryDao = databaseInstance.mealCategoryDao();
+                MealProductDao mealProductDao = databaseInstance.mealProductDao();
 
                 // Wyczyszczenie tabel i sekwencji
                 /*categoryDAO.clearTable();
@@ -90,6 +113,19 @@ public abstract class ProductDatabase extends RoomDatabase {
                 productDAO.resetTableId();
                 productDetailsDAO.clearTable();
                 productDetailsDAO.resetTableId();*/
+                ;
+                MealCategory mealCategory1 = new MealCategory(_context.getResources().getString(R.string.breakfast));
+                MealCategory mealCategory2 = new MealCategory(_context.getResources().getString(R.string.second_breakfast));
+                MealCategory mealCategory3 = new MealCategory(_context.getResources().getString(R.string.lunch));
+                MealCategory mealCategory4 = new MealCategory(_context.getResources().getString(R.string.tea));
+                MealCategory mealCategory5 = new MealCategory(_context.getResources().getString(R.string.dinner));
+                MealCategory mealCategory6 = new MealCategory(_context.getResources().getString(R.string.snack));
+                mealCategoryDao.insert(mealCategory1);
+                mealCategoryDao.insert(mealCategory2);
+                mealCategoryDao.insert(mealCategory3);
+                mealCategoryDao.insert(mealCategory4);
+                mealCategoryDao.insert(mealCategory5);
+                mealCategoryDao.insert(mealCategory6);
 
                 // Kategoria
                 Category category = new Category("Napój");

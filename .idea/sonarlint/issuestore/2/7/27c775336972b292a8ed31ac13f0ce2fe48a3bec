@@ -1,0 +1,8 @@
+
+C
+java:S1604K"(Make this anonymous inner class a lambda(ª¹Ùùşÿÿÿÿ
+s
+java:S1450"XRemove the "addButton" field and declare it as a local variable in the relevant methods.(™õù»ÿÿÿÿÿ
+x
+java:S1450"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ
+c	java:S100H"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øç
