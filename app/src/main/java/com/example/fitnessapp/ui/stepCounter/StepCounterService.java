@@ -39,6 +39,7 @@ public class StepCounterService extends Service implements SensorEventListener {
         }
     }
 
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         createNotificationChannel();
@@ -80,7 +81,6 @@ public class StepCounterService extends Service implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "StepCounterChannel";
@@ -89,7 +89,9 @@ public class StepCounterService extends Service implements SensorEventListener {
             NotificationChannel channel = new NotificationChannel("StepCounterChannel", name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(channel);
+            }
         }
     }
 
