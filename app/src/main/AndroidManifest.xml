@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
     <uses-permission android:name="android.permission.SENSOR_ACCELEROMETER"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
@@ -27,9 +27,6 @@
             android:exported="false" />
         <activity
             android:name=".AddEditProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.stepCounter.StepCounter"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

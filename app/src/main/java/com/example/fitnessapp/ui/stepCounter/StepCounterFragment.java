@@ -8,6 +8,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +17,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.fitnessapp.R;
 
-@SuppressLint("NewApi")
+
 public class StepCounterFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView steps;
@@ -38,6 +40,21 @@ public class StepCounterFragment extends Fragment {
         loadData();
 
         return rootView;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Start the StepCounterService when fragment resumes
+        startStepCounterService();
+    }
+
+    private void startStepCounterService() {
+        Intent serviceIntent = new Intent(requireContext(), StepCounterService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            requireContext().startForegroundService(serviceIntent);
+        } else {
+            requireContext().startService(serviceIntent);
+        }
     }
 
     private void resetSteps() {

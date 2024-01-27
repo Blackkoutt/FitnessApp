@@ -12,10 +12,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import com.example.fitnessapp.R;
@@ -25,7 +27,6 @@ public class StepCounterService extends Service implements SensorEventListener {
     private Sensor stepSensor;
     private int totalSteps = 0;
     private int previousTotalSteps = 0;
-    @SuppressLint("NewApi")
     @Override
     public void onCreate() {
         super.onCreate();
@@ -65,6 +66,7 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            Log.i("Sensor"," Sensor dziala");
             totalSteps = (int) event.values[0];
             if (previousTotalSteps == 0) {
                 previousTotalSteps = totalSteps;
@@ -78,15 +80,17 @@ public class StepCounterService extends Service implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    @SuppressLint("NewApi")
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void createNotificationChannel() {
-        NotificationChannel serviceChannel = new NotificationChannel(
-                "StepCounterChannel",
-                "Step Counter Service Channel",
-                NotificationManager.IMPORTANCE_LOW
-        );
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.createNotificationChannel(serviceChannel);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "StepCounterChannel";
+            String description = "Step Counter Service Channel";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel("StepCounterChannel", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     private void saveData(int steps) {
