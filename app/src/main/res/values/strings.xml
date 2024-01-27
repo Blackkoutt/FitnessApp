@@ -70,4 +70,37 @@
 
     <string name="left_arrow">&#x2190;</string>
     <string name="right_arrow">&#x2192;</string>
+
+    <string name="breakfast">Śniadanie</string>
+    <string name="second_breakfast">Drugie śniadanie</string>
+    <string name="lunch">Obiad</string>
+    <string name="tea">Podwieczorek</string>
+    <string name="dinner">Kolacja</string>
+    <string name="snack">Przekąska</string>
+
+    <string name="total_calorific">Łączne ilość kalorii: %1$s kcal</string>
+    <string name="total_protein">Łączne ilość białka: %1$s g</string>
+    <string name="total_carbohydrates">Łączne ilość węglowodanów: %1$s g</string>
+    <string name="total_fat">Łączne ilość tłuszczy: %1$s g</string>\
+
+    <string name="meal_category">Kategoria posiłku</string>
+    <string name="search_products">Szukaj produktu po nazwie</string>
+
+    <string name="add_meal">Dodaj posiłek</string>
+    <string name="edit_meal">Edytuj posiłek</string>
+    <string name="meal_added_succesful">Pomyślnie dodano posiłek do listy!</string>
+    <string name="meal_modified_succesful">Pomyślnie zmodyfikowano posiłek z listy!</string>
+    <string name="empty_not_saved_meal">Posiłek nie został zapisany ponieważ w formularzu były puste pola</string>
+
+    <string name="meal_delete_question">Czy napewno chcesz usunąć %1$s z dnia: %2$s ?</string>
+    <string name="meal_deleted">Pomyślnie usunięto posiłek</string>
+    <string name="meal_details">Szczegóły posiłku</string>
+    <string name="included_products">Produkty wchodzące w skład</string>
+    <string name="meal_details_summary">Podsumowanie posiłku</string>
+
+    <string name="meal_category_name">Kategoria: %1$s</string>
+    <string name="meal_date">Data: %1$s</string>
+
+
+    <string name="product_list_empty">Wybierz conajmniej jeden produkt z listy</string>
 </resources>

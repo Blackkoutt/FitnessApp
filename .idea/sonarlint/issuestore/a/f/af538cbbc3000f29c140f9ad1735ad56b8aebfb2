@@ -1,0 +1,17 @@
+
+E
+java:S1604r"(Make this anonymous inner class a lambda(ú“Úå8Ò÷˜Ô1
+{
+java:S1450#"^Remove the "nextMonthButton" field and declare it as a local variable in the relevant methods.(˜‰¸ê8Œ´é˜Ô1
+
+java:S1450""bRemove the "previousMonthButton" field and declare it as a local variable in the relevant methods.(’ûùî8Œ´é˜Ô1
+}
+java:S1450&"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ıÿÿÿÿ8Œ´é˜Ô1
+\
+java:S1161+":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8´é˜Ô1
+z
+java:S1450i"XRemove the "dayOfWeek" field and declare it as a local variable in the relevant methods.(úã°»üÿÿÿÿ8˜´é˜Ô1
+C
+java:S1905q"&Remove this unnecessary cast to "int".(™“†§8™´é˜Ô1
+F
+java:S1185¥"(Remove this method to simply inherit it.(±íòÑ8›´é˜Ô1

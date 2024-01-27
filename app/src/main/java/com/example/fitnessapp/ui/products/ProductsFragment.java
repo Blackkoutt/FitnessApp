@@ -150,8 +150,6 @@ public class ProductsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddEditProductActivity.class);
-                //intent.putExtra("request_code", NEW_PRODUCT_ACTIVITY_REQUEST_CODE);
-                //activityResultLauncher.launch(intent, NEW_PRODUCT_ACTIVITY_REQUEST_CODE);
                 startActivityForResult(intent, NEW_PRODUCT_ACTIVITY_REQUEST_CODE);
             }
         });

@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".MealDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddEditMealActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddMealActivity"
             android:exported="false" />
         <activity

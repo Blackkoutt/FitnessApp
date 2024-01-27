@@ -1,2 +1,12 @@
 
 o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(’Ó•
+Z
+java:S1128"8Remove this unused import 'androidx.lifecycle.LiveData'.(ß„İŞşÿÿÿÿ8ñĞæšÔ1
+l
+java:S1128"ORemove this unused import 'com.example.fitnessapp.Database.Dao.MeasureUnitDao'.(…ÎÍ8ñĞæšÔ1
+q
+java:S1128	"ORemove this unused import 'com.example.fitnessapp.Database.Models.MeasureUnit'.( İÓœùÿÿÿÿ8ñĞæšÔ1
+o
+java:S1128"RRemove this unused import 'com.example.fitnessapp.Database.Models.ProductDetails'.(ù©ª„8ñĞæšÔ1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ñĞæšÔ1

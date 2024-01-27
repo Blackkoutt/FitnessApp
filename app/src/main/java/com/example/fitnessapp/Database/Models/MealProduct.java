@@ -3,8 +3,10 @@ package com.example.fitnessapp.Database.Models;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "MealProduct")
-public class MealProduct {
+public class MealProduct implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long mealProductId;
     private long mealId;

@@ -1,24 +1,50 @@
 package com.example.fitnessapp.ui.meals;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitnessapp.AddEditMealActivity;
+import com.example.fitnessapp.AddEditProductActivity;
+import com.example.fitnessapp.Database.Models.Category;
+import com.example.fitnessapp.Database.Models.Manufacturer;
+import com.example.fitnessapp.Database.Models.Meal;
+import com.example.fitnessapp.Database.Models.MealProduct;
+import com.example.fitnessapp.Database.Models.MealWithRelations;
+import com.example.fitnessapp.Database.Models.Product;
+import com.example.fitnessapp.Database.Models.ProductCategory;
+import com.example.fitnessapp.Database.Models.ProductDetails;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
+import com.example.fitnessapp.Database.ViewModels.MealProductViewModel;
+import com.example.fitnessapp.Database.ViewModels.MealViewModel;
+import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
+import com.example.fitnessapp.MealDetailsActivity;
+import com.example.fitnessapp.ProductDetailsActivity;
 import com.example.fitnessapp.R;
 import com.example.fitnessapp.ui.products.ProductsFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.w3c.dom.Text;
 
@@ -32,27 +58,110 @@ import java.util.List;
 
 public class MealsFragment extends Fragment {
     private Button previousMonthButton;
+    public static final String EXTRA_DATE = "EXTRA_DATE";
+    public static final String EXTRA_MEAL = "EXTRA_MEAL";
+    public static final String EXTRA_MEAL_DETAILS = "EXTRA_MEAL_DETAILS";
+
+    public static final int NEW_MEAL_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_MEAL_ACTIVITY_REQUEST_CODE = 2;
     private Button nextMonthButton;
     private TextView monthViewTextView;
     private LocalDate selectedDate;
     private RecyclerView recyclerView;
     private MealsFragment.CalendarAdapter adapter;
-    private  View lastClickedParentView = null;
+    private View lastClickedParentView = null;
+    private RecyclerView mealRecyclerView;
+    private LocalDate selectedDay;
+    private MealAdapter mealAdapter;
+    private MealViewModel mealViewModel;
+    private MealProductViewModel mealProductViewModel;
+    private Button newMealButton;
+    private Meal editedMeal;
+    private View fragmentView;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK){
+
+            long categoryId = Long.parseLong(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_CATEGORY_ID));
+            long[] productsIds = data.getLongArrayExtra(AddEditMealActivity.EXTRA_EDIT_PRODUCTS_IDS);
+            float totalCalories = Float.parseFloat(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_TOTAL_CALORIES));
+            float totalProteins = Float.parseFloat(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_TOTAL_PROTEINS));
+            float totalCarbohydrates = Float.parseFloat(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_TOTAL_CARBOHYDRATES));
+            float totalFat = Float.parseFloat(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_TOTAL_FATS));
+
+            // Dodawanie posiłku
+            if(requestCode == NEW_MEAL_ACTIVITY_REQUEST_CODE){
+                // trzeba sprawdzić czy selectedDay jest takie samo jak wybrane wczesniej
+                Meal mealToAdd = new Meal(categoryId, selectedDay, totalCalories, totalProteins, totalCarbohydrates, totalFat);
+                long mealId = mealViewModel.insert(mealToAdd);
+
+                for(long productId : productsIds){
+                    MealProduct mealProduct = new MealProduct(mealId, productId);
+                    mealProductViewModel.insert(mealProduct);
+                }
+
+
+                Snackbar.make(fragmentView.findViewById(R.id.main_fragment_layout), getString(R.string.meal_added_succesful),
+                        Snackbar.LENGTH_LONG).show();
+            }
+            // Edycja produktu
+            else{
+                editedMeal.setMealCategoryId(categoryId);
+                editedMeal.setTotalCalorific(totalCalories);
+                editedMeal.setTotalProtein(totalProteins);
+                editedMeal.setTotalCarbohydrates(totalCarbohydrates);
+                editedMeal.setTotalFat(totalFat);
+                mealViewModel.update(editedMeal);
+
+                mealProductViewModel.deleteByMealId(editedMeal.getMealId());
+                for(long productId : productsIds){
+                    MealProduct mealProduct = new MealProduct(editedMeal.getMealId(), productId);
+                    mealProductViewModel.insert(mealProduct);
+                }
+                Snackbar.make(fragmentView.findViewById(R.id.main_fragment_layout), getString(R.string.meal_modified_succesful),
+                        Snackbar.LENGTH_LONG).show();
+            }
+        }
+        else{
+            Snackbar.make(fragmentView.findViewById(R.id.main_fragment_layout), getString(R.string.empty_not_saved_meal),
+                    Snackbar.LENGTH_LONG).show();
+        }
+
+    }
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_meals, container, false);
+        fragmentView = view;
 
         previousMonthButton = view.findViewById(R.id.previous_month);
         nextMonthButton = view.findViewById(R.id.next_month);
         monthViewTextView = view.findViewById(R.id.moth_view_text_view);
+        newMealButton = view.findViewById(R.id.new_meal);
+
         recyclerView = view.findViewById(R.id.calendar_recycler_view);
         adapter = new MealsFragment.CalendarAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 7));
         selectedDate = LocalDate.now();
+        selectedDay = LocalDate.now();
+
+        mealRecyclerView = view.findViewById(R.id.meal_recycler_view);
+        mealAdapter = new MealAdapter();
+        mealRecyclerView.setAdapter(mealAdapter);
+        mealRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
+        mealViewModel.getAllByDate(selectedDate).observe(getActivity(), mealAdapter::setMeals);
+
+        mealProductViewModel = new ViewModelProvider(getActivity()).get(MealProductViewModel.class);
+
+        newMealButton.setOnClickListener(this::onAddMeal);
 
         setWeekView();
 
@@ -61,6 +170,12 @@ public class MealsFragment extends Fragment {
 
         return view;
     }
+
+    private void onAddMeal(View view) {
+        Intent intent = new Intent(getActivity(), AddEditMealActivity.class);
+        startActivityForResult(intent, NEW_MEAL_ACTIVITY_REQUEST_CODE);
+    }
+
     private void setWeekView(){
         monthViewTextView.setText(monthYearFromDate(selectedDate));
         ArrayList<LocalDate> days = getDaysInWeekArray(selectedDate);
@@ -100,6 +215,124 @@ public class MealsFragment extends Fragment {
         selectedDate = selectedDate.minusWeeks(1);
         setWeekView();
     }
+    private class MealHolder extends RecyclerView.ViewHolder {
+
+        private MealWithRelations meal;
+        private TextView mealCategoryTextView;
+        private TextView mealCalorificTextView;
+        private TextView mealProteinTextView;
+        private TextView mealCarbohydratesTextView;
+        private TextView mealFatTextView;
+        public MealHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.meal_list_item, parent, false));
+            mealCategoryTextView = itemView.findViewById(R.id.meal_category);
+            mealCalorificTextView = itemView.findViewById(R.id.meal_calorific);
+            mealProteinTextView = itemView.findViewById(R.id.meal_protein);
+            mealCarbohydratesTextView = itemView.findViewById(R.id.meal_carbohydrates);
+            mealFatTextView = itemView.findViewById(R.id.meal_fat);
+
+            itemView.setOnClickListener(this::EditMeal);
+            itemView.setOnLongClickListener(this::DeleteMeal);
+            //itemView.setOnTouchListener(this::DetailsMeal);
+            itemView.setOnTouchListener(new View.OnTouchListener() {
+                GestureDetector gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                        Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
+                        intent.putExtra("EXTRA_MEAL_DETAILS", meal);
+
+                        startActivity(intent);
+
+                        return super.onFling(e1, e2, velocityX, velocityY);
+                    }
+                });
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (gestureDetector.onTouchEvent(event)) {
+                        return true;
+                    }
+                    return false;
+                }
+            });
+        }
+
+        private boolean DeleteMeal(View view) {
+            AlertDialog.Builder builder = new AlertDialog.Builder((getActivity()));
+            builder.setTitle(getResources().getString(R.string.meal_delete_question, meal.mealCategory.getName(), meal.meal.getDate().toString()));
+            builder.setPositiveButton(R.string.yes_button, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mealProductViewModel.deleteByMealId(meal.meal.getMealId());
+                    mealViewModel.delete(meal.meal);
+
+                    Snackbar.make(fragmentView.findViewById(R.id.main_fragment_layout), getString(R.string.meal_deleted),
+                            Snackbar.LENGTH_LONG).show();
+                }
+            });
+            builder.setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.create();
+            builder.show();
+            return true;
+        }
+
+        private void EditMeal(View view) {
+            editedMeal = meal.meal;
+            Intent intent = new Intent(getActivity(), AddEditMealActivity.class);
+            Bundle extras = new Bundle();
+
+            extras.putSerializable(EXTRA_MEAL, meal);
+            intent.putExtras(extras);
+
+            startActivityForResult(intent, EDIT_MEAL_ACTIVITY_REQUEST_CODE);
+        }
+
+        public void bind(MealWithRelations meal){
+            this.meal = meal;
+            mealCategoryTextView.setText(meal.mealCategory.getName());
+            mealCalorificTextView.setText(getResources().getString(R.string.total_calorific, String.valueOf(meal.meal.getTotalCalorific())));
+            mealProteinTextView.setText(getResources().getString(R.string.total_protein, String.valueOf(meal.meal.getTotalProtein())));
+            mealCarbohydratesTextView.setText(getResources().getString(R.string.total_carbohydrates, String.valueOf(meal.meal.getTotalCarbohydrates())));
+            mealFatTextView.setText(getResources().getString(R.string.total_fat, String.valueOf(meal.meal.getTotalFat())));
+        }
+    }
+    private class MealAdapter extends RecyclerView.Adapter<MealsFragment.MealHolder>{
+        private List<MealWithRelations> meals;
+        @NonNull
+        @Override
+        public MealsFragment.MealHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new MealsFragment.MealHolder(getLayoutInflater(), parent);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MealsFragment.MealHolder holder, int position) {
+            if(meals != null){
+                MealWithRelations meal = meals.get(position);
+                holder.bind(meal);
+            }
+            else {
+                Log.d("MainActivity", "No meals");
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            if(meals != null){
+                return meals.size();
+            }
+            else{
+                return 0;
+            }
+        }
+        void setMeals(List<MealWithRelations> meals){
+            this.meals = meals;
+            notifyDataSetChanged();
+        }
+    }
 
     private class CalendarViewHolder extends RecyclerView.ViewHolder {
         private LocalDate dayOfWeek;
@@ -117,6 +350,8 @@ public class MealsFragment extends Fragment {
                    if(lastClickedParentView!=null){
                        lastClickedParentView.setBackgroundColor(Color.WHITE);
                    }
+                   selectedDay = dayOfWeek;
+                   mealViewModel.getAllByDate(dayOfWeek).observe(getActivity(), mealAdapter::setMeals);
                    parentView.setBackgroundColor(Color.LTGRAY);
                    lastClickedParentView = parentView;
                }

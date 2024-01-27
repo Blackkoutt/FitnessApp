@@ -1,5 +1,7 @@
 package com.example.fitnessapp.Database;
 
+import static android.provider.Settings.System.getString;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,7 @@ import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductCategory;
 import com.example.fitnessapp.Database.Models.ProductDetails;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
+import com.example.fitnessapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +50,9 @@ import java.util.concurrent.Executors;
                 ProductCategory.class,
                 ProductDetails.class
             },
-            version = 2,
+            version = 3,
             autoMigrations = {
-                @AutoMigration(from = 1, to = 2)
+                @AutoMigration(from = 1, to = 3)
             },
             exportSchema = true)
 @TypeConverters({Converters.class})
@@ -66,9 +69,11 @@ public abstract class ProductDatabase extends RoomDatabase {
     public abstract MeasureUnitDao measureUnitDao();
     public abstract ProductDetailsDao productDetailsDao();
     public abstract ProductCategoryDao productCategoryDao();
+    private static Context _context;
 
     public static ProductDatabase getDatabase(final Context context){
         if(databaseInstance == null){
+            _context = context;
             databaseInstance = Room.databaseBuilder(context.getApplicationContext(),
                     ProductDatabase.class, "my_db")
                     .addCallback(newCallback1)
@@ -91,6 +96,9 @@ public abstract class ProductDatabase extends RoomDatabase {
                 ProductCategoryDao productCategoryDAO = databaseInstance.productCategoryDao();
                 ProductDao productDAO = databaseInstance.productDao();
                 ProductDetailsDao productDetailsDAO = databaseInstance.productDetailsDao();
+                MealDao mealDao = databaseInstance.mealDao();
+                MealCategoryDao mealCategoryDao = databaseInstance.mealCategoryDao();
+                MealProductDao mealProductDao = databaseInstance.mealProductDao();
 
                 // Wyczyszczenie tabel i sekwencji
                 /*categoryDAO.clearTable();
@@ -105,6 +113,19 @@ public abstract class ProductDatabase extends RoomDatabase {
                 productDAO.resetTableId();
                 productDetailsDAO.clearTable();
                 productDetailsDAO.resetTableId();*/
+                ;
+                MealCategory mealCategory1 = new MealCategory(_context.getResources().getString(R.string.breakfast));
+                MealCategory mealCategory2 = new MealCategory(_context.getResources().getString(R.string.second_breakfast));
+                MealCategory mealCategory3 = new MealCategory(_context.getResources().getString(R.string.lunch));
+                MealCategory mealCategory4 = new MealCategory(_context.getResources().getString(R.string.tea));
+                MealCategory mealCategory5 = new MealCategory(_context.getResources().getString(R.string.dinner));
+                MealCategory mealCategory6 = new MealCategory(_context.getResources().getString(R.string.snack));
+                mealCategoryDao.insert(mealCategory1);
+                mealCategoryDao.insert(mealCategory2);
+                mealCategoryDao.insert(mealCategory3);
+                mealCategoryDao.insert(mealCategory4);
+                mealCategoryDao.insert(mealCategory5);
+                mealCategoryDao.insert(mealCategory6);
 
                 // Kategoria
                 Category category = new Category("Napój");

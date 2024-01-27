@@ -165,6 +165,7 @@ public class AddEditProductActivity extends AppCompatActivity {
                 selectUnit.setAdapter(unitAdapter);
             }
         });
+
         // Ustawienie onclickListenera
         selectUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -204,15 +205,6 @@ public class AddEditProductActivity extends AppCompatActivity {
                 }
             }
             selectCategory.setText(stringBuilder.toString());
-
-            //selectCategory.setText(extras.getString(EXTRA_EDIT_CATEGORY_NAME));
-            /*StringBuilder stringBuilder = new StringBuilder();
-            for(int i=0; i<selectedCategoriesList.size(); i++){
-                stringBuilder.append(selectedCategoriesList.get(i).getName());
-                if(i != selectedCategoriesList.size() - 1){
-                    stringBuilder.append(", ");
-                }
-            }*/
 
             productName.setText(extras.getString(EXTRA_EDIT_PRODUCT_NAME));
             selectUnit.setText(extras.getString(EXTRA_EDIT_UNIT_NAME));

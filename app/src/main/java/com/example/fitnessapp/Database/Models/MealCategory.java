@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 
 @Entity(tableName = "meal_category")
-public class MealCategory {
+public class MealCategory implements Serializable{
     @PrimaryKey(autoGenerate = true)
     private long mealCategoryId;
     private String name;

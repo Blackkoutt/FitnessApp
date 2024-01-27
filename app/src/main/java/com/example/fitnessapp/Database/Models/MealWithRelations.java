@@ -4,9 +4,10 @@ import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MealWithRelations {
+public class MealWithRelations implements Serializable {
     @Embedded
     public Meal meal;
 

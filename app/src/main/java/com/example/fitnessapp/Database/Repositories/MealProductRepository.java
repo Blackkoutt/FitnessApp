@@ -17,7 +17,7 @@ public class MealProductRepository {
     }
     public void insert(MealProduct mealProduct) {ProductDatabase.databaseWriteExecutor.execute(()->mealProductDao.insert(mealProduct));}
     public void deleteByMealId(long mealId){
-        ProductDatabase.databaseWriteExecutor.execute(()->mealProductDao.deleteByProductId(mealId));
+        ProductDatabase.databaseWriteExecutor.execute(()->mealProductDao.deleteByMealId(mealId));
     }
     public void deleteByProductId(long productId){
         ProductDatabase.databaseWriteExecutor.execute(()->mealProductDao.deleteByProductId(productId));
