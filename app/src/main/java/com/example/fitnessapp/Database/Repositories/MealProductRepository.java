@@ -3,9 +3,7 @@ package com.example.fitnessapp.Database.Repositories;
 import android.app.Application;
 
 import com.example.fitnessapp.Database.Dao.MealProductDao;
-import com.example.fitnessapp.Database.Dao.ProductCategoryDao;
 import com.example.fitnessapp.Database.Models.MealProduct;
-import com.example.fitnessapp.Database.Models.ProductCategory;
 import com.example.fitnessapp.Database.ProductDatabase;
 
 public class MealProductRepository {

@@ -6,7 +6,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.fitnessapp.Database.Models.MealProduct;
-import com.example.fitnessapp.Database.Models.ProductCategory;
 
 @Dao
 public interface MealProductDao {

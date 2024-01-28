@@ -2,7 +2,6 @@ package com.example.fitnessapp.Database.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Database;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,7 +9,6 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
 

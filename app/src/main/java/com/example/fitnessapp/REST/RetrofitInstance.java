@@ -10,8 +10,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInstance {
     private static Retrofit retrofit;
 
+    // Adres url serwera
     public static final String POSTS_API_URL = "http://10.0.2.2:3000/";
 
+    // Pobranie instancji klasy Retrofit odpowiedzialnej za komunikację z serwerem
     public static Retrofit getRetrofitInstance(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

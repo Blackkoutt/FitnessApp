@@ -1,6 +1,5 @@
 package com.example.fitnessapp.ui.bmi_calculator;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -36,6 +35,7 @@ public class BmiCalculator extends Fragment {
     private int color;
 
 
+    // Metoda do zapisu stanu przy obróceniu ekranu
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -45,26 +45,30 @@ public class BmiCalculator extends Fragment {
         outState.putString(KEY_BMI_VALUE, BMIValue);
     }
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bmi_calculator, container, false);
 
+        // Jeśli zapisano stan przy obrocie ekranu
         if(savedInstanceState != null){
+            // Pobierz wszytskie wartości stanu
             resultsVisible = savedInstanceState.getBoolean(KEY_RESULTS_VISIBLE);
             BMIName = savedInstanceState.getString(KEY_BMI_NAME);
             BMIValue = savedInstanceState.getString(KEY_BMI_VALUE);
             color = savedInstanceState.getInt(KEY_COLOR_VALUE);
         }
 
+        // Przypisz wszytskie elementy widoku
         calculateBMIButton = view.findViewById(R.id.calculate_bmi);
         heightTextInput = view.findViewById(R.id.text_input_height);
         heightEditText = view.findViewById(R.id.edit_text_height);
         bodyWeightTextInput = view.findViewById(R.id.text_input_body_weight);
         bodyWeightEditText = view.findViewById(R.id.edit_text_body_weight);
-
         BMIValueTextView = view.findViewById(R.id.your_bmi_value);
         BMINameTextView = view.findViewById(R.id.your_bmi_name);
 
+        // Jeśli wyniki są widoczne przypisz ich zawartość oraz kolor
         if(resultsVisible){
             BMIValueTextView.setText(BMIValue);
             BMINameTextView.setText(BMIName);
@@ -77,25 +81,35 @@ public class BmiCalculator extends Fragment {
             BMINameTextView.setVisibility(View.GONE);
         }
 
-
+        // Nasłuchiwanie zdarzenia click na przycisku oblicz kalorie
         calculateBMIButton.setOnClickListener(this::calculateBMI);
 
         return view;
     }
 
+    // Metoda obliczająca kalorie
     private void calculateBMI(View view) {
+        // Sprawdzenie poprawności wprowadzonych danych
         if(ValidateControl(heightTextInput, heightEditText) && ValidateControl(bodyWeightTextInput, bodyWeightEditText)){
+            // Obliczenie BMI
             double height = Double.parseDouble(heightEditText.getText().toString());
             double weight = Double.parseDouble(bodyWeightEditText.getText().toString());
             double BMI = weight / (Math.pow(height,2));
+
+            // Ustawienie widoczności pól wyników
             BMIValueTextView.setVisibility(View.VISIBLE);
             BMINameTextView.setVisibility(View.VISIBLE);
 
+            // Ustawienie zmiennej - czy wyniki są widoczne
             resultsVisible = true;
 
+            // Sformatowanie daty i ustawienie wyniku
             DecimalFormat df = new DecimalFormat("#.##");
             String formattedBMI = df.format(BMI);
             BMIValueTextView.setText(getResources().getString(R.string.your_bmi, formattedBMI));
+
+            // Ustawienie tekstu w zależności do wartości BMI
+            // Switch na wartości double nie działa ;/
             if(BMI < BMI_ENUM.EMACIATION.value()){
                 BMINameTextView.setText(getResources().getString(R.string.starvation));
                 color = getResources().getColor(R.color.blue_700);
@@ -140,6 +154,8 @@ public class BmiCalculator extends Fragment {
             BMIValue = BMIValueTextView.getText().toString();
         }
     }
+
+    // Metoda walidująca kontrolkę formularza
     private boolean ValidateControl(TextInputLayout textInputLayout, EditText editText){
         if(TextUtils.isEmpty(editText.getText())){
             textInputLayout.setHelperText(getString(R.string.required_error));

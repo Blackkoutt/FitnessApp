@@ -7,10 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnessapp.Database.Models.Manufacturer;
-import com.example.fitnessapp.Database.Models.ProductCategory;
-import com.example.fitnessapp.Database.Models.ProductWithRelations;
 import com.example.fitnessapp.Database.Repositories.ManufacturerRepository;
-import com.example.fitnessapp.Database.Repositories.ProductRepository;
 
 import java.util.List;
 
@@ -24,6 +21,7 @@ public class ManufacturerViewModel extends AndroidViewModel {
         manufacturer = manufacturerRepository.getAllManufacturers();
     }
     public LiveData<List<Manufacturer>> getAll() {return manufacturer;}
+
     public void insert (Manufacturer manufacturer){
         manufacturerRepository.insert(manufacturer);
     }

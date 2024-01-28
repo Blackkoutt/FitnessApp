@@ -6,10 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.fitnessapp.Database.Models.MeasureUnit;
-import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductDetails;
-import com.example.fitnessapp.Database.Repositories.MeasureUnitRepository;
 import com.example.fitnessapp.Database.Repositories.ProductDetailsRepository;
 
 import java.util.List;

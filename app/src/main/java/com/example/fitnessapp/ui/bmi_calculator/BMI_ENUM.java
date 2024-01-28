@@ -1,5 +1,6 @@
 package com.example.fitnessapp.ui.bmi_calculator;
 
+// Enum do wyznaczenia konkretnego BMI - czy jest to waga prawidłowa, nadwaga itp
 public enum BMI_ENUM {
     EMACIATION(16.0),
     UNDERWEIGHT(17.0),

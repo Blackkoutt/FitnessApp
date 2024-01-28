@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 
 import com.example.fitnessapp.Database.Models.MealCategory;
 import com.example.fitnessapp.Database.Repositories.MealCategoryRepository;
-import com.example.fitnessapp.Database.Repositories.MealProductRepository;
 
 import java.util.List;
 
@@ -21,5 +20,4 @@ public class MealCategoryViewModel extends AndroidViewModel {
         mealCategory = mealCategoryRepository.getAllCategories();
     }
     public LiveData<List<MealCategory>> getAllCategories(){return mealCategory; }
-
 }

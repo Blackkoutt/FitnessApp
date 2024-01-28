@@ -9,12 +9,8 @@ import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.fitnessapp.Database.Models.CaloricLimit;
-import com.example.fitnessapp.Database.Models.Category;
-import com.example.fitnessapp.Database.Models.Meal;
-import com.example.fitnessapp.Database.Models.MealWithRelations;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Dao
 public interface CaloricLimitDao {

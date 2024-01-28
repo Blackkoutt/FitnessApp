@@ -1,12 +1,10 @@
 package com.example.fitnessapp.Database.Models;
 
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-//@Entity(tableName = "product")
 @Entity(tableName = "product")
 public class Product implements Serializable {
     @PrimaryKey(autoGenerate = true)
@@ -47,8 +45,4 @@ public class Product implements Serializable {
     public void setMeasureUnitId(long id){
         this.measureUnitId=id;
     }
-    // manufacturer
-    // unit of measure
-    // details
-    // category
 }

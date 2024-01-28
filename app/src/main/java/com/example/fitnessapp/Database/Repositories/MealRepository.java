@@ -5,11 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnessapp.Database.Dao.MealDao;
-import com.example.fitnessapp.Database.Dao.ProductDao;
 import com.example.fitnessapp.Database.Models.Meal;
 import com.example.fitnessapp.Database.Models.MealWithRelations;
-import com.example.fitnessapp.Database.Models.Product;
-import com.example.fitnessapp.Database.Models.ProductWithRelations;
 import com.example.fitnessapp.Database.ProductDatabase;
 
 import java.time.LocalDate;
@@ -28,8 +25,11 @@ public class MealRepository {
     public LiveData<List<MealWithRelations>> getAllMeals(){return meals; }
     public LiveData<List<MealWithRelations>> getAllMealsByDate(LocalDate date){return mealDao.getAllByDate(date); }
 
+    // Dodanie zwraca id dodanego posiłku
     public long insert(Meal meal)
     {
+        // Oczekiwanie na wykonanie operacji dodawania do bazy
+        // Po dodaniu zwracane jest id posiłku
         final CountDownLatch latch = new CountDownLatch(1);
         AtomicLong insertedId = new AtomicLong();
         ProductDatabase.databaseWriteExecutor.execute(()->{
@@ -38,7 +38,7 @@ public class MealRepository {
             latch.countDown();
         });
         try {
-            latch.await();  // Czekaj, aż operacja się zakończy
+            latch.await();  // Oczekiwanie na zakończenie operacji dodawania
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

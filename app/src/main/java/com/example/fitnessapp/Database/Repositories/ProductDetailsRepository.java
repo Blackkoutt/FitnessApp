@@ -4,10 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.fitnessapp.Database.Dao.MeasureUnitDao;
 import com.example.fitnessapp.Database.Dao.ProductDetailsDao;
-import com.example.fitnessapp.Database.Models.MeasureUnit;
-import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductDetails;
 import com.example.fitnessapp.Database.ProductDatabase;
 
@@ -23,10 +20,13 @@ public class ProductDetailsRepository {
         details = detailsDao.getAll();
     }
     public LiveData<List<ProductDetails>> getAllDetails(){return details; }
+
     public void insert(ProductDetails details) {ProductDatabase.databaseWriteExecutor.execute(()->detailsDao.insert(details));}
+
     public void delete(ProductDetails details){
         ProductDatabase.databaseWriteExecutor.execute(()->detailsDao.delete(details));
     }
+
     public void update(ProductDetails details){
         ProductDatabase.databaseWriteExecutor.execute(()->detailsDao.update(details));
     }

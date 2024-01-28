@@ -1,9 +1,9 @@
 package com.example.fitnessapp.Database.Models;
 
 import androidx.room.TypeConverter;
-import java.sql.Date;
 import java.time.LocalDate;
 
+// Klasa konwerterów typów
 public class Converters {
     @TypeConverter
     public static LocalDate fromTimestamp(Long value) {
