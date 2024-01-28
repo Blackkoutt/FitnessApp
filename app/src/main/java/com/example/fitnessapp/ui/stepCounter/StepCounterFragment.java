@@ -99,7 +99,7 @@ public class StepCounterFragment extends Fragment {
     }
 
     private double calculateCaloriesBurned(int stepsCount) {
-        double caloriesPerStep = 0.4;
+        double caloriesPerStep = 0.04;
         return stepsCount * caloriesPerStep;
     }
 

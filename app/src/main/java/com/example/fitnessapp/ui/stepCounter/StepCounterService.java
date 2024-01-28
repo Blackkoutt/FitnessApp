@@ -42,11 +42,13 @@ public class StepCounterService extends Service implements SensorEventListener {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //createNotificationChannel();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel();
+        }
         Notification notification = new NotificationCompat.Builder(this, "StepCounterChannel")
                 .setContentTitle("Step Counter Service")
                 .setContentText("Counting steps in background")
-                .setSmallIcon(R.drawable.baseline_steps_counter)
+                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
                 .build();
         startForeground(1, notification);
         return START_STICKY;
@@ -74,7 +76,7 @@ public class StepCounterService extends Service implements SensorEventListener {
             }
             int stepsSinceLastBoot = totalSteps - previousTotalSteps;
             saveData(stepsSinceLastBoot);
-            createNotification(totalSteps);
+            createNotification(stepsSinceLastBoot);
         }
     }
 
@@ -92,6 +94,17 @@ public class StepCounterService extends Service implements SensorEventListener {
         if (notificationManager != null) {
             notificationManager.notify(2, builder.build());
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createNotificationChannel() {
+            CharSequence name = "StepCounterChannel";
+            String description = "Step Counter Service Channel";
+            int importance = NotificationManager.IMPORTANCE_LOW;
+            NotificationChannel channel = new NotificationChannel("StepCounterChannel", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
     }
 
     private void saveData(int steps) {
