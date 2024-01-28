@@ -32,9 +32,6 @@
             android:name=".AddEditMealActivity"
             android:exported="false" />
         <activity
-            android:name=".AddMealActivity"
-            android:exported="false" />
-        <activity
             android:name=".AddCategoryManufacturerActivity"
             android:exported="false" />
         <activity

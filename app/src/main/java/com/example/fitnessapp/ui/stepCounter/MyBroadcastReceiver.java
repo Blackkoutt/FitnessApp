@@ -1,12 +1,8 @@
 package com.example.fitnessapp.ui.stepCounter;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
 

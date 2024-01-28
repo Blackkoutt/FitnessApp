@@ -52,7 +52,7 @@ import java.util.concurrent.Executors;
             },
             version = 5,
             autoMigrations = {
-                @AutoMigration(from = 4, to = 5)
+                @AutoMigration(from = 3, to = 5)
             },
             exportSchema = true)
 @TypeConverters({Converters.class})

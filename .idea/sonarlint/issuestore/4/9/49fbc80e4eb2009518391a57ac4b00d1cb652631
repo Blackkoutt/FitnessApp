@@ -1,0 +1,10 @@
+
+i
+java:S1192/"SDefine a constant instead of duplicating this literal "StepCounterChannel" 4 times.(ƒÏ¡µ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(†ÓÐ¹ùÿÿÿÿ
+—
+java:S1186S"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÐŠß±
+t
+java:S1450"YRemove the "stepSensor" field and declare it as a local variable in the relevant methods.(îúÂ¼øÿÿÿÿ
+t
+java:S1450"YRemove the "totalSteps" field and declare it as a local variable in the relevant methods.(¤£Íöøÿÿÿÿ

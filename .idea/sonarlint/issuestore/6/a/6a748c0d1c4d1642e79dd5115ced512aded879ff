@@ -1,31 +1,32 @@
 
-m	java:S117Z"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡›©²8»ş°ëÔ1
+m	java:S117a"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¡›©²8»ş°ëÔ1
 F
-java:S1604’"(Make this anonymous inner class a lambda(áÃ»8¼ş°ëÔ1
-v	java:S116 "[Rename this field "BMIValueTextView" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ş¸b8Ìş°ëÔ1
-{	java:S116!"ZRename this field "BMINameTextView" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê”ÍŸúÿÿÿÿ8Ìş°ëÔ1
-s	java:S116""RRename this field "BMIName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş Ä«ùÿÿÿÿ8Ìş°ëÔ1
-o	java:S116#"SRename this field "BMIValue" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó‘Ì„8Ìş°ëÔ1
+java:S1604¢"(Make this anonymous inner class a lambda(áÃ»8¼ş°ëÔ1
+v	java:S116"[Rename this field "BMIValueTextView" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¨ş¸b8Ìş°ëÔ1
+{	java:S116 "ZRename this field "BMINameTextView" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ê”ÍŸúÿÿÿÿ8Ìş°ëÔ1
+s	java:S116!"RRename this field "BMIName" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ş Ä«ùÿÿÿÿ8Ìş°ëÔ1
+o	java:S116""SRename this field "BMIValue" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ó‘Ì„8Ìş°ëÔ1
 ~
-java:S1450"aRemove the "calculateBMIButton" field and declare it as a local variable in the relevant methods.(·Ï±ï8Ñş°ëÔ1
+java:S1450"aRemove the "calculateBMIButton" field and declare it as a local variable in the relevant methods.(·Ï±ï8Ñş°ëÔ1
 \
-java:S11610":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8Úş°ëÔ1
+java:S11611":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8Úş°ëÔ1
 t
-java:S3776V"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(öú“ƒıÿÿÿÿ8Ûş°ëÔ1
+java:S3776["RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(öú“ƒıÿÿÿÿ8Ûş°ëÔ1
+X	java:S125p"<This block of commented-out lines of code should be removed.(±´¶8‘¡éˆÕ1
 L
-java:S1874e"0Remove this use of "getColor"; it is deprecated.(‹¦8àş°ëÔ1
+java:S1874s"0Remove this use of "getColor"; it is deprecated.(‹¦8àş°ëÔ1
 R
-java:S1874j"0Remove this use of "getColor"; it is deprecated.(†‰ãêıÿÿÿÿ8àş°ëÔ1
+java:S1874x"0Remove this use of "getColor"; it is deprecated.(†‰ãêıÿÿÿÿ8àş°ëÔ1
 R
-java:S1874o"0Remove this use of "getColor"; it is deprecated.(—úõ­øÿÿÿÿ8áş°ëÔ1
-R
-java:S1874t"0Remove this use of "getColor"; it is deprecated.(è‹˜şÿÿÿÿ8áş°ëÔ1
-R
-java:S1874y"0Remove this use of "getColor"; it is deprecated.(Šê™§şÿÿÿÿ8âş°ëÔ1
-R
-java:S1874~"0Remove this use of "getColor"; it is deprecated.(ªÛì´ûÿÿÿÿ8âş°ëÔ1
+java:S1874}"0Remove this use of "getColor"; it is deprecated.(—úõ­øÿÿÿÿ8áş°ëÔ1
+S
+java:S1874‚"0Remove this use of "getColor"; it is deprecated.(è‹˜şÿÿÿÿ8áş°ëÔ1
+S
+java:S1874‡"0Remove this use of "getColor"; it is deprecated.(Šê™§şÿÿÿÿ8âş°ëÔ1
+S
+java:S1874Œ"0Remove this use of "getColor"; it is deprecated.(ªÛì´ûÿÿÿÿ8âş°ëÔ1
 N
-java:S1874ƒ"0Remove this use of "getColor"; it is deprecated.(¦ÑÔŠ8ãş°ëÔ1
+java:S1874‘"0Remove this use of "getColor"; it is deprecated.(¦ÑÔŠ8ãş°ëÔ1
 N
-java:S1874ˆ"0Remove this use of "getColor"; it is deprecated.(Ú©Âô8ãş°ëÔ1
-p	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹‹¥øùÿÿÿÿ8äş°ëÔ1
+java:S1874–"0Remove this use of "getColor"; it is deprecated.(Ú©Âô8ãş°ëÔ1
+p	java:S100Ÿ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‹‹¥øùÿÿÿÿ8äş°ëÔ1

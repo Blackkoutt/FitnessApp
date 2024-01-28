@@ -2,7 +2,6 @@ package com.example.fitnessapp.ui.products;
 
 import static android.app.Activity.RESULT_OK;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,13 +12,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -34,15 +28,14 @@ import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductCategory;
 import com.example.fitnessapp.Database.Models.ProductDetails;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
+import com.example.fitnessapp.Database.ViewModels.MealProductViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductCategoryViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
 import com.example.fitnessapp.ProductDetailsActivity;
 import com.example.fitnessapp.R;
-import com.example.fitnessapp.ui.home.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +53,7 @@ public class ProductsFragment extends Fragment {
     private ProductViewModel productViewModel;
     private ProductCategoryViewModel productCategoryViewModel;
     private ProductDetailsViewModel productDetailsViewModel;
+    private MealProductViewModel mealProductViewModel;
     private Product editedProduct;
     private ProductCategory editedCategory;
     private ProductDetails editedDetails;
@@ -67,11 +61,15 @@ public class ProductsFragment extends Fragment {
     public static final int EDIT_PRODUCT_ACTIVITY_REQUEST_CODE = 2;
     private View fragmentView;
 
+    // Metoda wywoływana w momencie otrzymania wiadomości zwrotnej z activity
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Jeśli kod wyniku jest poprawnuy
         if(resultCode == RESULT_OK){
+
+            // Pobierz dane przesłane przez activity
             long manufacturerId = Long.parseLong(data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_MANUFACTURER_ID));
             long[] categoryIds = data.getLongArrayExtra(AddEditProductActivity.EXTRA_EDIT_CATEGORY_ID);
             String productName = data.getStringExtra(AddEditProductActivity.EXTRA_EDIT_PRODUCT_NAME);
@@ -133,19 +131,24 @@ public class ProductsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_products, container, false);
         fragmentView = view;
+
+        // Ustawienie recylerView dla produktów
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
         final ProductAdapter adapter = new ProductAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // Utworzenie ViewModeli do komunikacji z bazą danych
         productViewModel = new ViewModelProvider(getActivity()).get(ProductViewModel.class);
         productDetailsViewModel = new ViewModelProvider(getActivity()).get(ProductDetailsViewModel.class);
         productCategoryViewModel = new ViewModelProvider(getActivity()).get(ProductCategoryViewModel.class);
+        mealProductViewModel = new ViewModelProvider(getActivity()).get(MealProductViewModel.class);
 
+        // Pobranie produktów
         productViewModel.getAll().observe(getActivity(), adapter::setProducts);
 
+        // Uruchomienie aktywności z kodem żądania jako dodaj produkt
         FloatingActionButton addBookButton = view.findViewById(R.id.add_button);
-        // Kliknięcie floating button uruchamia nową aktyność do dodawania ksiązki
         addBookButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -156,32 +159,32 @@ public class ProductsFragment extends Fragment {
         return view;
     }
 
+    // Metoda wywoływana w momencie niszczenia fragmentu
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
-
-
+    // Holder produktu
     private class ProductHolder extends RecyclerView.ViewHolder {
-
         private ProductWithRelations product;
         private TextView categoryTextView;
-        //private TextView unitTextView;
         private TextView calorificValueTextView;
         private TextView productManufacturerTextView;
         private TextView productNameTextView;
         public ProductHolder(LayoutInflater inflater, ViewGroup parent){
-            //super(itemView);
             super(inflater.inflate(R.layout.product_list_item, parent, false));
 
+            // Pobranie elementów widoku
             productManufacturerTextView = itemView.findViewById(R.id.product_manufacturer);
             productNameTextView = itemView.findViewById(R.id.product_name);
             categoryTextView = itemView.findViewById(R.id.product_category);
-            //unitTextView = itemView.findViewById(R.id.product_unit);
             calorificValueTextView = itemView.findViewById(R.id.product_calorificValue);
 
+            // Ustawienie onClickListenera dla produktu - edycja produktu
             itemView.setOnClickListener(this::onClickItem);
+
+            // Ustawienie onLongClickListenera dla produktu - usunięcie produktu
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -194,6 +197,7 @@ public class ProductsFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             productCategoryViewModel.delete(product.product.getProductId());
                             productViewModel.delete(product.product);
+                            mealProductViewModel.deleteByProductId(product.product.getProductId());
                             productDetailsViewModel.delete(product.details);
                             Snackbar.make(fragmentView.findViewById(R.id.coordinator_layout), getString(R.string.product_deleted),
                                     Snackbar.LENGTH_LONG).show();
@@ -210,6 +214,8 @@ public class ProductsFragment extends Fragment {
                     return true;
                 }
             });
+
+            // Ustawienie gestu przesunięcia w prawo lub lewo na wybranym produkcie - przejscie do detali
             itemView.setOnTouchListener(new View.OnTouchListener() {
                 GestureDetector gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
                     @Override
@@ -223,7 +229,6 @@ public class ProductsFragment extends Fragment {
                 });
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    // Bez tego nie obsługiwany jest event click i long click
                     if (gestureDetector.onTouchEvent(event)) {
                         return true;
                     }
@@ -232,20 +237,20 @@ public class ProductsFragment extends Fragment {
             });
         }
 
+        // Metoda wywoływana w momencie kliknięcia na wybrany produkt - edycja produktu
         private void onClickItem(View view) {
             editedProduct = product.product;
-            //editedCategory = product.categories;
             editedDetails = product.details;
             Intent intent = new Intent(getActivity(), AddEditProductActivity.class);
             Bundle extras = new Bundle();
 
-            // Kategori może być wiele - trzeba naprawić !!!!!
             ArrayList<String> actualCategoryNames = new ArrayList<String>();
             for(Category cat: product.categories){
                 actualCategoryNames.add(cat.getName());
             }
-            extras.putStringArrayList(EXTRA_EDIT_CATEGORY_NAME, actualCategoryNames);
 
+            // Wysłanie danych do Activity
+            extras.putStringArrayList(EXTRA_EDIT_CATEGORY_NAME, actualCategoryNames);
             extras.putString(EXTRA_EDIT_MANUFACTURER_NAME, product.manufacturer.getName());
             extras.putString(EXTRA_EDIT_PRODUCT_NAME, product.product.getName());
             extras.putString(EXTRA_EDIT_UNIT_NAME, product.unit.getName());
@@ -255,9 +260,11 @@ public class ProductsFragment extends Fragment {
             extras.putString(EXTRA_EDIT_FAT_AMOUNT, String.valueOf(product.details.getFat()));
             intent.putExtras(extras);
 
+            // Uruchomienie activity i oczekiwanie na wynik
             startActivityForResult(intent, EDIT_PRODUCT_ACTIVITY_REQUEST_CODE);
         }
 
+        // Bindowanie produktu
         public void bind(ProductWithRelations product){
             this.product = product;
 
@@ -275,6 +282,7 @@ public class ProductsFragment extends Fragment {
         }
     }
 
+    // Adapter produtku
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder>{
         private List<ProductWithRelations> products;
         private List<Manufacturer> mans;
