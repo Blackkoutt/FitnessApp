@@ -14,8 +14,8 @@ tools:context=".ui.meals.MealsFragment">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginBottom="@dimen/value_20"
+        android:layout_marginTop="@dimen/value_20">
         <Button
             android:id="@+id/previous_month"
             android:layout_width="0dp"
@@ -27,7 +27,7 @@ tools:context=".ui.meals.MealsFragment">
             android:textColor="@color/purple_500"
             android:background="@null"
             android:textStyle="bold"
-            android:textSize="25sp"/>
+            android:textSize="@dimen/size_25"/>
         <TextView
             android:id="@+id/moth_view_text_view"
             android:layout_width="0dp"
@@ -48,7 +48,7 @@ tools:context=".ui.meals.MealsFragment">
             android:textColor="@color/purple_500"
             android:background="@null"
             android:textStyle="bold"
-            android:textSize="25sp"/>
+            android:textSize="@dimen/size_25"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -123,23 +123,23 @@ tools:context=".ui.meals.MealsFragment">
         android:id="@+id/calories_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Spożyte kalorie: "
+        android:text="@string/calories_text"
         android:textColor="@color/black"
         android:textAlignment="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/value_10"
         android:layout_marginBottom="5dp"
-        android:textSize="20dp"
+        android:textSize="@dimen/size_20"
         android:textStyle="bold"
         />
     <TextView
         android:id="@+id/limit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Limit kaloryczny: "
+        android:text="@string/limit_text"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:layout_marginBottom="5dp"
-        android:textSize="20dp"
+        android:textSize="@dimen/size_20"
         android:textStyle="bold"
         />
     <TextView
@@ -149,8 +149,8 @@ tools:context=".ui.meals.MealsFragment">
         android:text="@string/limit_exceeded"
         android:textColor="@color/red"
         android:textAlignment="center"
-        android:layout_marginBottom="10dp"
-        android:textSize="15dp"
+        android:layout_marginBottom="@dimen/value_10"
+        android:textSize="15sp"
         android:textStyle="bold"
         />
     <Button

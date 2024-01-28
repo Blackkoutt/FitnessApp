@@ -8,42 +8,30 @@
         android:id="@+id/stepCounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Step Counter"
+        android:layout_margin="@dimen/value_20"
+        android:text="@string/stepCounter"
         android:textColor="@color/black"
-        android:textFontWeight="800"
-        android:textSize="20sp" />
+        android:textSize="@dimen/size_20"/>
 
     <TextView
         android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/stepCounter"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:paddingTop="20dp"
+        android:layout_margin="@dimen/value_20"
         android:text="@string/distance"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="@dimen/size_20" />
 
     <TextView
         android:id="@+id/caloriesBurned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/distance"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:paddingTop="20dp"
+        android:layout_margin="@dimen/value_20"
         android:text="@string/caloriesBurned"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="@dimen/size_20" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -66,22 +54,22 @@
             android:id="@+id/steps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Steps"
+            android:text="@string/steps"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textSize="25sp"
+            android:textSize="@dimen/size_25"
             android:textColor="@color/black"
             android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Goal: 8000"
+            android:text="@string/goal"
             android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:paddingTop="140dp"
-            android:textSize="20dp"
+            android:paddingTop="120dp"
+            android:textSize="@dimen/size_20"
             />
     </RelativeLayout>
 </RelativeLayout>

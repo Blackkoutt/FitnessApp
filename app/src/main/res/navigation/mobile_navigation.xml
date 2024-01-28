@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/navigation_stepCounter"
         android:name="com.example.fitnessapp.ui.stepCounter.StepCounterFragment"
-        android:label="Step Counter"
+        android:label="@string/stepCounter"
         tools:layout="@layout/step_counter" />
     <fragment
         android:id="@+id/navigation_bmi_calculator"

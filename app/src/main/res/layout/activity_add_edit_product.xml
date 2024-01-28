@@ -13,12 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
-        card_view:cardCornerRadius="@dimen/corner_radius"
+        card_view:cardCornerRadius="@dimen/value_6"
         card_view:cardElevation="@dimen/elevation"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/value_10"
+        android:layout_marginRight="@dimen/value_10"
+        android:layout_marginTop="@dimen/value_10"
+        android:layout_marginBottom="@dimen/value_10"
         card_view:cardUseCompatPadding="true">
     <ScrollView
         android:layout_width="match_parent"
@@ -27,16 +27,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
+        android:layout_marginTop="@dimen/value_20"
+        android:layout_marginRight="@dimen/value_20"
+        android:layout_marginLeft="@dimen/value_20">
         <TextView
-            android:textSize="27dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginRight="@dimen/title_margin"
-            android:layout_marginLeft="@dimen/title_margin"
+            android:textSize="@dimen/size_27"
+            android:layout_marginBottom="@dimen/value_15"
+            android:layout_marginRight="@dimen/value_10"
+            android:layout_marginLeft="@dimen/value_10"
             android:id="@+id/header_edit_add"
-            android:text="Edytuj produkt"
+            android:text="@string/header_edit"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,14 +68,14 @@
             android:text="@string/add_manufacturer"
             app:icon="@drawable/add_24"
             app:iconTint="@color/green"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:textColor="@color/black"
             app:strokeColor="@android:color/transparent">
         </com.google.android.material.button.MaterialButton>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_product_category"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             app:helperText =""
             app:helperTextTextColor = "@color/red"
@@ -98,7 +98,7 @@
             android:text="@string/add_category"
             app:icon="@drawable/add_24"
             app:iconTint="@color/green"
-            android:textSize="10dp"
+            android:textSize="10sp"
             android:textColor="@color/black"
             app:strokeColor="@android:color/transparent">
         </com.google.android.material.button.MaterialButton>
@@ -107,7 +107,7 @@
             android:id="@+id/text_input_product_name"
             android:layout_gravity="center"
             app:endIconMode="clear_text"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             android:hint="@string/product_name"
             app:helperText =""
@@ -123,7 +123,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_product_unit"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             app:helperText =""
             app:helperTextTextColor = "@color/red"
@@ -145,7 +145,7 @@
             app:helperText =""
             app:helperTextTextColor = "@color/red"
             app:endIconMode="clear_text"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             android:hint="@string/calories_amount"
             android:layout_height="wrap_content">
@@ -164,7 +164,7 @@
             app:endIconMode="clear_text"
             app:helperText =""
             app:helperTextTextColor = "@color/red"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             android:hint="@string/protein_amount"
             android:layout_height="wrap_content">
@@ -183,7 +183,7 @@
             app:helperText =""
             app:helperTextTextColor = "@color/red"
             app:endIconMode="clear_text"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             android:hint="@string/carbohydrates_amount"
             android:layout_height="wrap_content">
@@ -202,7 +202,7 @@
             app:endIconMode="clear_text"
             app:helperText =""
             app:helperTextTextColor = "@color/red"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_width="match_parent"
             android:hint="@string/fat_amount"
             android:layout_height="wrap_content">

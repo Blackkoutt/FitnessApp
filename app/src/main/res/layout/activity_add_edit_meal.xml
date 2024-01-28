@@ -14,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools"
-        card_view:cardCornerRadius="@dimen/corner_radius"
+        card_view:cardCornerRadius="@dimen/value_6"
         card_view:cardElevation="@dimen/elevation"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="@dimen/value_10"
+        android:layout_marginRight="@dimen/value_10"
+        android:layout_marginTop="@dimen/value_10"
+        android:layout_marginBottom="@dimen/value_10"
         card_view:cardUseCompatPadding="true"
 >
         <ScrollView
@@ -29,16 +29,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp">
+                android:layout_marginTop="@dimen/value_20"
+                android:layout_marginRight="@dimen/value_20"
+                android:layout_marginLeft="@dimen/value_20">
                 <TextView
-                    android:textSize="27dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginRight="@dimen/title_margin"
-                    android:layout_marginLeft="@dimen/title_margin"
+                    android:textSize="27sp"
+                    android:layout_marginBottom="@dimen/value_15"
+                    android:layout_marginRight="@dimen/value_10"
+                    android:layout_marginLeft="@dimen/value_10"
                     android:id="@+id/header_edit_add"
-                    android:text="Edytuj produkt"
+                    android:text="@string/header_edit"
                     android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                     android:id="@+id/text_input_search_product"
                     android:layout_gravity="center"
                     app:endIconMode="clear_text"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/value_10"
                     android:layout_width="match_parent"
                     android:hint="@string/search_products"
                     app:helperText=""
@@ -88,8 +88,8 @@
                     android:layout_height="match_parent"
                     android:layout_below="@id/text_input_search_product"
                     tools:listitem="@layout/product_list_item"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="@dimen/value_10"
+                    android:layout_marginBottom="@dimen/value_10"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     />
             </LinearLayout>
@@ -103,5 +103,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin" />
+        android:layout_margin="@dimen/value_16" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

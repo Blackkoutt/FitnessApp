@@ -18,7 +18,7 @@
     <item
         android:id="@+id/navigation_stepCounter"
         android:icon="@drawable/baseline_steps_counter"
-        android:title="Steps" />
+        android:title="@string/stepCounter" />
 
     <item
         android:id="@+id/navigation_bmi_calculator"

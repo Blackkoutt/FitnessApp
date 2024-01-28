@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="@dimen/corner_radius"
+    card_view:cardCornerRadius="@dimen/value_6"
     card_view:cardElevation="@dimen/elevation"
     card_view:cardUseCompatPadding="true">
     <RelativeLayout
@@ -16,10 +16,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/value_10"
             android:layout_marginBottom="3dp"
             android:text="AAAAAAAAAAAAAA"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/value_10"
             />
         <TextView
             android:id="@+id/comment_publication_date"
@@ -35,19 +35,19 @@
             android:id="@+id/comment_content"
             android:layout_width="wrap_content"
             android:text="AAAAAAAAAAAAAA"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/value_10"
             android:layout_height="wrap_content"
             android:layout_below="@+id/comment_publication_date"
             android:layout_alignStart="@id/comment_publication_date"
         />
         <ImageView
             android:id="@+id/delete_icon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="@dimen/value_25"
+            android:layout_height="@dimen/value_25"
             android:src="@drawable/delete_24"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="@dimen/value_10" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

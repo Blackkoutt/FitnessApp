@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">FitnessApp</string>
     <string name="title_home">Strona główna</string>
@@ -106,7 +107,14 @@
 
     <string name="distance">Odległość: %.2f metrów</string>
     <string name="caloriesBurned">Spalone kalorie: %.2f kcal</string>
-    
+    <string name="stepCounter">Licznik kroków</string>
+    <string name="steps">Kroki</string>
+    <string name="goal">Cel: 8000</string>
+    <string name="not_counter">Serwis liczenia kroków</string>
+    <string name="not_counter_working">Liczenie kroków działa w tle</string>
+    <string name="steps_done">Zrobione kroki: </string>
+    <string name="asc">Aktualna liczba kroków</string>
+
     <string name="add_limit">Dodaj limit</string>
     <string name="edit_limit">Edytuj limit</string>
     <string name="save_edit_limit_button">Zapisz limit</string>

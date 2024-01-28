@@ -46,8 +46,8 @@ public class StepCounterService extends Service implements SensorEventListener {
             createNotificationChannel();
         }
         Notification notification = new NotificationCompat.Builder(this, "StepCounterChannel")
-                .setContentTitle("Step Counter Service")
-                .setContentText("Counting steps in background")
+                .setContentTitle(getString(R.string.not_counter))
+                .setContentText(getString(R.string.not_counter_working))
                 .setSmallIcon(R.drawable.baseline_steps_counter)
                 .build();
         startForeground(1, notification);
@@ -69,7 +69,6 @@ public class StepCounterService extends Service implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            Log.i("Sensor"," Sensor dziala");
             totalSteps = (int) event.values[0];
             if (previousTotalSteps == 0) {
                 previousTotalSteps = totalSteps;
@@ -87,8 +86,8 @@ public class StepCounterService extends Service implements SensorEventListener {
     private void createNotification(int currentSteps) {
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "StepCounterChannel")
-                .setContentTitle("Aktualna liczba kroków")
-                .setContentText("Zrobione kroki: " + currentSteps)
+                .setContentTitle(getString(R.string.asc))
+                .setContentText(getString(R.string.steps_done) + currentSteps)
                 .setSmallIcon(R.drawable.baseline_steps_counter);
 
         if (notificationManager != null) {

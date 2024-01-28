@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FitnessApp</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_products">Productos</string>
+    <string name="title_meals">Comidas</string>
+    <string name="author">Autor:</string>
+    <string name="publication_date">Fecha de publicación:</string>
+    <string name="enter_name">Nombre completo</string>
+    <string name="enter_comment">Ingrese el comentario</string>
+    <string name="add_comment">Agregar comentario</string>
+    <string name="other_comments">Otros comentarios</string>
+    <string name="error">No se pudo conectar al API. Intente nuevamente más tarde</string>
+
+    <string name="product_name">Nombre del producto</string>
+    <string name="product_category">Categoría del producto</string>
+    <string name="product_manufacturer">Fabricante del producto</string>
+    <string name="product_unit">Unidad de medida</string>
+    <string name="calories_amount">Cantidad de calorías en 100g</string>
+    <string name="protein_amount">Cantidad de proteínas en 100g</string>
+    <string name="carbohydrates_amount">Cantidad de carbohidratos en 100g</string>
+    <string name="fat_amount">Cantidad de grasas en 100g</string>
+
+    <string name="header_add">Agregar producto</string>
+    <string name="header_edit">Editar producto</string>
+
+    <string name="product_name_label">Nombre: %1$s</string>
+    <string name="product_category_label">Categorías: %1$s</string>
+    <string name="product_manufacturer_label">Fabricante: %1$s</string>
+    <string name="product_unit_label">Unidad: %1$s</string>
+    <string name="product_protein_label">Cantidad de proteínas por 100 g: %1$s g</string>
+    <string name="product_carbohydrates_label">Cantidad de carbohidratos por 100 g: %1$s g</string>
+    <string name="product_fat_label">Cantidad de grasas por 100 g: %1$s g</string>
+    <string name="product_calorific_label">Valor nutricional por 100 g: %1$s kcal</string>
+
+    <string name="product_details_header">Detalles del producto</string>
+    <string name="general_data_header">Datos generales</string>
+    <string name="nutri_value_header">Valores nutricionales</string>
+
+    <string name="add_product_buton">Agregar producto</string>
+    <string name="save_edit_product_button">Guardar producto</string>
+
+    <string name="product_added_succesful">Producto agregado correctamente a la lista</string>
+
+    <string name="product_delete_question">¿Está seguro de que desea eliminar este producto?</string>
+    <string name="formatted_product_info">Fabricante: %1$s\nNombre: %2$s</string>
+
+    <string name="product_deleted">Producto eliminado correctamente</string>
+    <string name="product_modified">Producto modificado correctamente</string>
+    <string name="empty_not_saved">El producto no se guardó porque había campos vacíos en el formulario</string>
+
+
+    <string name="yes_button">SÍ</string>
+    <string name="no_button">NO</string>
+    <string name="confirm_button">Confirmar</string>
+    <string name="cancel_button">Cancelar</string>
+    <string name="clear_button">Limpiar</string>
+
+    <string name="category_dialog_header">Seleccione una categoría</string>
+
+    <string name="required_error">Campo obligatorio</string>
+
+    <string name="add_manufacturer">Agregar fabricante</string>
+    <string name="add_category">Agregar categoría</string>
+
+    <string name="add_string">Agregar</string>
+
+    <string name="manufacturer_name">Nombre del fabricante</string>
+    <string name="category_name">Nombre del producto</string>
+
+
+    <string name="left_arrow">&#x2190;</string>
+    <string name="right_arrow">&#x2192;</string>
+
+    <string name="breakfast">Desayuno</string>
+    <string name="second_breakfast">Segundo desayuno</string>
+    <string name="lunch">Almuerzo</string>
+    <string name="tea">Merienda</string>
+    <string name="dinner">Cena</string>
+    <string name="snack">Bocadillo</string>
+
+    <string name="total_calorific">Calorías totales: %1$s kcal</string>
+    <string name="total_protein">Proteínas totales: %1$s g</string>
+    <string name="total_carbohydrates">Carbohidratos totales: %1$s g</string>
+    <string name="total_fat">Grasas totales: %1$s g</string>
+
+    <string name="meal_category">Categoría de la comida</string>
+    <string name="search_products">Buscar producto por nombre</string>
+
+    <string name="add_meal">Agregar comida</string>
+    <string name="edit_meal">Editar comida</string>
+    <string name="meal_added_succesful">Comida agregada correctamente a la lista</string>
+    <string name="meal_modified_succesful">Comida modificada correctamente</string>
+    <string name="empty_not_saved_meal">La comida no se guardó porque había campos vacíos en el formulario</string>
+
+    <string name="meal_delete_question">¿Está seguro de que desea eliminar %1$s del día: %2$s ?</string>
+    <string name="meal_deleted">Comida eliminada correctamente</string>
+    <string name="meal_details">Detalles de la comida</string>
+    <string name="included_products">Productos incluidos</string>
+    <string name="meal_details_summary">Resumen de la comida</string>
+
+    <string name="meal_category_name">Categoría: %1$s</string>
+    <string name="meal_date">Fecha: %1$s</string>
+
+
+    <string name="product_list_empty">Seleccione al menos un producto de la lista</string>
+
+    <string name="distance">Distancia: %.2f metros</string>
+    <string name="caloriesBurned">Calorías quemadas: %.2f kcal</string>
+    <string name="stepCounter">Contador de pasos</string>
+    <string name="steps">Pasos</string>
+    <string name="goal">Objetivo: 8000</string>
+    <string name="not_counter">Servicio de conteo de pasos</string>
+    <string name="not_counter_working">El conteo de pasos está funcionando en segundo plano</string>
+    <string name="steps_done">Pasos realizados: </string>
+    <string name="asc">Número actual de pasos</string>
+
+    <string name="add_limit">Agregar límite</string>
+    <string name="edit_limit">Editar límite</string>
+    <string name="save_edit_limit_button">Guardar límite</string>
+    <string name="caloric_limit">Límite calórico</string>
+
+    <string name="limit_text">Límite calórico: %1$s</string>
+    <string name="calories_text">Calorías consumidas: %1$s</string>
+    <string name="limit_exceeded">¡Límite calórico excedido!</string>
+    <string name="add_meal_button">Agregar comida</string>
+    <string name="limit_empty">Límite no establecido</string>
+    <string name="bmi_calculator">Calculadora de IMC</string>
+
+    <string name="body_weight">Peso corporal (kg)</string>
+    <string name="height">Altura (m)</string>
+    <string name="calculate_BMI">Calcular tu IMC</string>
+
+    <string name="table_category">Categoría</string>
+    <string name="bmi">IMC</string>
+    <string name="starvation">Inanición</string>
+    <string name="emaciation">Emaciación</string>
+    <string name="underweight">Bajo peso</string>
+    <string name="correct">Correcto</string>
+    <string name="overweight">Sobrepeso</string>
+    <string name="first_degree_obesity">Obesidad de primer grado</string>
+    <string name="second_degree_obesity">Obesidad de segundo grado</string>
+    <string name="third_degree_obesity">Obesidad de tercer grado</string>
+    <string name="your_bmi">Tu IMC es: %1$s</string>
+    <string name="notification_info">El límite establecido es %1$s kcal, mientras que la ingesta total de calorías de las comidas es %2$s kcal</string>
+    <string name="delete_comment">¿Seguro que quieres eliminar el comentario de %1$s ?</string>
+</resources>
