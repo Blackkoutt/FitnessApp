@@ -103,4 +103,7 @@
 
 
     <string name="product_list_empty">Wybierz conajmniej jeden produkt z listy</string>
+
+    <string name="distance">Odległość: %.2f metrów</string>
+    <string name="caloriesBurned">Spalone kalorie: %.2f kcal</string>
 </resources>

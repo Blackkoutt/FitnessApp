@@ -42,11 +42,11 @@ public class StepCounterService extends Service implements SensorEventListener {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        createNotificationChannel();
+        //createNotificationChannel();
         Notification notification = new NotificationCompat.Builder(this, "StepCounterChannel")
                 .setContentTitle("Step Counter Service")
                 .setContentText("Counting steps in background")
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setSmallIcon(R.drawable.baseline_steps_counter)
                 .build();
         startForeground(1, notification);
         return START_STICKY;
@@ -74,6 +74,7 @@ public class StepCounterService extends Service implements SensorEventListener {
             }
             int stepsSinceLastBoot = totalSteps - previousTotalSteps;
             saveData(stepsSinceLastBoot);
+            createNotification(totalSteps);
         }
     }
 
@@ -81,17 +82,15 @@ public class StepCounterService extends Service implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "StepCounterChannel";
-            String description = "Step Counter Service Channel";
-            int importance = NotificationManager.IMPORTANCE_LOW;
-            NotificationChannel channel = new NotificationChannel("StepCounterChannel", name, importance);
-            channel.setDescription(description);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            if (notificationManager != null) {
-                notificationManager.createNotificationChannel(channel);
-            }
+    private void createNotification(int currentSteps) {
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "StepCounterChannel")
+                .setContentTitle("Aktualna liczba kroków")
+                .setContentText("Zrobione kroki: " + currentSteps)
+                .setSmallIcon(R.drawable.baseline_steps_counter);
+
+        if (notificationManager != null) {
+            notificationManager.notify(2, builder.build());
         }
     }
 

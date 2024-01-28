@@ -28,6 +28,8 @@ import com.example.fitnessapp.R;
 public class StepCounterFragment extends Fragment {
     private ProgressBar progressBar;
     private TextView steps;
+    private TextView distance;
+    private TextView caloriesBurned;
 
     @Nullable
     @Override
@@ -35,8 +37,10 @@ public class StepCounterFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.step_counter, container, false);
         progressBar = rootView.findViewById(R.id.progressBar);
         steps = rootView.findViewById(R.id.steps);
+        distance = rootView.findViewById(R.id.distance);
+        caloriesBurned = rootView.findViewById(R.id.caloriesBurned);
 
-        resetSteps();
+        //resetSteps();
         loadData();
 
         return rootView;
@@ -83,12 +87,25 @@ public class StepCounterFragment extends Fragment {
         int savedSteps = sharedPref.getInt("key1", 0);
         steps.setText(String.valueOf(savedSteps));
         progressBar.setProgress(savedSteps);
+        double calculatedDistance = calculateDistance(savedSteps);
+        double calculatedCaloriesBurned = calculateCaloriesBurned(savedSteps);
+
+        distance.setText(getString(R.string.distance, calculatedDistance));
+        caloriesBurned.setText(getString(R.string.caloriesBurned, calculatedCaloriesBurned));
+    }
+    private double calculateDistance(int stepsCount) {
+        double stepLength = 0.5;
+        return stepsCount * stepLength;
+    }
+
+    private double calculateCaloriesBurned(int stepsCount) {
+        double caloriesPerStep = 0.4;
+        return stepsCount * caloriesPerStep;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        // Stop the StepCounterService when fragment is destroyed
         requireActivity().stopService(new Intent(requireContext(), StepCounterService.class));
     }
 }
