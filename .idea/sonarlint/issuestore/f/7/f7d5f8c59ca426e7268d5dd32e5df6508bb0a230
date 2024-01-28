@@ -1,0 +1,10 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¶¨’Â8ÖóÁãÔ1
+n
+java:S1128"LRemove this unused import 'com.example.fitnessapp.Database.Models.Category'.(Òî‹Âşÿÿÿÿ8ğİ£äÔ1
+e
+java:S1128"HRemove this unused import 'com.example.fitnessapp.Database.Models.Meal'.(Åˆç—8ÿ±¯åÔ1
+w
+java:S1128"URemove this unused import 'com.example.fitnessapp.Database.Models.MealWithRelations'.(ËÌ¨­øÿÿÿÿ8ğİ£äÔ1
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8æ§©äÔ1

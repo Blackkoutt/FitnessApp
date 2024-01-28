@@ -132,5 +132,5 @@
     <string name="third_degree_obesity">Otyłość III stopnia</string>
     <string name="your_bmi">Twoje BMI wynosi: %1$s</string>
     <string name="notification_info">Ustalony limit wynosi %1$s kcal, natomiast łączna ilość kalori z posiłków wyniosła %2$s kcal</string>
-
+    <string name="delete_comment">Czy napewno chcesz usunąć komentarz autorstwa %1$s ?</string>
 </resources>

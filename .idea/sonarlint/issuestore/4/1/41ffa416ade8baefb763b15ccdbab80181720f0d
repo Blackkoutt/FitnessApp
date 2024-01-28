@@ -1,55 +1,63 @@
 
+L
+java:S1066º"/Merge this if statement with the enclosing one.(åéµ#8Ì™×íÔ1
 E
-java:S1604m"(Make this anonymous inner class a lambda(ÁâÚÁ8áÛÁÔ1
+java:S1604{"(Make this anonymous inner class a lambda(ÁâÚÁ8Í™×íÔ1
 F
-java:S1604"(Make this anonymous inner class a lambda(á¥£Û8áÛÁÔ1
+java:S1604¤"(Make this anonymous inner class a lambda(á¥£Û8Í™×íÔ1
 F
-java:S1604Ë"(Make this anonymous inner class a lambda(™¦ò•8áÛÁÔ1
+java:S1604à"(Make this anonymous inner class a lambda(™¦ò•8Í™×íÔ1
 :
-java:S1643µ"Use a StringBuilder instead.(’¤½ç8áÛÁÔ1
+java:S1643ë"Use a StringBuilder instead.(’¤½ç8Î™×íÔ1
 9
-java:S1643·"Use a StringBuilder instead.(ƒã¤}8áÛÁÔ1
-
-java:S1450>"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ8—ŸÛÁÔ1
-†
-java:S1450?"dRemove the "mealCategoryViewModel" field and declare it as a local variable in the relevant methods.(ÿ½µ“ıÿÿÿÿ8—ŸÛÁÔ1
-
-java:S1450A"bRemove the "productRecyclerView" field and declare it as a local variable in the relevant methods.(úŞŠš8—ŸÛÁÔ1
-
-java:S1450D"_Remove the "productViewModel" field and declare it as a local variable in the relevant methods.(¤ì˜¶ûÿÿÿÿ8—ŸÛÁÔ1
-v
-java:S1450F"YRemove the "saveButton" field and declare it as a local variable in the relevant methods.(ºƒ¥Í8—ŸÛÁÔ1
-
-java:S14505"]Remove the "searchEditText" field and declare it as a local variable in the relevant methods.(§—Ø¹ÿÿÿÿÿ8—ŸÛÁÔ1
-t
-java:S3776I"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(¨Œşÿÿÿÿ8 ŸÛÁÔ1
-]	java:S125~"<This block of commented-out lines of code should be removed.(ÈÅÀøÿÿÿÿ8§ŸÛÁÔ1
+java:S1643í"Use a StringBuilder instead.(ƒã¤}8Î™×íÔ1
 Z
-java:S1874‹"7Remove this use of "getSerializable"; it is deprecated.(µíö¦øÿÿÿÿ8¨ŸÛÁÔ1
-k	java:S100¼"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛŠ‘‰8¯ŸÛÁÔ1
+java:S4973›"<Strings and Boxed types should be compared using "equals()".(±ÿ¨û8Ï™×íÔ1
+Y
+java:S4973"<Strings and Boxed types should be compared using "equals()".(Ó×,8Ï™×íÔ1
+
+java:S1450J"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ8˜›×íÔ1
+†
+java:S1450K"dRemove the "mealCategoryViewModel" field and declare it as a local variable in the relevant methods.(ÿ½µ“ıÿÿÿÿ8™›×íÔ1
+
+java:S1450M"bRemove the "productRecyclerView" field and declare it as a local variable in the relevant methods.(úŞŠš8™›×íÔ1
+
+java:S1450P"_Remove the "productViewModel" field and declare it as a local variable in the relevant methods.(¤ì˜¶ûÿÿÿÿ8™›×íÔ1
+v
+java:S1450R"YRemove the "saveButton" field and declare it as a local variable in the relevant methods.(ºƒ¥Í8™›×íÔ1
+
+java:S1450A"]Remove the "searchEditText" field and declare it as a local variable in the relevant methods.(§—Ø¹ÿÿÿÿÿ8™›×íÔ1
+t
+java:S3776W"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(¨Œşÿÿÿÿ8¦›×íÔ1
+^	java:S125Œ"<This block of commented-out lines of code should be removed.(ÈÅÀøÿÿÿÿ8°›×íÔ1
+Z
+java:S1874 "7Remove this use of "getSerializable"; it is deprecated.(µíö¦øÿÿÿÿ8±›×íÔ1
+k	java:S100Ñ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛŠ‘‰8¸›×íÔ1
 a
-java:S1155Á">Use isEmpty() to check whether the collection is empty or not.(–äåÆúÿÿÿÿ8¯ŸÛÁÔ1
-k	java:S100È"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÆãÖ8°ŸÛÁÔ1
-D	java:S131İ""Add a default case to this switch.(˜ğ”Ëşÿÿÿÿ8²ŸÛÁÔ1
-^	java:S125ø"<This block of commented-out lines of code should be removed.(¨ç¼»ûÿÿÿÿ8µŸÛÁÔ1
+java:S1155Ö">Use isEmpty() to check whether the collection is empty or not.(–äåÆúÿÿÿÿ8¸›×íÔ1
+k	java:S100İ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÆãÖ8¹›×íÔ1
+D	java:S131ò""Add a default case to this switch.(˜ğ”Ëşÿÿÿÿ8»›×íÔ1
+^	java:S125"<This block of commented-out lines of code should be removed.(¨ç¼»ûÿÿÿÿ8½›×íÔ1
 d
-java:S1126•"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8·ŸÛÁÔ1
-k	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö‰ªğ8·ŸÛÁÔ1
+java:S1126ª"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8À›×íÔ1
+k	java:S100²"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ö‰ªğ8À›×íÔ1
+p
+java:S3776²"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ö‰ªğ8Á›×íÔ1
 S
-java:S1874Ÿ"0Remove this use of "getColor"; it is deprecated.(×®šûÿÿÿÿ8·ŸÛÁÔ1
+java:S1874´"0Remove this use of "getColor"; it is deprecated.(×®šûÿÿÿÿ8Â›×íÔ1
 N
-java:S1874£"0Remove this use of "getColor"; it is deprecated.(ÀË†ƒ8·ŸÛÁÔ1
+java:S1874Ø"0Remove this use of "getColor"; it is deprecated.(ÀË†ƒ8Í›×íÔ1
 S
-java:S1874¬"0Remove this use of "getColor"; it is deprecated.(×®šûÿÿÿÿ8¸ŸÛÁÔ1
+java:S1874â"0Remove this use of "getColor"; it is deprecated.(×®šûÿÿÿÿ8Î›×íÔ1
 N
-java:S1874¯"0Remove this use of "getColor"; it is deprecated.(ÀË†ƒ8¸ŸÛÁÔ1
+java:S1874å"0Remove this use of "getColor"; it is deprecated.(ÀË†ƒ8Ï›×íÔ1
 [
-java:S1155Ó">Use isEmpty() to check whether the collection is empty or not.(ãˆ¥8ºŸÛÁÔ1
+java:S1155‰">Use isEmpty() to check whether the collection is empty or not.(ãˆ¥8Ó›×íÔ1
 \
-java:S1854ì"9Remove this useless assignment to local variable "chara".(ºˆáëûÿÿÿÿ8»ŸÛÁÔ1
+java:S1854¢"9Remove this useless assignment to local variable "chara".(ºˆáëûÿÿÿÿ8Ô›×íÔ1
 M
-java:S1481ì"*Remove this unused "chara" local variable.(ºˆáëûÿÿÿÿ8»ŸÛÁÔ1
+java:S1481¢"*Remove this unused "chara" local variable.(ºˆáëûÿÿÿÿ8Õ›×íÔ1
 I
-java:S1481í"&Remove this unused "a" local variable.(–ÎåÌûÿÿÿÿ8»ŸÛÁÔ1
+java:S1481£"&Remove this unused "a" local variable.(–ÎåÌûÿÿÿÿ8Õ›×íÔ1
 F
-java:S1068É"(Remove this unused "mans" private field.(¤Š…8¼ŸÛÁÔ1
+java:S1068ÿ"(Remove this unused "mans" private field.(¤Š…8Ö›×íÔ1

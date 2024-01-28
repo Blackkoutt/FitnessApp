@@ -1,6 +1,8 @@
 package com.example.fitnessapp.ui.home;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -45,7 +47,6 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private View view;
     private View activityRootView;
-    private CommentAdapter commentAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -78,46 +79,12 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-    private void addCommentToPost(Post post, List<Comment> comments, CommentAdapter adapter) {
-        PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
-
-        Call<Void> addCommentCall = postService.addComment(post.getId(), comments);
-        addCommentCall.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    Log.d("API Success", "Comment added successfully");
-                    updateCommentView(post, comments, adapter);
-                } else {
-                    Log.e("API Error", "Error adding comment: " + response.message());
-                    Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
-                            BaseTransientBottomBar.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                String errorMessage = "Error: " + t.getMessage();
-                Log.e("API Error", errorMessage);
-                Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
-                        BaseTransientBottomBar.LENGTH_LONG).show();
-                //Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
-                   //     BaseTransientBottomBar.LENGTH_LONG).show();
-            }
-        });
-    }
-    private void updateCommentView(Post post, List<Comment> comments, CommentAdapter adapter){
-        post.setCommentList(comments);
-        commentAdapter.setComments(post);
-        //adapter.notifyDataSetChanged();
-    }
     private void setupPostListView(List<Post> postList){
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
         final PostAdapter adapter = new PostAdapter();
         adapter.setPosts(postList);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
     }
 
     @Override
@@ -135,8 +102,7 @@ public class HomeFragment extends Fragment {
         private final TextInputEditText commentContent;
         private final MaterialButton buttonAddComment;
         private final RecyclerView commentRecyclerView;
-
-
+        private CommentAdapter commentAdapter;
         private Post post;
         public PostHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.post_list_item, parent, false));
@@ -187,7 +153,6 @@ public class HomeFragment extends Fragment {
                     }
                 }
             });
-
         }
         public void bind(Post post){
             this.post = post;
@@ -202,12 +167,46 @@ public class HomeFragment extends Fragment {
 
                 //RecyclerView commentRecyclerView = view.findViewById(R.id.comment_recyclerview);
                 //final
+                commentAdapter = new CommentAdapter();
                 commentAdapter.setComments(post);
                 commentRecyclerView.setAdapter(commentAdapter);
                 commentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
             }
+        }
+        private void addCommentToPost(Post post, List<Comment> comments, CommentAdapter adapter) {
+            PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
+
+            Call<Void> addCommentCall = postService.addComment(post.getId(), comments);
+            addCommentCall.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("API Success", "Comment added successfully");
+                        updateCommentView(post, comments, adapter);
+                    } else {
+                        Log.e("API Error", "Error adding comment: " + response.message());
+                        Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                                BaseTransientBottomBar.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    String errorMessage = "Error: " + t.getMessage();
+                    Log.e("API Error", errorMessage);
+                    Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
+                            BaseTransientBottomBar.LENGTH_LONG).show();
+                    //Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                    //     BaseTransientBottomBar.LENGTH_LONG).show();
+                }
+            });
+        }
+        private void updateCommentView(Post post, List<Comment> comments, CommentAdapter adapter){
+            post.setCommentList(comments);
+            //commentAdapter.setComments(post);
+            commentAdapter.notifyDataSetChanged();
         }
     }
     private class PostAdapter extends RecyclerView.Adapter<PostHolder>{
@@ -259,7 +258,7 @@ public class HomeFragment extends Fragment {
         public void onBindViewHolder(@NonNull CommentHolder holder, int position) {
             if(comments != null){
                 Comment comment = comments.get(position);
-                holder.bind(post, comment);
+                holder.bind(post, comment, this);
             }
         }
 
@@ -283,8 +282,8 @@ public class HomeFragment extends Fragment {
         private final TextView commentPublicationDateTextView;
         private final TextView commentContentTextView;
         private final ImageView deleteComment;
-
         private Post post;
+        private CommentAdapter commentAdapter;
         private Comment comment;
         public CommentHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.comment_list_item, parent, false));
@@ -299,43 +298,58 @@ public class HomeFragment extends Fragment {
 
         private void deleteComment(View view) {
             if (comment != null && post != null) {
-                PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
-
-                int postId = post.getId();
-                int commentId = comment.getId(); // Tutaj załóżmy, że komentarz ma pole 'id'
-
-                Call<Void> deleteCommentCall = postService.deleteComment(postId, commentId);
-                deleteCommentCall.enqueue(new Callback<Void>() {
+                String message = getResources().getString(R.string.delete_comment, comment.getAuthor());
+                AlertDialog.Builder builder = new AlertDialog.Builder((getActivity()));
+                builder.setTitle(getResources().getString(R.string.delete_comment, comment.getAuthor()));
+                builder.setPositiveButton(R.string.yes_button, this::deleteCommentOnServer);
+                builder.setNegativeButton(R.string.no_button, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
-                            // Usunięcie komentarza z lokalnej listy
-                            int position = post.getCommentList().indexOf(comment);
-                            if (position != -1) {
-                                post.getCommentList().remove(position);
-                                commentAdapter.setComments(post);
-                            }
-                        } else {
-                            Log.e("API Error", "Error deleting comment: " + response.message());
-                            Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
-                                    BaseTransientBottomBar.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        String errorMessage = "Error: " + t.getMessage();
-                        Log.e("API Error", errorMessage);
-                        Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
-                                BaseTransientBottomBar.LENGTH_LONG).show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
                     }
                 });
+                builder.create();
+                builder.show();
             }
         }
 
-        public void bind(Post post, Comment comment){
+        private void deleteCommentOnServer(DialogInterface dialogInterface, int i) {
+            PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
+
+            int postId = post.getId();
+            int commentId = comment.getId(); // Tutaj załóżmy, że komentarz ma pole 'id'
+
+            Call<Void> deleteCommentCall = postService.deleteComment(postId, commentId);
+            deleteCommentCall.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        // Usunięcie komentarza z lokalnej listy
+                        int position = post.getCommentList().indexOf(comment);
+                        if (position != -1) {
+                            post.getCommentList().remove(position);
+                            commentAdapter.notifyDataSetChanged();
+                        }
+                    } else {
+                        Log.e("API Error", "Error deleting comment: " + response.message());
+                        Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                                BaseTransientBottomBar.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    String errorMessage = "Error: " + t.getMessage();
+                    Log.e("API Error", errorMessage);
+                    Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
+                            BaseTransientBottomBar.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        public void bind(Post post, Comment comment, CommentAdapter commentAdapter){
             this.post = post;
             this.comment = comment;
+            this.commentAdapter = commentAdapter;
             if(comment != null){
                 commentAuthorTextView.setText(comment.getAuthor());
                 commentPublicationDateTextView.setText(comment.getPublication_date());

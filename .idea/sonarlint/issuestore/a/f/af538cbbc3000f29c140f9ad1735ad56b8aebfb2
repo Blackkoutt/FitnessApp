@@ -1,48 +1,52 @@
 
 {
-java:S1192ò"XUse already-defined constant 'EXTRA_MEAL_DETAILS' instead of duplicating its value here.(ã®“©ûÿÿÿÿ8½‰¿ÄÔ1
+java:S1192ú"XUse already-defined constant 'EXTRA_MEAL_DETAILS' instead of duplicating its value here.(ã®“©ûÿÿÿÿ8ªµÅìÔ1
 K
-java:S1604†"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8½‰¿ÄÔ1
+java:S1604"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8«µÅìÔ1
 K
-java:S1604"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8½‰¿ÄÔ1
+java:S1604˜"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8«µÅìÔ1
 F
-java:S1604Û"(Make this anonymous inner class a lambda(ú“Úå8½‰¿ÄÔ1
+java:S1604ì"(Make this anonymous inner class a lambda(ÖêÔå8«µÅìÔ1
+F
+java:S1604„"(Make this anonymous inner class a lambda(ÖêÔå8«µÅìÔ1
+K
+java:S1604"(Make this anonymous inner class a lambda(ò³Ïƒúÿÿÿÿ8«µÅìÔ1
 |
-java:S1450I"_Remove the "mealRecyclerView" field and declare it as a local variable in the relevant methods.(¼âá¾8¨Š¿ÄÔ1
+java:S1450B"_Remove the "mealRecyclerView" field and declare it as a local variable in the relevant methods.(¼âá¾8›¶ÅìÔ1
 y
-java:S1450N"\Remove the "newMealButton" field and declare it as a local variable in the relevant methods.(¿µÄ8¨Š¿ÄÔ1
+java:S1450H"\Remove the "newMealButton" field and declare it as a local variable in the relevant methods.(¿µÄ8›¶ÅìÔ1
 {
-java:S1450C"^Remove the "nextMonthButton" field and declare it as a local variable in the relevant methods.(˜‰¸ê8¨Š¿ÄÔ1
+java:S1450<"^Remove the "nextMonthButton" field and declare it as a local variable in the relevant methods.(˜‰¸ê8›¶ÅìÔ1
 
-java:S1450<"bRemove the "previousMonthButton" field and declare it as a local variable in the relevant methods.(’ûùî8©Š¿ÄÔ1
+java:S14500"bRemove the "previousMonthButton" field and declare it as a local variable in the relevant methods.(’ûùî8›¶ÅìÔ1
 }
-java:S1450F"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ıÿÿÿÿ8©Š¿ÄÔ1
+java:S1450?"[Remove the "recyclerView" field and declare it as a local variable in the relevant methods.(¿á© ıÿÿÿÿ8›¶ÅìÔ1
 l
-java:S1874S"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8±Š¿ÄÔ1
+java:S1874R"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8¤¶ÅìÔ1
 Z
-java:S1874T"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8±Š¿ÄÔ1
+java:S1874S"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8¤¶ÅìÔ1
 „
-java:S3252l"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8²Š¿ÄÔ1
+java:S3252k"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8¦¶ÅìÔ1
 „
-java:S3252}"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8³Š¿ÄÔ1
+java:S3252|"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8¦¶ÅìÔ1
 …
-java:S3252‚"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8³Š¿ÄÔ1
+java:S3252"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8§¶ÅìÔ1
 ]
-java:S1161ˆ":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8³Š¿ÄÔ1
+java:S1161‡":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8§¶ÅìÔ1
 \
-java:S1874°">Remove this use of "startActivityForResult"; it is deprecated.(º°®8¼Š¿ÄÔ1
-^	java:S125ì"<This block of commented-out lines of code should be removed.(ö‘ìØøÿÿÿÿ8ÀŠ¿ÄÔ1
+java:S1874¸">Remove this use of "startActivityForResult"; it is deprecated.(º°®8±¶ÅìÔ1
+^	java:S125ô"<This block of commented-out lines of code should be removed.(ö‘ìØøÿÿÿÿ8µ¶ÅìÔ1
 d
-java:S1126û"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8ÁŠ¿ÄÔ1
-k	java:S100ƒ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¼ÁÔ8ïİ¿ÄÔ1
+java:S1126ƒ"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8¶¶ÅìÔ1
+k	java:S100‹"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¼ÁÔ8¶¶ÅìÔ1
 …
-java:S3252"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8óİ¿ÄÔ1
+java:S3252•"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8¹¶ÅìÔ1
 ¤
-java:S1186’"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8óİ¿ÄÔ1
-k	java:S100›"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ§®Ú8ôİ¿ÄÔ1
+java:S1186š"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8¹¶ÅìÔ1
+k	java:S100£"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ§®Ú8º¶ÅìÔ1
 a
-java:S1874£">Remove this use of "startActivityForResult"; it is deprecated.(‹¥ç•úÿÿÿÿ8õİ¿ÄÔ1
+java:S1874®">Remove this use of "startActivityForResult"; it is deprecated.(‹¥ç•úÿÿÿÿ8»¶ÅìÔ1
 D
-java:S1905Ú"&Remove this unnecessary cast to "int".(™“†§8øİ¿ÄÔ1
+java:S1905å"&Remove this unnecessary cast to "int".(™“†§8¾¶ÅìÔ1
 F
-java:S1185"(Remove this method to simply inherit it.(±íòÑ8úİ¿ÄÔ1
+java:S1185Ó"(Remove this method to simply inherit it.(±íòÑ8Æ¶ÅìÔ1

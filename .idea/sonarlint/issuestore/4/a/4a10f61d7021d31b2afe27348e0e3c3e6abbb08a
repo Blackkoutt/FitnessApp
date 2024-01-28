@@ -1,0 +1,14 @@
+
+L
+java:S1066J"/Merge this if statement with the enclosing one.(äğª†8ÕËàåÔ1
+J
+java:S1604V"(Make this anonymous inner class a lambda(‡ƒÃüÿÿÿÿ8ìıÛåÔ1
+}
+java:S1450"[Remove the "dateTextView" field and declare it as a local variable in the relevant methods.(£ùôÈıÿÿÿÿ8ø‹ÙåÔ1
+
+java:S1450"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ8ø‹ÙåÔ1
+{
+java:S1450"^Remove the "saveLimitButton" field and declare it as a local variable in the relevant methods.(ˆâ¸Œ8ù‹ÙåÔ1
+Y
+java:S18748"7Remove this use of "getSerializable"; it is deprecated.(ÊŒçéüÿÿÿÿ8„ŒÙåÔ1
+j	java:S100S"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(øç8‹şÛåÔ1
