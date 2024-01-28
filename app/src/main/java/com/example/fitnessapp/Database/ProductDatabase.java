@@ -12,6 +12,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.fitnessapp.Database.Dao.CaloricLimitDao;
 import com.example.fitnessapp.Database.Dao.CategoryDao;
 import com.example.fitnessapp.Database.Dao.ManufacturerDao;
 import com.example.fitnessapp.Database.Dao.MealCategoryDao;
@@ -21,6 +22,7 @@ import com.example.fitnessapp.Database.Dao.MeasureUnitDao;
 import com.example.fitnessapp.Database.Dao.ProductCategoryDao;
 import com.example.fitnessapp.Database.Dao.ProductDao;
 import com.example.fitnessapp.Database.Dao.ProductDetailsDao;
+import com.example.fitnessapp.Database.Models.CaloricLimit;
 import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.Converters;
 import com.example.fitnessapp.Database.Models.Manufacturer;
@@ -48,11 +50,12 @@ import java.util.concurrent.Executors;
                 Manufacturer.class,
                 MeasureUnit.class,
                 ProductCategory.class,
-                ProductDetails.class
+                ProductDetails.class,
+                CaloricLimit.class
             },
-            version = 3,
+            version = 5,
             autoMigrations = {
-                @AutoMigration(from = 1, to = 3)
+                @AutoMigration(from = 4, to = 5)
             },
             exportSchema = true)
 @TypeConverters({Converters.class})
@@ -63,6 +66,7 @@ public abstract class ProductDatabase extends RoomDatabase {
     public abstract ProductDao productDao();
     public abstract MealDao mealDao();
     public abstract MealCategoryDao mealCategoryDao();
+    public abstract CaloricLimitDao caloricLimitDao();
     public abstract MealProductDao mealProductDao();
     public abstract CategoryDao categoryDao();
     public abstract ManufacturerDao manufacturerDao();

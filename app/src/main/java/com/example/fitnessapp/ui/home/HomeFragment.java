@@ -45,6 +45,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private View view;
     private View activityRootView;
+    private CommentAdapter commentAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -107,7 +108,8 @@ public class HomeFragment extends Fragment {
     }
     private void updateCommentView(Post post, List<Comment> comments, CommentAdapter adapter){
         post.setCommentList(comments);
-        adapter.notifyDataSetChanged();
+        commentAdapter.setComments(post);
+        //adapter.notifyDataSetChanged();
     }
     private void setupPostListView(List<Post> postList){
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
@@ -133,7 +135,7 @@ public class HomeFragment extends Fragment {
         private final TextInputEditText commentContent;
         private final MaterialButton buttonAddComment;
         private final RecyclerView commentRecyclerView;
-        private final CommentAdapter adapter;
+
 
         private Post post;
         public PostHolder(LayoutInflater inflater, ViewGroup parent){
@@ -148,8 +150,43 @@ public class HomeFragment extends Fragment {
             userName = itemView.findViewById(R.id.text_input_EditText_name);
             commentContent = itemView.findViewById(R.id.text_input_EditText_comment_content);
 
-            adapter = new CommentAdapter();
+            commentAdapter = new CommentAdapter();
             buttonAddComment = itemView.findViewById(R.id.post_comment_button);
+            buttonAddComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String newUserName = String.valueOf(userName.getText());
+                    String newCommentContent = String.valueOf(commentContent.getText());
+                    if(newUserName!=""&&newCommentContent!=""){
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                        String currentDate = sdf.format(new Date());
+                        List<Comment> commentList = post.getCommentList();
+                        int maxCommentId = Integer.MIN_VALUE;
+                        if(commentList.size() == 0){
+                            maxCommentId = 0;
+                        }
+                        else{
+                            for (Comment comment : commentList) {
+                                if (comment.getId() > maxCommentId) {
+                                    maxCommentId = comment.getId();
+                                }
+                            }
+                            maxCommentId+=1;
+                        }
+
+                        Comment newComment = new Comment(maxCommentId,newUserName, currentDate, newCommentContent);
+                        commentList.add(0,newComment);
+                        addCommentToPost(post, commentList, commentAdapter);
+
+                        userName.setText("");
+                        commentContent.setText("");
+                        userName.clearFocus();
+                        commentContent.clearFocus();
+                        InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                }
+            });
 
         }
         public void bind(Post post){
@@ -165,31 +202,10 @@ public class HomeFragment extends Fragment {
 
                 //RecyclerView commentRecyclerView = view.findViewById(R.id.comment_recyclerview);
                 //final
-                adapter.setComments(post.getCommentList());
-                commentRecyclerView.setAdapter(adapter);
+                commentAdapter.setComments(post);
+                commentRecyclerView.setAdapter(commentAdapter);
                 commentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                buttonAddComment.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String newUserName = String.valueOf(userName.getText());
-                        String newCommentContent = String.valueOf(commentContent.getText());
-                        if(newUserName!=""&&newCommentContent!=""){
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                            String currentDate = sdf.format(new Date());
-                            Comment newComment = new Comment(newUserName, currentDate, newCommentContent);
-                            List<Comment> commentList = post.getCommentList();
-                            commentList.add(0,newComment);
-                            addCommentToPost(post, commentList, adapter);
 
-                            userName.setText("");
-                            commentContent.setText("");
-                            userName.clearFocus();
-                            commentContent.clearFocus();
-                            InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                            manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                        }
-                    }
-                });
 
             }
         }
@@ -232,6 +248,7 @@ public class HomeFragment extends Fragment {
 
     private class CommentAdapter extends RecyclerView.Adapter<CommentHolder>{
         private List<Comment> comments;
+        private Post post;
         @NonNull
         @Override
         public CommentHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -242,7 +259,7 @@ public class HomeFragment extends Fragment {
         public void onBindViewHolder(@NonNull CommentHolder holder, int position) {
             if(comments != null){
                 Comment comment = comments.get(position);
-                holder.bind(comment);
+                holder.bind(post, comment);
             }
         }
 
@@ -255,8 +272,9 @@ public class HomeFragment extends Fragment {
                 return 0;
             }
         }
-        void setComments(List<Comment> comments){
-            this.comments = comments;
+        void setComments(Post post){
+            this.post = post;
+            this.comments = post.getCommentList();
             notifyDataSetChanged();
         }
     }
@@ -264,8 +282,9 @@ public class HomeFragment extends Fragment {
         private final TextView commentAuthorTextView;
         private final TextView commentPublicationDateTextView;
         private final TextView commentContentTextView;
+        private final ImageView deleteComment;
 
-        //private final ImageView bookImageView;
+        private Post post;
         private Comment comment;
         public CommentHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.comment_list_item, parent, false));
@@ -273,8 +292,49 @@ public class HomeFragment extends Fragment {
             commentAuthorTextView = itemView.findViewById(R.id.comment_author);
             commentPublicationDateTextView = itemView.findViewById(R.id.comment_publication_date);
             commentContentTextView = itemView.findViewById(R.id.comment_content);
+            deleteComment = itemView.findViewById(R.id.delete_icon);
+
+            deleteComment.setOnClickListener(this::deleteComment);
         }
-        public void bind(Comment comment){
+
+        private void deleteComment(View view) {
+            if (comment != null && post != null) {
+                PostService postService = RetrofitInstance.getRetrofitInstance().create(PostService.class);
+
+                int postId = post.getId();
+                int commentId = comment.getId(); // Tutaj załóżmy, że komentarz ma pole 'id'
+
+                Call<Void> deleteCommentCall = postService.deleteComment(postId, commentId);
+                deleteCommentCall.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            // Usunięcie komentarza z lokalnej listy
+                            int position = post.getCommentList().indexOf(comment);
+                            if (position != -1) {
+                                post.getCommentList().remove(position);
+                                commentAdapter.setComments(post);
+                            }
+                        } else {
+                            Log.e("API Error", "Error deleting comment: " + response.message());
+                            Snackbar.make(view.findViewById(R.id.main_home_view), getString(R.string.error),
+                                    BaseTransientBottomBar.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        String errorMessage = "Error: " + t.getMessage();
+                        Log.e("API Error", errorMessage);
+                        Snackbar.make(activityRootView.findViewById(R.id.container), getString(R.string.error),
+                                BaseTransientBottomBar.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }
+
+        public void bind(Post post, Comment comment){
+            this.post = post;
             this.comment = comment;
             if(comment != null){
                 commentAuthorTextView.setText(comment.getAuthor());

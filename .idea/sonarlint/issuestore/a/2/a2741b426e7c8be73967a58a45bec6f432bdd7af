@@ -8,17 +8,17 @@ java:S1604j"(Make this anonymous inner class a lambda(™²Ä˜8ñÄƒ½Ó1
 K
 java:S1604"(Make this anonymous inner class a lambda(·ÿĞúÿÿÿÿ8ñÄƒ½Ó1
 K
-java:S1604©"(Make this anonymous inner class a lambda(Š…½½ıÿÿÿÿ8Ô´î’Ô1
+java:S1604ª"(Make this anonymous inner class a lambda(Š…½½ıÿÿÿÿ8Ô´î’Ô1
 K
-java:S1604ù"(Make this anonymous inner class a lambda(ã×Êüÿÿÿÿ8Ô´î’Ô1
+java:S1604ñ"(Make this anonymous inner class a lambda(ã×Êüÿÿÿÿ8Ô´î’Ô1
 K
-java:S1604ƒ"(Make this anonymous inner class a lambda(òÕ¸İûÿÿÿÿ8Ô´î’Ô1
+java:S1604û"(Make this anonymous inner class a lambda(òÕ¸İûÿÿÿÿ8Ô´î’Ô1
 F
-java:S1604"(Make this anonymous inner class a lambda(ÚÅşì8Õ´î’Ô1
+java:S1604‡"(Make this anonymous inner class a lambda(ÚÅşì8Õ´î’Ô1
 K
-java:S1604”"(Make this anonymous inner class a lambda(ÍÕ®ıÿÿÿÿÿ8Õ´î’Ô1
+java:S1604Œ"(Make this anonymous inner class a lambda(ÍÕ®ıÿÿÿÿÿ8Õ´î’Ô1
 F
-java:S1604ã"(Make this anonymous inner class a lambda(™¦ò•8Õ´î’Ô1
+java:S1604Û"(Make this anonymous inner class a lambda(™¦ò•8Õ´î’Ô1
 †
 java:S1450G"iRemove the "actualProductCategoryNames" field and declare it as a local variable in the relevant methods.(»ÈÅ¤8“µî’Ô1
 ‚
@@ -40,8 +40,7 @@ java:S3776M"RRefactor this method to reduce its Cognitive Complexity from 31 to
 Y	java:S125…"<This block of commented-out lines of code should be removed.(–«•Á8µµî’Ô1
 O
 java:S1602‰",Remove useless curly braces around statement(éÒÌİşÿÿÿÿ8µµî’Ô1
-^	java:S125Ğ"<This block of commented-out lines of code should be removed.(‚ò®Éøÿÿÿÿ8Ğµî’Ô1
-p	java:S100½"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òŸšúÿÿÿÿ8òµî’Ô1
-k	java:S100à"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÆãÖ8ùµî’Ô1
+p	java:S100µ"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òŸšúÿÿÿÿ8òµî’Ô1
+k	java:S100Ø"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÆãÖ8ùµî’Ô1
 V
 java:S1068A"4Remove this unused "selectedCategory" private field.(ğ¨ åùÿÿÿÿ8ÿµî’Ô1

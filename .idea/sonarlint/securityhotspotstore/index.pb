@@ -121,3 +121,7 @@ Rapp/src/main/java/com/example/fitnessapp/Database/Repositories/MealRepository.j
 Wapp/src/main/java/com/example/fitnessapp/Database/ViewModels/MealCategoryViewModel.java,c\3\c3374e7a64a8bfa9fdf125337dcc4543080d447c
 †
 Vapp/src/main/java/com/example/fitnessapp/Database/ViewModels/MealProductViewModel.java,9\4\94fa54063bc3d8c2754b6b1b4d4d0d71f4443348
+q
+Aapp/src/main/java/com/example/fitnessapp/AddEditMealActivity.java,4\1\41ffa416ade8baefb763b15ccdbab80181720f0d
+q
+Aapp/src/main/java/com/example/fitnessapp/MealDetailsActivity.java,d\7\d76d352a25286b7028ebcd4914491553a3a360e5

@@ -13,45 +13,33 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fitnessapp.AddEditCaloricLimitActivity;
 import com.example.fitnessapp.AddEditMealActivity;
-import com.example.fitnessapp.AddEditProductActivity;
-import com.example.fitnessapp.Database.Models.Category;
-import com.example.fitnessapp.Database.Models.Manufacturer;
+import com.example.fitnessapp.Database.Models.CaloricLimit;
 import com.example.fitnessapp.Database.Models.Meal;
 import com.example.fitnessapp.Database.Models.MealProduct;
 import com.example.fitnessapp.Database.Models.MealWithRelations;
-import com.example.fitnessapp.Database.Models.Product;
-import com.example.fitnessapp.Database.Models.ProductCategory;
-import com.example.fitnessapp.Database.Models.ProductDetails;
-import com.example.fitnessapp.Database.Models.ProductWithRelations;
+import com.example.fitnessapp.Database.ViewModels.CaloricLimitViewModel;
 import com.example.fitnessapp.Database.ViewModels.MealProductViewModel;
 import com.example.fitnessapp.Database.ViewModels.MealViewModel;
-import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
 import com.example.fitnessapp.MealDetailsActivity;
-import com.example.fitnessapp.ProductDetailsActivity;
 import com.example.fitnessapp.R;
-import com.example.fitnessapp.ui.products.ProductsFragment;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.w3c.dom.Text;
-
-import java.time.DateTimeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +48,12 @@ public class MealsFragment extends Fragment {
     private Button previousMonthButton;
     public static final String EXTRA_DATE = "EXTRA_DATE";
     public static final String EXTRA_MEAL = "EXTRA_MEAL";
+    public static final String EXTRA_ACTUAL_LIMIT = "EXTRA_ACTUAL_LIMIT";
     public static final String EXTRA_MEAL_DETAILS = "EXTRA_MEAL_DETAILS";
+    public static final String EXTRA_LIMIT = "EXTRA_LIMIT";
+    public static final String REQUEST_CODE_ADD_EDIT_MEAL = "REQUEST_CODE_ADD_EDIT_MEAL";
+    public static final String EXTRA_TOTAL_CALORIFIC = "EXTRA_TOTAL_CALORIFIC";
+    public static final String ADD_EDIT_LIMIT_REQUEST_CODE = "ADD_EDIT_LIMIT_REQUEST_CODE";
 
     public static final int NEW_MEAL_ACTIVITY_REQUEST_CODE = 1;
     public static final int EDIT_MEAL_ACTIVITY_REQUEST_CODE = 2;
@@ -75,9 +68,15 @@ public class MealsFragment extends Fragment {
     private MealAdapter mealAdapter;
     private MealViewModel mealViewModel;
     private MealProductViewModel mealProductViewModel;
+    private CaloricLimitViewModel caloricLimitViewModel;
     private Button newMealButton;
     private Meal editedMeal;
     private View fragmentView;
+    private TextView limitTextView;
+    private TextView limitExceededTextView;
+    private TextView caloriesTextView;
+    private float totalCalorificOfSelectedDay;
+    private float limitOfSelectedDay;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -143,6 +142,10 @@ public class MealsFragment extends Fragment {
         nextMonthButton = view.findViewById(R.id.next_month);
         monthViewTextView = view.findViewById(R.id.moth_view_text_view);
         newMealButton = view.findViewById(R.id.new_meal);
+        limitTextView = view.findViewById(R.id.limit_text);
+        limitExceededTextView = view.findViewById(R.id.limit_exceeded);
+        caloriesTextView = view.findViewById(R.id.calories_text);
+        limitExceededTextView.setVisibility(View.GONE);
 
         recyclerView = view.findViewById(R.id.calendar_recycler_view);
         adapter = new MealsFragment.CalendarAdapter();
@@ -161,6 +164,8 @@ public class MealsFragment extends Fragment {
 
         mealProductViewModel = new ViewModelProvider(getActivity()).get(MealProductViewModel.class);
 
+        caloricLimitViewModel = new ViewModelProvider(getActivity()).get(CaloricLimitViewModel.class);
+
         newMealButton.setOnClickListener(this::onAddMeal);
 
         setWeekView();
@@ -173,6 +178,9 @@ public class MealsFragment extends Fragment {
 
     private void onAddMeal(View view) {
         Intent intent = new Intent(getActivity(), AddEditMealActivity.class);
+        intent.putExtra(EXTRA_TOTAL_CALORIFIC, totalCalorificOfSelectedDay);
+        intent.putExtra(EXTRA_LIMIT, limitOfSelectedDay);
+        intent.putExtra(REQUEST_CODE_ADD_EDIT_MEAL, "ADD_MEAL");
         startActivityForResult(intent, NEW_MEAL_ACTIVITY_REQUEST_CODE);
     }
 
@@ -283,6 +291,9 @@ public class MealsFragment extends Fragment {
         private void EditMeal(View view) {
             editedMeal = meal.meal;
             Intent intent = new Intent(getActivity(), AddEditMealActivity.class);
+            intent.putExtra(EXTRA_TOTAL_CALORIFIC, totalCalorificOfSelectedDay);
+            intent.putExtra(EXTRA_LIMIT, limitOfSelectedDay);
+            intent.putExtra(REQUEST_CODE_ADD_EDIT_MEAL, "EDIT_MEAL");
             Bundle extras = new Bundle();
 
             extras.putSerializable(EXTRA_MEAL, meal);
@@ -344,19 +355,75 @@ public class MealsFragment extends Fragment {
            parentView = itemView.findViewById(R.id.parentView);
            ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
            layoutParams.height = (int) (parent.getHeight());
-           itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   if(lastClickedParentView!=null){
-                       lastClickedParentView.setBackgroundColor(Color.WHITE);
-                   }
-                   selectedDay = dayOfWeek;
-                   mealViewModel.getAllByDate(dayOfWeek).observe(getActivity(), mealAdapter::setMeals);
-                   parentView.setBackgroundColor(Color.LTGRAY);
-                   lastClickedParentView = parentView;
-               }
-           });
+
+           itemView.setOnLongClickListener(this::onCalendarDayLongClick);
+           itemView.setOnClickListener(this::onCalendarDayClick);
        }
+
+        private boolean onCalendarDayLongClick(View view) {
+            caloricLimitViewModel.getLimitByDate(dayOfWeek).observe(getActivity(), new Observer<CaloricLimit>() {
+                @Override
+                public void onChanged(CaloricLimit caloricLimit) {
+                    Intent intent = new Intent(getActivity(), AddEditCaloricLimitActivity.class);
+                    intent.putExtra(EXTRA_DATE, selectedDay.toString());
+                    if(caloricLimit == null){
+                        // znaczy ze nie ma limitu i można dodać na dany dzień
+                        intent.putExtra(ADD_EDIT_LIMIT_REQUEST_CODE, "ADD_LIMIT");
+                    }
+                    else{
+                        // znaczy że jest limit ale można zmodyfikować
+                        intent.putExtra(ADD_EDIT_LIMIT_REQUEST_CODE, "EDIT_LIMIT");
+                        intent.putExtra(EXTRA_ACTUAL_LIMIT, caloricLimit);
+                    }
+                    startActivity(intent);
+                }
+            });
+            return true;
+        }
+
+        private void onCalendarDayClick(View view) {
+            mealViewModel.getAllByDate(dayOfWeek).observe(getActivity(), new Observer<List<MealWithRelations>>() {
+                @Override
+                public void onChanged(List<MealWithRelations> mealWithRelations) {
+                    caloricLimitViewModel.getLimitByDate(dayOfWeek).observe(getActivity(), new Observer<CaloricLimit>() {
+                        @Override
+                        public void onChanged(CaloricLimit caloricLimit) {
+                            float totalCalorificByDay = 0;
+                            for(MealWithRelations mealWR : mealWithRelations){
+                                totalCalorificByDay += mealWR.meal.getTotalCalorific();
+                            }
+                            totalCalorificOfSelectedDay = totalCalorificByDay;
+
+
+                            caloriesTextView.setText(getResources().getString(R.string.calories_text, String.valueOf(totalCalorificByDay)));
+                            if(caloricLimit == null){
+                                limitExceededTextView.setVisibility(View.GONE);
+                                limitTextView.setText(getResources().getString(R.string.limit_text, getString(R.string.limit_empty)));
+                                limitOfSelectedDay = 0;
+                            }
+                            else{
+                                limitOfSelectedDay = caloricLimit.getCaloricLimit();
+                                if(totalCalorificByDay>caloricLimit.getCaloricLimit()){
+                                    limitExceededTextView.setVisibility(View.VISIBLE);
+                                }
+                                else{
+                                    limitExceededTextView.setVisibility(View.GONE);
+                                }
+                                limitTextView.setText(getResources().getString(R.string.limit_text, String.valueOf(caloricLimit.getCaloricLimit())));
+                            }
+                        }
+                    });
+                }
+            });
+            if(lastClickedParentView!=null){
+                lastClickedParentView.setBackgroundColor(Color.WHITE);
+            }
+            selectedDay = dayOfWeek;
+            mealViewModel.getAllByDate(dayOfWeek).observe(getActivity(), mealAdapter::setMeals);
+            parentView.setBackgroundColor(Color.LTGRAY);
+            lastClickedParentView = parentView;
+        }
+
         public void bind(LocalDate day){
            if(day == null){
                dayOfMonthTextView.setText("");

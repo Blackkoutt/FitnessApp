@@ -22,4 +22,9 @@
         android:name="com.example.fitnessapp.ui.meals.MealsFragment"
         android:label="@string/title_meals"
         tools:layout="@layout/fragment_meals" />
+    <fragment
+        android:id="@+id/navigation_bmi_calculator"
+        android:name="com.example.fitnessapp.ui.bmi_calculator.BmiCalculator"
+        android:label="@string/bmi_calculator"
+        tools:layout="@layout/fragment_bmi_calculator" />
 </navigation>

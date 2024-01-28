@@ -1,16 +1,22 @@
 
-s	java:S117Œ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¨ÓÊüÿÿÿÿ8Ö‘«›Ô1
-o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(÷‡¤ú
+s	java:S117¡"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ë¨ÓÊüÿÿÿÿ8ü–°»Ô1
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(÷‡¤ú8ı–°»Ô1
+p
+java:S3008H"SRename this field "_context" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÇÑ¶ë8“—°»Ô1
 ¶
-java:S65488"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ø¯Ş8ì‘«›Ô1
-X	java:S125`"<This block of commented-out lines of code should be removed.(İ«º–8û‘«›Ô1
-R
-java:S1481q"0Remove this unused "categoryId1" local variable.(¤™ˆËûÿÿÿÿ8ü‘«›Ô1
-N
-java:S1481|",Remove this unused "unitId2" local variable.(ô‡½«øÿÿÿÿ8ı‘«›Ô1
+java:S6548;"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ø¯Ş8–—°»Ô1
 I
-java:S1481",Remove this unused "unitId3" local variable.(ïèƒá8ı‘«›Ô1
+java:S1481c",Remove this unused "mealDao" local variable.(İò¹Ó8¦—°»Ô1
+P
+java:S1481e"3Remove this unused "mealProductDao" local variable.(©ŠŸŸ8§—°»Ô1
+>
+java:S1116t"Remove this empty statement.(Åñ­õşÿÿÿÿ8ç®°»Ô1
+X	java:S125h"<This block of commented-out lines of code should be removed.(İ«º–8§—°»Ô1
+S
+java:S1481†"0Remove this unused "categoryId1" local variable.(¤™ˆËûÿÿÿÿ8«—°»Ô1
+O
+java:S1481‘",Remove this unused "unitId2" local variable.(ô‡½«øÿÿÿÿ8¬—°»Ô1
+J
+java:S1481”",Remove this unused "unitId3" local variable.(ïèƒá8¬—°»Ô1
 Q
-java:S1481‡".Remove this unused "detailsId" local variable.(¶ŞÚÂúÿÿÿÿ8ı‘«›Ô1
-t
-java:S1128 "XRemove this unused import 'com.example.fitnessapp.Database.Models.ProductWithRelations'.(ú¾A8Æ€è›Ô1
+java:S1481œ".Remove this unused "detailsId" local variable.(¶ŞÚÂúÿÿÿÿ8­—°»Ô1
