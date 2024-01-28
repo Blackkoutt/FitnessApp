@@ -1,46 +1,45 @@
 
 {
-java:S2293Q"YReplace the type specification in this constructor call with the diamond operator ("<>").(¬äšÂúÿÿÿÿ8Ñ´î’Ô1
+java:S2293N"YReplace the type specification in this constructor call with the diamond operator ("<>").(¬äšÂúÿÿÿÿ8Ñ´î’Ô1
 {
-java:S2293R"YReplace the type specification in this constructor call with the diamond operator ("<>").(éğ•Õùÿÿÿÿ8Ò´î’Ô1
+java:S2293O"YReplace the type specification in this constructor call with the diamond operator ("<>").(éğ•Õùÿÿÿÿ8Ò´î’Ô1
 E
-java:S1604k"(Make this anonymous inner class a lambda(™²Ä˜8ñÄƒ½Ó1
+java:S1604w"(Make this anonymous inner class a lambda(™²Ä˜8ø‰„‡Õ1
 K
-java:S1604"(Make this anonymous inner class a lambda(·ÿĞúÿÿÿÿ8ñÄƒ½Ó1
+java:S1604—"(Make this anonymous inner class a lambda(·ÿĞúÿÿÿÿ8ø‰„‡Õ1
 K
-java:S1604«"(Make this anonymous inner class a lambda(Š…½½ıÿÿÿÿ8Ô´î’Ô1
+java:S1604®"(Make this anonymous inner class a lambda(Š…½½ıÿÿÿÿ8ø‰„‡Õ1
 K
-java:S1604ò"(Make this anonymous inner class a lambda(ã×Êüÿÿÿÿ8Ô´î’Ô1
+java:S1604è"(Make this anonymous inner class a lambda(ã×Êüÿÿÿÿ8Ó¿—‡Õ1
 K
-java:S1604ü"(Make this anonymous inner class a lambda(òÕ¸İûÿÿÿÿ8Ô´î’Ô1
+java:S1604ò"(Make this anonymous inner class a lambda(òÕ¸İûÿÿÿÿ8Ó¿—‡Õ1
 F
-java:S1604ˆ"(Make this anonymous inner class a lambda(ÚÅşì8Õ´î’Ô1
+java:S1604ş"(Make this anonymous inner class a lambda(ÚÅşì8Ó¿—‡Õ1
 K
-java:S1604"(Make this anonymous inner class a lambda(ÍÕ®ıÿÿÿÿÿ8Õ´î’Ô1
+java:S1604ƒ"(Make this anonymous inner class a lambda(ÍÕ®ıÿÿÿÿÿ8Ó¿—‡Õ1
 F
-java:S1604Ü"(Make this anonymous inner class a lambda(™¦ò•8Õ´î’Ô1
+java:S1604×"(Make this anonymous inner class a lambda(™¦ò•8Ó¿—‡Õ1
 †
-java:S1450H"iRemove the "actualProductCategoryNames" field and declare it as a local variable in the relevant methods.(»ÈÅ¤8“µî’Ô1
+java:S1450B"iRemove the "actualProductCategoryNames" field and declare it as a local variable in the relevant methods.(»ÈÅ¤8“µî’Ô1
 ‚
-java:S1450I"`Remove the "addCategoryButton" field and declare it as a local variable in the relevant methods.(ÙÕ²¢ûÿÿÿÿ8”µî’Ô1
+java:S1450C"`Remove the "addCategoryButton" field and declare it as a local variable in the relevant methods.(ÙÕ²¢ûÿÿÿÿ8”µî’Ô1
 †
-java:S1450J"dRemove the "addManufacturerButton" field and declare it as a local variable in the relevant methods.(£Àëöÿÿÿÿÿ8”µî’Ô1
+java:S1450D"dRemove the "addManufacturerButton" field and declare it as a local variable in the relevant methods.(£Àëöÿÿÿÿÿ8”µî’Ô1
 ‚
-java:S1450:"`Remove the "categoryViewModel" field and declare it as a local variable in the relevant methods.(‘ª—æøÿÿÿÿ8¿Åƒ½Ó1
+java:S14504"`Remove the "categoryViewModel" field and declare it as a local variable in the relevant methods.(‘ª—æøÿÿÿÿ8¿Åƒ½Ó1
 
-java:S1450D"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ8¿Åƒ½Ó1
+java:S1450>"]Remove the "headerTextView" field and declare it as a local variable in the relevant methods.(––¹ëøÿÿÿÿ8¿Åƒ½Ó1
 
-java:S1450;"dRemove the "manufacturerViewModel" field and declare it as a local variable in the relevant methods.(¦¶ 8ÀÅƒ½Ó1
+java:S14505"dRemove the "manufacturerViewModel" field and declare it as a local variable in the relevant methods.(¦¶ 8ÀÅƒ½Ó1
 {
-java:S1450="YRemove the "saveButton" field and declare it as a local variable in the relevant methods.(Éÿ¤ûÿÿÿÿ8ÀÅƒ½Ó1
+java:S14507"YRemove the "saveButton" field and declare it as a local variable in the relevant methods.(Éÿ¤ûÿÿÿÿ8ÌË”‡Õ1
 ~
-java:S1450<"\Remove the "unitViewModel" field and declare it as a local variable in the relevant methods.(ŠĞÿôúÿÿÿÿ8ÁÅƒ½Ó1
+java:S14506"\Remove the "unitViewModel" field and declare it as a local variable in the relevant methods.(ŠĞÿôúÿÿÿÿ8ÁÅƒ½Ó1
 t
-java:S3776N"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(¨Œşÿÿÿÿ8ÓÅƒ½Ó1
-Y	java:S125†"<This block of commented-out lines of code should be removed.(–«•Á8µµî’Ô1
+java:S3776J"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(¨Œşÿÿÿÿ8ÓÅƒ½Ó1
 O
-java:S1602Š",Remove useless curly braces around statement(éÒÌİşÿÿÿÿ8µµî’Ô1
-p	java:S100¶"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òŸšúÿÿÿÿ8òµî’Ô1
-k	java:S100Ù"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÆãÖ8ùµî’Ô1
+java:S1602“",Remove useless curly braces around statement(éÒÌİşÿÿÿÿ8ÆŠ„‡Õ1
+p	java:S100¯"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(òŸšúÿÿÿÿ8¬À—‡Õ1
+k	java:S100Ô"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìÆãÖ8­À—‡Õ1
 V
-java:S1068B"4Remove this unused "selectedCategory" private field.(ğ¨ åùÿÿÿÿ8ÿµî’Ô1
+java:S1068<"4Remove this unused "selectedCategory" private field.(ğ¨ åùÿÿÿÿ8ÿµî’Ô1

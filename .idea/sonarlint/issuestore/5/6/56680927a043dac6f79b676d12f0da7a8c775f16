@@ -1,8 +1,8 @@
 
 9
-java:S1643."Use a StringBuilder instead.(’¤½ç8î¥óÃÔ1
+java:S1643/"Use a StringBuilder instead.(’¤½ç8î¥óÃÔ1
 1
-java:S16430"Use a StringBuilder instead.(ƒã¤}
+java:S16431"Use a StringBuilder instead.(ƒã¤}
 
 java:S1450"fRemove the "productCaloriesTextView" field and declare it as a local variable in the relevant methods.(–Í›õÿÿÿÿÿ
 
@@ -20,4 +20,4 @@ java:S1450"eRemove the "productProteinTextView" field and declare it as a loca
 }
 java:S1450"bRemove the "productUnitTextView" field and declare it as a local variable in the relevant methods.(ŸÍà˜úÿÿÿÿ
 W
-java:S1874&"<Remove this use of "getSerializableExtra"; it is deprecated.(Û­õÕüÿÿÿÿ
+java:S1874("<Remove this use of "getSerializableExtra"; it is deprecated.(Û­õÕüÿÿÿÿ

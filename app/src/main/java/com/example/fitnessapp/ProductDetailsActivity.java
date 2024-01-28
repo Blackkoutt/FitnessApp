@@ -24,6 +24,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_details);
 
+        // Pobranie elementow widoku
         productNameTextView = findViewById(R.id.product_name);
         productManufacturerTextView = findViewById(R.id.product_manufacturer);
         productCategoryTextView = findViewById(R.id.product_category);
@@ -33,11 +34,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         productCarbohydratesTextView = findViewById(R.id.product_carbohydratesValue);
         productFatTextView = findViewById(R.id.product_fatValue);
 
+        // Pobranie danych przekazanych do Activity
         Intent intent = getIntent();
         if (intent.hasExtra("EXTRA_PRODUCT_DETAILS")) {
             product = (ProductWithRelations) intent.getSerializableExtra("EXTRA_PRODUCT_DETAILS");
         }
-
         productNameTextView.setText(getResources().getString(R.string.product_name_label, product.product.getName()));
         productManufacturerTextView.setText(getResources().getString(R.string.product_manufacturer_label, product.manufacturer.getName()));
 

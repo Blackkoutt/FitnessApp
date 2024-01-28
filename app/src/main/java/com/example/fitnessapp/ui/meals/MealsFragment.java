@@ -78,12 +78,15 @@ public class MealsFragment extends Fragment {
     private float totalCalorificOfSelectedDay;
     private float limitOfSelectedDay;
 
+
+    // Metoda wywoływana w  momencie zatwierdzenia dodania/edycji posiłku
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // Aktywność wykonała się poprawnie
         if(resultCode == RESULT_OK){
-
+            // Pobranie danych z aktywności
             long categoryId = Long.parseLong(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_CATEGORY_ID));
             long[] productsIds = data.getLongArrayExtra(AddEditMealActivity.EXTRA_EDIT_PRODUCTS_IDS);
             float totalCalories = Float.parseFloat(data.getStringExtra(AddEditMealActivity.EXTRA_EDIT_TOTAL_CALORIES));
@@ -93,7 +96,6 @@ public class MealsFragment extends Fragment {
 
             // Dodawanie posiłku
             if(requestCode == NEW_MEAL_ACTIVITY_REQUEST_CODE){
-                // trzeba sprawdzić czy selectedDay jest takie samo jak wybrane wczesniej
                 Meal mealToAdd = new Meal(categoryId, selectedDay, totalCalories, totalProteins, totalCarbohydrates, totalFat);
                 long mealId = mealViewModel.insert(mealToAdd);
 
@@ -102,11 +104,10 @@ public class MealsFragment extends Fragment {
                     mealProductViewModel.insert(mealProduct);
                 }
 
-
                 Snackbar.make(fragmentView.findViewById(R.id.main_fragment_layout), getString(R.string.meal_added_succesful),
                         Snackbar.LENGTH_LONG).show();
             }
-            // Edycja produktu
+            // Edycja posiłku
             else{
                 editedMeal.setMealCategoryId(categoryId);
                 editedMeal.setTotalCalorific(totalCalories);
@@ -138,6 +139,7 @@ public class MealsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_meals, container, false);
         fragmentView = view;
 
+        // Pobranie elementów widoku
         previousMonthButton = view.findViewById(R.id.previous_month);
         nextMonthButton = view.findViewById(R.id.next_month);
         monthViewTextView = view.findViewById(R.id.moth_view_text_view);
@@ -145,37 +147,46 @@ public class MealsFragment extends Fragment {
         limitTextView = view.findViewById(R.id.limit_text);
         limitExceededTextView = view.findViewById(R.id.limit_exceeded);
         caloriesTextView = view.findViewById(R.id.calories_text);
+        recyclerView = view.findViewById(R.id.calendar_recycler_view);
+        mealRecyclerView = view.findViewById(R.id.meal_recycler_view);
+
+        // Ukrycie limitu
         limitExceededTextView.setVisibility(View.GONE);
 
-        recyclerView = view.findViewById(R.id.calendar_recycler_view);
+        // Przypisanie adaptera dla kalendarza
         adapter = new MealsFragment.CalendarAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(), 7));
         selectedDate = LocalDate.now();
         selectedDay = LocalDate.now();
 
-        mealRecyclerView = view.findViewById(R.id.meal_recycler_view);
+        // Przypisanie adaptera dla posiłków
         mealAdapter = new MealAdapter();
         mealRecyclerView.setAdapter(mealAdapter);
         mealRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // Pobranie posiłków dla aktualnej daty
         mealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
         mealViewModel.getAllByDate(selectedDate).observe(getActivity(), mealAdapter::setMeals);
 
+        // utworzenie ViewModelu Produkt-Posiłek oraz Limit kaloryczny
         mealProductViewModel = new ViewModelProvider(getActivity()).get(MealProductViewModel.class);
-
         caloricLimitViewModel = new ViewModelProvider(getActivity()).get(CaloricLimitViewModel.class);
 
+        // Dodanie onclickListenera dla przycisku "Dodaj posiłek"
         newMealButton.setOnClickListener(this::onAddMeal);
 
+        // Ustawienie tygodniowego widoku
         setWeekView();
 
+        // Dodanie onCLickListenerów dla kolejnych/poprzednich tygodni - przyciski -> <-
         previousMonthButton.setOnClickListener(this::setPreviousWeek);
         nextMonthButton.setOnClickListener(this::setNextWeek);
 
         return view;
     }
 
+    // Metoda wywoływana w momencie wciśnięcia przycisku "Dodaj posiłek"
     private void onAddMeal(View view) {
         Intent intent = new Intent(getActivity(), AddEditMealActivity.class);
         intent.putExtra(EXTRA_TOTAL_CALORIFIC, totalCalorificOfSelectedDay);
@@ -184,15 +195,17 @@ public class MealsFragment extends Fragment {
         startActivityForResult(intent, NEW_MEAL_ACTIVITY_REQUEST_CODE);
     }
 
+    // Metoda przygotowująca widok tygodniowy kalendarza
     private void setWeekView(){
         monthViewTextView.setText(monthYearFromDate(selectedDate));
         ArrayList<LocalDate> days = getDaysInWeekArray(selectedDate);
         adapter.setDays(days);
     }
 
+    // Metoda zwracająca listę dni w danym tygodniu
     private ArrayList<LocalDate> getDaysInWeekArray(LocalDate date) {
         ArrayList<LocalDate> days = new ArrayList<>();
-        LocalDate current = sundayForMonday(date);
+        LocalDate current = getWeekMonday(date);
 
         for (int i = 0; i < 7; i++) {
             days.add(current);
@@ -202,29 +215,34 @@ public class MealsFragment extends Fragment {
         return days;
     }
 
-    private LocalDate sundayForMonday(LocalDate current) {
+    // Metoda zwracająca poniedziałek w tygodniu w którym wybrana jest data
+    private LocalDate getWeekMonday(LocalDate current) {
         while (current.getDayOfWeek() != DayOfWeek.MONDAY) {
             current = current.minusDays(1);
         }
         return current;
     }
 
+    // Metoda zwracająca skrócony zapis miesiąca i roku
     private String monthYearFromDate(LocalDate date){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM yyyy");
         return date.format(formatter);
     }
 
+    // Metoda wywoływana w momencie wciśnięcia przycisku "->"
     private void setNextWeek(View view) {
         selectedDate = selectedDate.plusWeeks(1);
         setWeekView();
     }
 
+    // Metoda wywoływana w momencie wciśnięcia przycisku "<-"
     private void setPreviousWeek(View view) {
         selectedDate = selectedDate.minusWeeks(1);
         setWeekView();
     }
-    private class MealHolder extends RecyclerView.ViewHolder {
 
+    // Holder posiłków
+    private class MealHolder extends RecyclerView.ViewHolder {
         private MealWithRelations meal;
         private TextView mealCategoryTextView;
         private TextView mealCalorificTextView;
@@ -233,15 +251,21 @@ public class MealsFragment extends Fragment {
         private TextView mealFatTextView;
         public MealHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.meal_list_item, parent, false));
+
+            // Pobranie elementów widoku holdera
             mealCategoryTextView = itemView.findViewById(R.id.meal_category);
             mealCalorificTextView = itemView.findViewById(R.id.meal_calorific);
             mealProteinTextView = itemView.findViewById(R.id.meal_protein);
             mealCarbohydratesTextView = itemView.findViewById(R.id.meal_carbohydrates);
             mealFatTextView = itemView.findViewById(R.id.meal_fat);
 
+            // Ustawienie onClickListenera
             itemView.setOnClickListener(this::EditMeal);
+
+            // Ustawienie onLongClickListenera
             itemView.setOnLongClickListener(this::DeleteMeal);
-            //itemView.setOnTouchListener(this::DetailsMeal);
+
+            // Ustawienie gestu przeciągnięcia w prawo lub lewo
             itemView.setOnTouchListener(new View.OnTouchListener() {
                 GestureDetector gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
                     @Override
@@ -264,6 +288,7 @@ public class MealsFragment extends Fragment {
             });
         }
 
+        // Metoda wywoływana w momencie dłuższego przycisnięcia na posiłek - usunięcie posiłku
         private boolean DeleteMeal(View view) {
             AlertDialog.Builder builder = new AlertDialog.Builder((getActivity()));
             builder.setTitle(getResources().getString(R.string.meal_delete_question, meal.mealCategory.getName(), meal.meal.getDate().toString()));
@@ -288,6 +313,7 @@ public class MealsFragment extends Fragment {
             return true;
         }
 
+        // Metoda wywoływana w momecnie kliknięcia na wybrany posiłek - edycja posiłku
         private void EditMeal(View view) {
             editedMeal = meal.meal;
             Intent intent = new Intent(getActivity(), AddEditMealActivity.class);
@@ -302,6 +328,7 @@ public class MealsFragment extends Fragment {
             startActivityForResult(intent, EDIT_MEAL_ACTIVITY_REQUEST_CODE);
         }
 
+        // Bindowanie posiłku do elementów widoku
         public void bind(MealWithRelations meal){
             this.meal = meal;
             mealCategoryTextView.setText(meal.mealCategory.getName());
@@ -311,6 +338,8 @@ public class MealsFragment extends Fragment {
             mealFatTextView.setText(getResources().getString(R.string.total_fat, String.valueOf(meal.meal.getTotalFat())));
         }
     }
+
+    // Adapter posiłków
     private class MealAdapter extends RecyclerView.Adapter<MealsFragment.MealHolder>{
         private List<MealWithRelations> meals;
         @NonNull
@@ -345,55 +374,68 @@ public class MealsFragment extends Fragment {
         }
     }
 
+    // Holder Kalendarza
     private class CalendarViewHolder extends RecyclerView.ViewHolder {
         private LocalDate dayOfWeek;
         private final View parentView;
         private final TextView dayOfMonthTextView;
         public  CalendarViewHolder(LayoutInflater inflater, ViewGroup parent){
            super(inflater.inflate(R.layout.calendar_cell, parent, false));
+
+           // Pobranie elementów widoku
            dayOfMonthTextView = itemView.findViewById(R.id.cellDayText);
            parentView = itemView.findViewById(R.id.parentView);
+
+           // Pobranie parametrów widoku
            ViewGroup.LayoutParams layoutParams = itemView.getLayoutParams();
            layoutParams.height = (int) (parent.getHeight());
 
+           // Ustawienie onClickListenerów na przyciskach -> i <-
            itemView.setOnLongClickListener(this::onCalendarDayLongClick);
            itemView.setOnClickListener(this::onCalendarDayClick);
        }
 
-        private boolean onCalendarDayLongClick(View view) {
-            caloricLimitViewModel.getLimitByDate(dayOfWeek).observe(getActivity(), new Observer<CaloricLimit>() {
-                @Override
-                public void onChanged(CaloricLimit caloricLimit) {
-                    Intent intent = new Intent(getActivity(), AddEditCaloricLimitActivity.class);
-                    intent.putExtra(EXTRA_DATE, selectedDay.toString());
-                    if(caloricLimit == null){
-                        // znaczy ze nie ma limitu i można dodać na dany dzień
-                        intent.putExtra(ADD_EDIT_LIMIT_REQUEST_CODE, "ADD_LIMIT");
-                    }
-                    else{
-                        // znaczy że jest limit ale można zmodyfikować
-                        intent.putExtra(ADD_EDIT_LIMIT_REQUEST_CODE, "EDIT_LIMIT");
-                        intent.putExtra(EXTRA_ACTUAL_LIMIT, caloricLimit);
-                    }
-                    startActivity(intent);
+       // Obserwator do pobrania limitu kalorycznego
+        private Observer<CaloricLimit> caloricLimitObserver = new Observer<CaloricLimit>() {
+            @Override
+            public void onChanged(CaloricLimit caloricLimit) {
+                Intent intent = new Intent(getActivity(), AddEditCaloricLimitActivity.class);
+                intent.putExtra(EXTRA_DATE, selectedDay.toString());
+                if (caloricLimit == null) {
+                    // znaczy że nie ma limitu i można dodać na dany dzień
+                    intent.putExtra(ADD_EDIT_LIMIT_REQUEST_CODE, "ADD_LIMIT");
+                } else {
+                    // znaczy że jest limit ale można zmodyfikować
+                    intent.putExtra(ADD_EDIT_LIMIT_REQUEST_CODE, "EDIT_LIMIT");
+                    intent.putExtra(EXTRA_ACTUAL_LIMIT, caloricLimit);
                 }
-            });
-            return true;
+                caloricLimitViewModel.getLimitByDate(dayOfWeek).removeObserver(caloricLimitObserver);
+                startActivity(intent);
+            }
+        };
+
+        // Metoda obsługująca dłuższe przytryzmanie na wybranym dniu kalendarza
+        private boolean onCalendarDayLongClick(View view) {
+            caloricLimitViewModel.getLimitByDate(dayOfWeek).observe(getActivity(), caloricLimitObserver);
+            return false;
         }
 
+        // Metoda wywoływana w momencie kliknięcia na wybrany dzień kalendarza
         private void onCalendarDayClick(View view) {
+            // Pobranie posiłków na dany dzień
             mealViewModel.getAllByDate(dayOfWeek).observe(getActivity(), new Observer<List<MealWithRelations>>() {
                 @Override
                 public void onChanged(List<MealWithRelations> mealWithRelations) {
+                    // Pobranie limitu kalorycznego na dany dzień
                     caloricLimitViewModel.getLimitByDate(dayOfWeek).observe(getActivity(), new Observer<CaloricLimit>() {
                         @Override
                         public void onChanged(CaloricLimit caloricLimit) {
+                            // Podliczenie całkowitej kaloryczności wszytskich posiłków w wybranym dniu
                             float totalCalorificByDay = 0;
                             for(MealWithRelations mealWR : mealWithRelations){
                                 totalCalorificByDay += mealWR.meal.getTotalCalorific();
                             }
                             totalCalorificOfSelectedDay = totalCalorificByDay;
-
 
                             caloriesTextView.setText(getResources().getString(R.string.calories_text, String.valueOf(totalCalorificByDay)));
                             if(caloricLimit == null){
@@ -424,6 +466,7 @@ public class MealsFragment extends Fragment {
             lastClickedParentView = parentView;
         }
 
+        // Bindowanie dnia do widoku
         public void bind(LocalDate day){
            if(day == null){
                dayOfMonthTextView.setText("");
@@ -434,6 +477,8 @@ public class MealsFragment extends Fragment {
            }
         }
     }
+
+    // Adapter kalendarza
     private class CalendarAdapter extends RecyclerView.Adapter<MealsFragment.CalendarViewHolder> {
         private ArrayList<LocalDate> daysOfWeek;
         @NonNull

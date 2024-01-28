@@ -7,14 +7,8 @@ D
 Wapp/src/main/java/com/example/fitnessapp/Database/ViewModels/ManufacturerViewModel.java,9\7\97f1383b988d43fc25d4660aa319bae6b1352c3d
 †
 Vapp/src/main/java/com/example/fitnessapp/Database/Repositories/CategoryRepository.java,a\c\acd702fea567436b473c88281b2dce498292ec2b
-|
-Lapp/src/main/java/com/example/fitnessapp/ui/dashboard/DashboardFragment.java,2\0\20b147f13f514ba86847f229f02fe506d511d9bf
-}
-Mapp/src/main/java/com/example/fitnessapp/ui/dashboard/DashboardViewModel.java,2\0\20ad603fe9627d65f80eed57de2be1391a0e052a
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-s
-Capp/src/main/java/com/example/fitnessapp/ui/home/HomeViewModel.java,0\5\050f9f497d231488c0ad49c15ad07dbf9fed2443
 v
 Fapp/src/main/java/com/example/fitnessapp/Database/ProductDatabase.java,7\9\79c971bdf681e6cf66fc0cb79482ce5c83c7af12
 p
@@ -83,12 +77,6 @@ t
 Dapp/src/main/java/com/example/fitnessapp/ProductDetailsActivity.java,5\6\56680927a043dac6f79b676d12f0da7a8c775f16
 }
 Mapp/src/main/java/com/example/fitnessapp/AddCategoryManufacturerActivity.java,2\7\27c775336972b292a8ed31ac13f0ce2fe48a3bec
-p
-@app/src/main/java/com/example/fitnessapp/CalendarViewHolder.java,a\7\a7735d06e15fe4db0d389adb7536cc7713aba05a
-m
-=app/src/main/java/com/example/fitnessapp/CalendarAdapter.java,d\f\df442ef5f901d3ced72dd9581dee1b91f5a2d051
-m
-=app/src/main/java/com/example/fitnessapp/AddMealActivity.java,3\5\35838b96a88c5280290ed6cfe194fc16b1558842
 t
 Dapp/src/main/java/com/example/fitnessapp/ui/meals/MealsFragment.java,a\f\af538cbbc3000f29c140f9ad1735ad56b8aebfb2
 y
@@ -141,3 +129,9 @@ Happ/src/main/java/com/example/fitnessapp/ui/bmi_calculator/BMI_ENUM.java,8\4\8
 Mapp/src/main/java/com/example/fitnessapp/ui/bmi_calculator/BmiCalculator.java,6\a\6a748c0d1c4d1642e79dd5115ced512aded879ff
 y
 Iapp/src/main/java/com/example/fitnessapp/AddEditCaloricLimitActivity.java,4\a\4a10f61d7021d31b2afe27348e0e3c3e6abbb08a
+€
+Papp/src/main/java/com/example/fitnessapp/ui/stepCounter/MyBroadcastReceiver.java,6\c\6cb0a0b45dada9e8837f86e9042a7e6ba382ff8b
+€
+Papp/src/main/java/com/example/fitnessapp/ui/stepCounter/StepCounterFragment.java,5\f\5f49165833466360b431c7ffb4a67d3b31c37c47
+
+Oapp/src/main/java/com/example/fitnessapp/ui/stepCounter/StepCounterService.java,4\9\49fbc80e4eb2009518391a57ac4b00d1cb652631

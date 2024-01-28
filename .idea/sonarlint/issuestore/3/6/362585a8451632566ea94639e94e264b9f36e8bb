@@ -1,51 +1,47 @@
 
 w
-java:S2293ó"YReplace the type specification in this constructor call with the diamond operator ("<>").(œ¹Á€8Œú™“Ô1
+java:S2293÷"YReplace the type specification in this constructor call with the diamond operator ("<>").(œ¹Á€8ãøŸ‰Õ1
 y
-java:S1192Ú"[Use already-defined constant 'EXTRA_PRODUCT_DETAILS' instead of duplicating its value here.(ÑŠ¼¶8ú™“Ô1
-m	java:S117]"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı‰Ã¾8ÆÉæÁÓ1
-m	java:S117n"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éø“·8ú™“Ô1
+java:S1192à"[Use already-defined constant 'EXTRA_PRODUCT_DETAILS' instead of duplicating its value here.(ÑŠ¼¶8ãøŸ‰Õ1
+m	java:S117["QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı‰Ã¾8äøŸ‰Õ1
+m	java:S117l"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éø“·8äøŸ‰Õ1
 K
-java:S1604•"(Make this anonymous inner class a lambda(“«ì×ıÿÿÿÿ8ÆÉæÁÓ1
+java:S1604˜"(Make this anonymous inner class a lambda(“«ì×ıÿÿÿÿ8äøŸ‰Õ1
 K
-java:S1604À"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8ÆÉæÁÓ1
+java:S1604Ã"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8äøŸ‰Õ1
 K
-java:S1604Ê"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8ÆÉæÁÓ1
+java:S1604Î"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8äøŸ‰Õ1
 F
-java:S1604¹"(Make this anonymous inner class a lambda(”™ûÈ8ÆÉæÁÓ1
+java:S1604¼"(Make this anonymous inner class a lambda(”™ûÈ8äøŸ‰Õ1
 :
-java:S1643‹"Use a StringBuilder instead.(’¤½ç8ú™“Ô1
+java:S1643’"Use a StringBuilder instead.(’¤½ç8äøŸ‰Õ1
 9
-java:S1643"Use a StringBuilder instead.(ƒã¤}8çŸÜ•Ô1
+java:S1643”"Use a StringBuilder instead.(ƒã¤}8åøŸ‰Õ1
 l
-java:S1874G"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8òÉæÁÓ1
+java:S1874B"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8…ùŸ‰Õ1
 Z
-java:S1874H"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8óÉæÁÓ1
+java:S1874C"8Remove this use of "onActivityResult"; it is deprecated.(ß¬©úÿÿÿÿ8…ùŸ‰Õ1
 „
-java:S3252c"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8ôÉæÁÓ1
+java:S3252a"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8‡ùŸ‰Õ1
 „
-java:S3252y"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8õÉæÁÓ1
+java:S3252w"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8ˆùŸ‰Õ1
 „
-java:S3252~"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8õÉæÁÓ1
+java:S3252|"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8ˆùŸ‰Õ1
 ]
-java:S1161ƒ":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8õÉæÁÓ1
+java:S1161":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8ˆùŸ‰Õ1
 \
-java:S1874™">Remove this use of "startActivityForResult"; it is deprecated.(À€íÕ8şÉæÁÓ1
+java:S1874œ">Remove this use of "startActivityForResult"; it is deprecated.(À€íÕ8’ùŸ‰Õ1
 F
-java:S1185 "(Remove this method to simply inherit it.(±íòÑ8ÿÉæÁÓ1
-^	java:S125ª"<This block of commented-out lines of code should be removed.(¨ç¼»ûÿÿÿÿ8åú™“Ô1
-Y	java:S125¯"<This block of commented-out lines of code should be removed.(¡£™Ö8Àè¬—Ô1
-^	java:S125µ"<This block of commented-out lines of code should be removed.(“½Œ»úÿÿÿÿ8æú™“Ô1
+java:S1185¤"(Remove this method to simply inherit it.(±íòÑ8“ùŸ‰Õ1
 …
-java:S3252Ç"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8„ÊæÁÓ1
+java:S3252Ë"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8™ùŸ‰Õ1
 ¤
-java:S1186Ì"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8„ÊæÁÓ1
+java:S1186Ğ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8šùŸ‰Õ1
 d
-java:S1126ã"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8óú™“Ô1
-Y	java:S125í"<This block of commented-out lines of code should be removed.(’Í„Ÿ8…ÊæÁÓ1
+java:S1126è"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8›ùŸ‰Õ1
 [
-java:S1874‚">Remove this use of "startActivityForResult"; it is deprecated.(Å¥Ş 8†ÊæÁÓ1
+java:S1874ˆ">Remove this use of "startActivityForResult"; it is deprecated.(Å¥Ş 8ùŸ‰Õ1
 T
-java:S1068@"2Remove this unused "editedCategory" private field.(½¼’ùÿÿÿÿ8‰ÊæÁÓ1
+java:S1068:"2Remove this unused "editedCategory" private field.(½¼’ùÿÿÿÿ8¡ùŸ‰Õ1
 F
-java:S1068˜"(Remove this unused "mans" private field.(¤Š…8‰ÊæÁÓ1
+java:S1068 "(Remove this unused "mans" private field.(¤Š…8¡ùŸ‰Õ1

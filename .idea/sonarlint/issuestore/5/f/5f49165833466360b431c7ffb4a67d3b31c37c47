@@ -1,0 +1,9 @@
+
+C
+java:S1604:"(Make this anonymous inner class a lambda(ò¶»Ëýÿÿÿÿ
+C
+java:S1604@"(Make this anonymous inner class a lambda(½Ñ¯êÿÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(†ÓÐ¹ùÿÿÿÿ
+Q	java:S125%"<This block of commented-out lines of code should be removed.(ó„âÖ
+E
+java:S11449"/Remove this unused private "resetSteps" method.(Žöî¨

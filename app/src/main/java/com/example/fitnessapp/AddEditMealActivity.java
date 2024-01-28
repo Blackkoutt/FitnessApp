@@ -1,23 +1,9 @@
 package com.example.fitnessapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
-import android.app.AlertDialog;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -37,20 +23,25 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import com.example.fitnessapp.Database.Models.Category;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.fitnessapp.Database.Models.Manufacturer;
 import com.example.fitnessapp.Database.Models.MealCategory;
 import com.example.fitnessapp.Database.Models.MealWithRelations;
-import com.example.fitnessapp.Database.Models.MeasureUnit;
 import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
-import com.example.fitnessapp.Database.ViewModels.ManufacturerViewModel;
 import com.example.fitnessapp.Database.ViewModels.MealCategoryViewModel;
-import com.example.fitnessapp.Database.ViewModels.ProductCategoryViewModel;
-import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
 import com.example.fitnessapp.ui.meals.MealsFragment;
-import com.example.fitnessapp.ui.products.ProductsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -90,22 +81,22 @@ public class AddEditMealActivity extends AppCompatActivity {
 
         selectedProducts = new ArrayList<>();
 
+        // Pobranie elementów widoku
         saveButton = findViewById(R.id.save_button);
-        saveButton.setOnClickListener(this::saveMeal);
-
         selectMealCategory = findViewById(R.id.select_meal_category);
         searchEditText = findViewById(R.id.edit_text_search_product);
         headerTextView = findViewById(R.id.header_edit_add);
+        productRecyclerView = findViewById(R.id.recycler_view_search_results);
+
+        // Dodanie onClickListenera do przycisku
+        saveButton.setOnClickListener(this::saveMeal);
 
         // Ustawienie produktów dla listy recycler View
-        productRecyclerView = findViewById(R.id.recycler_view_search_results);
         adapter = new ProductAdapter();
         productRecyclerView.setAdapter(adapter);
         productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
         productViewModel.getAll().observe(this, adapter::setProducts);
-
-
 
         // Pobranie kategori i dodanie do listy select
         mealCategoryViewModel = new ViewModelProvider(this).get(MealCategoryViewModel.class);
@@ -120,6 +111,8 @@ public class AddEditMealActivity extends AppCompatActivity {
                 selectMealCategory.setAdapter(categoryAdapter);
             }
         });
+
+        // Dodanie listenera wybrania kategori z listy select
         selectMealCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -127,35 +120,33 @@ public class AddEditMealActivity extends AppCompatActivity {
             }
         });
 
+        // Dodanie listenera kontrolki wyszukiwania
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Not needed in this example
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // Filter your data based on the entered text
+                // Filtrowanie listy według wprowadzonego ciągu znaków
                 adapter.filterProducts(charSequence);
-                //adapter.getFilter().filter(charSequence.toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // Not needed in this example
             }
         });
 
-
+        // Pobranie dodatkowych danych przekazanych do aktywności
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             String requestCode = extras.getString(MealsFragment.REQUEST_CODE_ADD_EDIT_MEAL);
             actualTotalCalories = extras.getFloat(MealsFragment.EXTRA_TOTAL_CALORIFIC);
             calorificLimit = extras.getFloat(MealsFragment.EXTRA_LIMIT);
-            if(requestCode == "ADD_MEAL"){
+            if(requestCode.equals("ADD_MEAL")){
                 headerTextView.setText(R.string.add_meal);
             }
-            else if (requestCode == "EDIT_MEAL"){
+            else if (requestCode.equals("EDIT_MEAL")){
                 headerTextView.setText(R.string.edit_meal);
                 MealWithRelations givenMeal = (MealWithRelations) extras.getSerializable(EXTRA_MEAL);
                 selectMealCategory.setText(givenMeal.mealCategory.getName());
@@ -176,25 +167,31 @@ public class AddEditMealActivity extends AppCompatActivity {
                 });
             }
         }
-
     }
 
+    // Metoda wywoływana w momencie wciśnięcia przycisku Zapisz
     private void saveMeal(View view) {
+        // Pobranie wybranego obiektu kategori z listy
         MealCategory category = mealCategoryList.stream().filter(cat -> cat.getName().equals(selectedCategory))
                 .findFirst().orElse(null);
+
+        // Walidacja formularza
         if(IsFormValid(category)) {
+
+            // Obliczenie wartości odżywczych skomponowanego posiłku
             float totalCalories = calculateNutritionalValues("calories");
             float totalProteins = calculateNutritionalValues("proteins");
             float totalCarbohydrates = calculateNutritionalValues("carbohydrates");
             float totalFat = calculateNutritionalValues("fat");
 
+            // Pobranie id wybranych produtków
             long[] productsIds = new long [selectedProducts.size()];
-
             for(int i=0;i<selectedProducts.size();i++){
                 productsIds[i] = selectedProducts.get(i).product.getProductId();
             }
-            Intent replyIntent = new Intent();
 
+            // Przesłanie informacji spowrotem do activity
+            Intent replyIntent = new Intent();
             replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, String.valueOf(category.getMealCategoryId()));
             replyIntent.putExtra(EXTRA_EDIT_PRODUCTS_IDS, productsIds);
             replyIntent.putExtra(EXTRA_EDIT_TOTAL_CALORIES, String.valueOf(totalCalories));
@@ -203,9 +200,10 @@ public class AddEditMealActivity extends AppCompatActivity {
             replyIntent.putExtra(EXTRA_EDIT_TOTAL_FATS, String.valueOf(totalFat));
             setResult(RESULT_OK, replyIntent);
             finish();
-
         }
     }
+
+    // Metoda sprawdzający czy formularz jest poprawny
     private boolean IsFormValid(MealCategory category){
         if(category==null){
             FocusListener(R.id.text_input_meal_category, selectMealCategory);
@@ -218,6 +216,8 @@ public class AddEditMealActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    // Metoda dodająca focusListener do elementu formularza
     private void FocusListener(int id, TextView textView){
         TextInputLayout textInputLayout = findViewById(id);
         textInputLayout.setHelperText(getString(R.string.required_error));
@@ -236,6 +236,7 @@ public class AddEditMealActivity extends AppCompatActivity {
         });
     }
 
+    // Metoda obliczająca wartości odżywcze posiłku
     private float calculateNutritionalValues(String wichValue) {
         float value = 0;
         for(ProductWithRelations product : selectedProducts){
@@ -261,26 +262,29 @@ public class AddEditMealActivity extends AppCompatActivity {
         return value;
     }
 
+    // Holder produktu
     private class ProductHolder extends RecyclerView.ViewHolder {
 
         private ProductWithRelations product;
         private CardView cardView;
         private TextView categoryTextView;
-        //private TextView unitTextView;
         private TextView calorificValueTextView;
         private TextView productManufacturerTextView;
         private TextView productNameTextView;
         public ProductHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.product_list_item, parent, false));
 
+            // Pobranie elementów widoku
             cardView = itemView.findViewById(R.id.card_view);
             productManufacturerTextView = itemView.findViewById(R.id.product_manufacturer);
             productNameTextView = itemView.findViewById(R.id.product_name);
             categoryTextView = itemView.findViewById(R.id.product_category);
             calorificValueTextView = itemView.findViewById(R.id.product_calorificValue);
 
+            // Dodanie onClickListenera na danym produkcie - wybranie produktu do posiłku
             itemView.setOnClickListener(this::AddToList);
-            // moze lepiej bedzie onlong click
+
+            // Dodanie obsługi gestu przesunięcia w prawo lub lewo na danym produkcie - szczególy produktu
             itemView.setOnTouchListener(new View.OnTouchListener() {
                 GestureDetector gestureDetector = new GestureDetector(itemView.getContext(), new GestureDetector.SimpleOnGestureListener() {
                     @Override
@@ -294,7 +298,6 @@ public class AddEditMealActivity extends AppCompatActivity {
                 });
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    // Bez tego nie obsługiwany jest event click i long click
                     if (gestureDetector.onTouchEvent(event)) {
                         return true;
                     }
@@ -303,20 +306,24 @@ public class AddEditMealActivity extends AppCompatActivity {
             });
         }
 
+        // Metoda dodająca produkt do listy wybranych produktów
         private void AddToList(View view) {
             if(!selectedProducts.contains(product)){
+                // Zmiana koloru prodkutu - jeśli wybrany to jest zielony
                 cardView.setCardBackgroundColor(getResources().getColor(R.color.green));
+
+                // Dodanie produtku i podliczenie kalorii posiłku
                 selectedProducts.add(product);
                 actualTotalCalories+=product.details.getCalorificValue();
 
+                // Obsluga powiadomienia o przekroczeniu limitu kalorycznego
                 if(calorificLimit!=0 && actualTotalCalories > calorificLimit){
+                    // Jeśli wersja jest większa niz TIRAMISU
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                         if (ContextCompat.checkSelfPermission(AddEditMealActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(AddEditMealActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
                         }
                     }
-
-
                     String channelID = "CHANNEL_ID_NOTIFICATION";
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelID);
                     builder.setSmallIcon(R.drawable.notification_image_24);
@@ -325,6 +332,7 @@ public class AddEditMealActivity extends AppCompatActivity {
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT);
                     NotificationManager notificationManager =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+
                     // Jeśli wersja jest większa niż Oreo
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                         NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelID);
@@ -347,6 +355,7 @@ public class AddEditMealActivity extends AppCompatActivity {
             }
         }
 
+        // Bindowanie produtku do elementów widoku
         public void bind(ProductWithRelations product){
             this.product = product;
             cardView.setVisibility(View.VISIBLE);
@@ -369,6 +378,8 @@ public class AddEditMealActivity extends AppCompatActivity {
             productManufacturerTextView.setText(getResources().getString(R.string.product_manufacturer_label, product.manufacturer.getName()));
             calorificValueTextView.setText(getResources().getString(R.string.product_calorific_label, String.valueOf(product.details.getCalorificValue())));
         }
+
+        // Czyszczenie danego produktu z widoku
         public void clear(){
             cardView.setVisibility(View.GONE);
             productNameTextView.setText("");
@@ -377,6 +388,8 @@ public class AddEditMealActivity extends AppCompatActivity {
             calorificValueTextView.setText("");
         }
     }
+
+    // Adapter produktu
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder>{
         private List<ProductWithRelations> originalProducts;
         private List<ProductWithRelations> filteredProducts;
@@ -412,6 +425,8 @@ public class AddEditMealActivity extends AppCompatActivity {
                 return 0;
             }
         }
+
+        // Metoda filtrująca listę produktów
         void filterProducts(CharSequence sequence){
             filteredProducts.clear();
             for(ProductWithRelations product: originalProducts){
@@ -423,6 +438,7 @@ public class AddEditMealActivity extends AppCompatActivity {
             }
             notifyDataSetChanged();
         }
+
         void setProducts(List<ProductWithRelations> products){
             this.originalProducts = new ArrayList<>(products);
             this.filteredProducts = new ArrayList<>(products);

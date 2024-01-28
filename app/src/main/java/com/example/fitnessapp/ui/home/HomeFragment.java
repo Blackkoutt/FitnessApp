@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -106,6 +108,8 @@ public class HomeFragment extends Fragment {
         private final TextView postDescriptionTextView;
         private final TextView postPublicationDateTextView;
         private final WebView webView;
+        private final TextInputLayout userNameLayout;
+        private final TextInputLayout commentContentLayout;
         private final TextInputEditText userName;
         private final TextInputEditText commentContent;
         private final MaterialButton buttonAddComment;
@@ -125,6 +129,8 @@ public class HomeFragment extends Fragment {
             userName = itemView.findViewById(R.id.text_input_EditText_name);
             commentContent = itemView.findViewById(R.id.text_input_EditText_comment_content);
             buttonAddComment = itemView.findViewById(R.id.post_comment_button);
+            userNameLayout = itemView.findViewById(R.id.text_input_layout_name);
+            commentContentLayout = itemView.findViewById(R.id.text_input_layout_comment_content);
 
             // Ustawienie onclick Listenera dla przycisku dodawania komentarzy do posta
             buttonAddComment.setOnClickListener(this::onClickAddComment);
@@ -132,47 +138,88 @@ public class HomeFragment extends Fragment {
 
         // Handler zdarzenia onClick przycisku "Dodaj komentarz"
         private void onClickAddComment(View view) {
-            // Pobranie wartości z pól tekstowych
-            String newUserName = String.valueOf(userName.getText());
-            String newCommentContent = String.valueOf(commentContent.getText());
+            if(ValidateForm()){
+                // Pobranie wartości z pól tekstowych
+                String newUserName = String.valueOf(userName.getText());
+                String newCommentContent = String.valueOf(commentContent.getText());
 
-            if(newUserName!=""&&newCommentContent!=""){
-                // Formatowanie aktualnej daty
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                String currentDate = sdf.format(new Date());
+                if(newUserName!=""&&newCommentContent!=""){
+                    // Formatowanie aktualnej daty
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                    String currentDate = sdf.format(new Date());
 
-                // Znalezienie maksymalnego id komentarza
-                List<Comment> commentList = post.getCommentList();
-                int maxCommentId = Integer.MIN_VALUE;
-                if(commentList.size() == 0){
-                    maxCommentId = 0;
-                }
-                else{
-                    for (Comment comment : commentList) {
-                        if (comment.getId() > maxCommentId) {
-                            maxCommentId = comment.getId();
+                    // Znalezienie maksymalnego id komentarza
+                    List<Comment> commentList = post.getCommentList();
+                    int maxCommentId = Integer.MIN_VALUE;
+                    if(commentList.size() == 0){
+                        maxCommentId = 0;
+                    }
+                    else{
+                        for (Comment comment : commentList) {
+                            if (comment.getId() > maxCommentId) {
+                                maxCommentId = comment.getId();
+                            }
+                        }
+                        maxCommentId+=1;
+                    }
+
+                    // Utworzenie nowego komentarza i dodanie go do listy
+                    Comment newComment = new Comment(maxCommentId,newUserName, currentDate, newCommentContent);
+                    commentList.add(0,newComment);
+
+                    // Dodanie komentarza do bazy (pliku .json na serwerze)
+                    addCommentToPost(post, commentList, commentAdapter);
+
+                    // Wyczyszczenie inputów
+                    userName.setText("");
+                    commentContent.setText("");
+                    userName.clearFocus();
+                    commentContent.clearFocus();
+                    userNameLayout.setHelperText("");
+                    commentContentLayout.setHelperText("");
+
+                    // Ukrycie klawiatury
+                    InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+            }
+        }
+        private boolean ValidateForm(){
+            if(TextUtils.isEmpty(userName.getText())){
+                userNameLayout.setHelperText(getString(R.string.required_error));
+                userName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if(!hasFocus){
+                            if(TextUtils.isEmpty(userName.getText())){
+                                userNameLayout.setHelperText(getString(R.string.required_error));
+                            }
+                            else{
+                                userNameLayout.setHelperText("");
+                            }
                         }
                     }
-                    maxCommentId+=1;
-                }
-
-                // Utworzenie nowego komentarza i dodanie go do listy
-                Comment newComment = new Comment(maxCommentId,newUserName, currentDate, newCommentContent);
-                commentList.add(0,newComment);
-
-                // Dodanie komentarza do bazy (pliku .json na serwerze)
-                addCommentToPost(post, commentList, commentAdapter);
-
-                // Wyczyszczenie inputów
-                userName.setText("");
-                commentContent.setText("");
-                userName.clearFocus();
-                commentContent.clearFocus();
-
-                // Ukrycie klawiatury
-                InputMethodManager manager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                });
+                return false;
             }
+            if(TextUtils.isEmpty(commentContent.getText())){
+                commentContentLayout.setHelperText(getString(R.string.required_error));
+                commentContent.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+                        if(!hasFocus){
+                            if(TextUtils.isEmpty(commentContent.getText())){
+                                commentContentLayout.setHelperText(getString(R.string.required_error));
+                            }
+                            else{
+                                commentContentLayout.setHelperText("");
+                            }
+                        }
+                    }
+                });
+                return false;
+            }
+            return true;
         }
 
         // Bindowanie postów

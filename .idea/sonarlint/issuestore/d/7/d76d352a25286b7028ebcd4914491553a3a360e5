@@ -1,25 +1,25 @@
 
 E
-java:S1604N"(Make this anonymous inner class a lambda(á¥£Û8–˜‘ÅÔ1
+java:S1604F"(Make this anonymous inner class a lambda(á¥£Û8û§‡Õ1
 w
-java:S1450)"[Remove the "mealCalories" field and declare it as a local variable in the relevant methods.(ªğZ8È˜‘ÅÔ1
+java:S1450"[Remove the "mealCalories" field and declare it as a local variable in the relevant methods.(ªğZ8È˜‘ÅÔ1
 ‚
-java:S1450+"`Remove the "mealCarbohydrates" field and declare it as a local variable in the relevant methods.(ı­ûÿÿÿÿ8È˜‘ÅÔ1
+java:S1450 "`Remove the "mealCarbohydrates" field and declare it as a local variable in the relevant methods.(ı­ûÿÿÿÿ8È˜‘ÅÔ1
 x
-java:S1450'"[Remove the "mealCategory" field and declare it as a local variable in the relevant methods.(ÏÂá8È˜‘ÅÔ1
+java:S1450"[Remove the "mealCategory" field and declare it as a local variable in the relevant methods.(ÏÂá8È˜‘ÅÔ1
 y
-java:S1450("WRemove the "mealDate" field and declare it as a local variable in the relevant methods.(úûù‡şÿÿÿÿ8È˜‘ÅÔ1
+java:S1450"WRemove the "mealDate" field and declare it as a local variable in the relevant methods.(úûù‡şÿÿÿÿ8È˜‘ÅÔ1
 y
-java:S1450,"WRemove the "mealFats" field and declare it as a local variable in the relevant methods.(è—Óšıÿÿÿÿ8È˜‘ÅÔ1
+java:S1450!"WRemove the "mealFats" field and declare it as a local variable in the relevant methods.(è—Óšıÿÿÿÿ8È˜‘ÅÔ1
 x
-java:S1450*"[Remove the "mealProteins" field and declare it as a local variable in the relevant methods.(ÿ‹±Ç8È˜‘ÅÔ1
+java:S1450"[Remove the "mealProteins" field and declare it as a local variable in the relevant methods.(ÿ‹±Ç8È˜‘ÅÔ1
 
-java:S1450&"bRemove the "productRecyclerView" field and declare it as a local variable in the relevant methods.(úŞŠš8É˜‘ÅÔ1
+java:S1450"bRemove the "productRecyclerView" field and declare it as a local variable in the relevant methods.(úŞŠš8É˜‘ÅÔ1
 
-java:S1450-"_Remove the "productViewModel" field and declare it as a local variable in the relevant methods.(¤ì˜¶ûÿÿÿÿ8¨Å”ÅÔ1
+java:S1450""_Remove the "productViewModel" field and declare it as a local variable in the relevant methods.(¤ì˜¶ûÿÿÿÿ8¨Å”ÅÔ1
 Y
-java:S1874B"<Remove this use of "getSerializableExtra"; it is deprecated.(öî¦ç8Ğ˜‘ÅÔ1
+java:S1874:"<Remove this use of "getSerializableExtra"; it is deprecated.(öî¦ç8¾û§‡Õ1
 s
-java:S1450_"VRemove the "product" field and declare it as a local variable in the relevant methods.(š¥äø8¸Å”ÅÔ1
+java:S1450Y"VRemove the "product" field and declare it as a local variable in the relevant methods.(š¥äø8Æû§‡Õ1
 H
-java:S1068_"+Remove this unused "product" private field.(š¥äø8»Å”ÅÔ1
+java:S1068Y"+Remove this unused "product" private field.(š¥äø8Ìû§‡Õ1

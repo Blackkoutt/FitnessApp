@@ -1,9 +1,5 @@
 package com.example.fitnessapp;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,24 +11,22 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.Manufacturer;
 import com.example.fitnessapp.Database.Models.MeasureUnit;
-import com.example.fitnessapp.Database.Models.ProductDetails;
 import com.example.fitnessapp.Database.ViewModels.CategoryViewModel;
 import com.example.fitnessapp.Database.ViewModels.ManufacturerViewModel;
 import com.example.fitnessapp.Database.ViewModels.MeasureUnitViewModel;
-import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
-import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
-import com.example.fitnessapp.R;
-import com.example.fitnessapp.ui.meals.MealsFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import kotlin.Unit;
 
 public class AddEditProductActivity extends AppCompatActivity {
     public static final String EXTRA_EDIT_CATEGORY_ID = "EXTRA_EDIT_CATEGORY_ID";
@@ -74,23 +68,40 @@ public class AddEditProductActivity extends AppCompatActivity {
     private Button addManufacturerButton;
     public static final String ADD_MAN_CAT_ACTIVITY_REQUEST_CODE = "ADD_MAN_CAT_ACTIVITY_REQUEST_CODE";
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_product);
+
         selectedCategoriesList = new ArrayList<Category>();
         actualProductCategoryNames = new ArrayList<String>();
 
+        // Pobranie elementów widoku
         headerTextView = findViewById(R.id.header_edit_add);
-
         addCategoryButton = findViewById(R.id.add_category_button);
-        addCategoryButton.setOnClickListener(this::onClickAddCategory);
+        selectManufacturers = findViewById(R.id.select_manufacturer);
         addManufacturerButton = findViewById(R.id.add_manufacturer_button);
+        selectCategory = findViewById(R.id.select_category);
+        productName = findViewById(R.id.edit_text_product_name);
+        selectUnit = findViewById(R.id.select_unit);
+        caloriesAmount = findViewById(R.id.edit_text_product_calorificValue);
+        proteinAmount = findViewById(R.id.edit_text_product_proteinValue);
+        carbohydratesAmount = findViewById(R.id.edit_text_product_carbohydratesValue);
+        fatAmount = findViewById(R.id.edit_text_product_fatValue);
+        saveButton = findViewById(R.id.save_product_button);
+
+        // Ustawienie onClickListenera dla przycisku "Zapisz"
+        saveButton.setOnClickListener(this::onSaveButtonClick);
+
+        // Ustawienie onClickListenera dla przycisku "Dodaj producenta"
         addManufacturerButton.setOnClickListener(this::onClickAddManufacturer);
 
-        // Select Producentów
-        selectManufacturers = findViewById(R.id.select_manufacturer);
-        // Pobranie listy kategorii z bazy
+        // Ustawienie onClickListenera dla przycisku "Dodaj kategorie"
+        addCategoryButton.setOnClickListener(this::onClickAddCategory);
+
+        // Pobranie listy producentów z bazy
         manufacturerViewModel = new ViewModelProvider(this).get(ManufacturerViewModel.class);
         manufacturerViewModel.getAll().observe(this, manufacturers -> {
             if (manufacturers != null && !manufacturers.isEmpty()) {
@@ -103,7 +114,8 @@ public class AddEditProductActivity extends AppCompatActivity {
                 selectManufacturers.setAdapter(manufacturerAdapter);
             }
         });
-        // Ustawienie onclickListenera
+
+        // Ustawienie onClickListenera dla selecta - wybranie producenta
         selectManufacturers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -111,8 +123,6 @@ public class AddEditProductActivity extends AppCompatActivity {
             }
         });
 
-        // Select Kategorii
-        selectCategory = findViewById(R.id.select_category);
         // Pobranie listy kategorii z bazy
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         categoryViewModel.getAll().observe(this, categories -> {
@@ -130,15 +140,14 @@ public class AddEditProductActivity extends AppCompatActivity {
                         selectedCategoriesBool[i]=true;
                     }
                 }
-
-                /*ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, R.layout.select_item, categoryNames);
-                selectCategory.setAdapter(categoryAdapter);*/
             }
         });
+
+        // Kliknięcie na select Kategorii powoduje otwarcie okna dialogowego
         selectCategory.setOnClickListener(v->{
             showCategoryDialog();
         });
-        // Ustawienie onclickListenera
+
         selectCategory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -146,13 +155,7 @@ public class AddEditProductActivity extends AppCompatActivity {
             }
         });
 
-        // Input Produktu
-        productName = findViewById(R.id.edit_text_product_name);
-
-
-        // Select Kategorii
-        selectUnit = findViewById(R.id.select_unit);
-        // Pobranie listy kategorii z bazy
+        // Pobranie listy jednostek z bazy
         unitViewModel = new ViewModelProvider(this).get(MeasureUnitViewModel.class);
         unitViewModel.getAll().observe(this, units -> {
             if (units != null && !units.isEmpty()) {
@@ -167,7 +170,7 @@ public class AddEditProductActivity extends AppCompatActivity {
             }
         });
 
-        // Ustawienie onclickListenera
+        // Ustawienie onclickListenera dla wyboru jednostki
         selectUnit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -175,28 +178,15 @@ public class AddEditProductActivity extends AppCompatActivity {
             }
         });
 
-        // Input Kalori
-        caloriesAmount = findViewById(R.id.edit_text_product_calorificValue);
-
-        // Input Białka
-        proteinAmount = findViewById(R.id.edit_text_product_proteinValue);
-
-        // Input Węglowodanów
-        carbohydratesAmount = findViewById(R.id.edit_text_product_carbohydratesValue);
-
-        // Input Tłuszczy
-        fatAmount = findViewById(R.id.edit_text_product_fatValue);
-
         headerTextView.setText(R.string.header_add);
 
+        // Pobranie wartości przekazanych do activity
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             headerTextView.setText(R.string.header_edit);
             selectManufacturers.setText(extras.getString(EXTRA_EDIT_MANUFACTURER_NAME));
             selectedManufacturer = extras.getString(EXTRA_EDIT_MANUFACTURER_NAME);
 
-            // ustawic liste
-            // ustawić wartości true w tablicy boolean
             actualProductCategoryNames = extras.getStringArrayList(EXTRA_EDIT_CATEGORY_NAME);
             StringBuilder stringBuilder = new StringBuilder();
             for(int i=0; i<actualProductCategoryNames.size(); i++){
@@ -205,8 +195,9 @@ public class AddEditProductActivity extends AppCompatActivity {
                     stringBuilder.append(", ");
                 }
             }
-            selectCategory.setText(stringBuilder.toString());
 
+            // Przypisanie wartości do widoku
+            selectCategory.setText(stringBuilder.toString());
             productName.setText(extras.getString(EXTRA_EDIT_PRODUCT_NAME));
             selectUnit.setText(extras.getString(EXTRA_EDIT_UNIT_NAME));
             selectedUnit = extras.getString(EXTRA_EDIT_UNIT_NAME);
@@ -215,24 +206,23 @@ public class AddEditProductActivity extends AppCompatActivity {
             carbohydratesAmount.setText(extras.getString(EXTRA_EDIT_CARBOHYDRATES_AMOUNT));
             fatAmount.setText(extras.getString(EXTRA_EDIT_FAT_AMOUNT));
         }
-
-        // Przycisk do zapisywania
-        saveButton = findViewById(R.id.save_product_button);
-        saveButton.setOnClickListener(this::onSaveButtonClick);
     }
 
+    // Metoda wywoływana w momencie kliknięcia przycisku "Dodaj producenta"
     private void onClickAddManufacturer(View view) {
         Intent intent = new Intent(this, AddCategoryManufacturerActivity.class);
         intent.putExtra(ADD_MAN_CAT_ACTIVITY_REQUEST_CODE, "NEW_MANUFACTURER");
         startActivity(intent);
     }
 
+    // Metoda wywoływana w momencie kliknięcia przycisku "Dodaj kategorię"
     private void onClickAddCategory(View view) {
         Intent intent = new Intent(this, AddCategoryManufacturerActivity.class);
         intent.putExtra(ADD_MAN_CAT_ACTIVITY_REQUEST_CODE, "NEW_CATEGORY");
         startActivity(intent);
     }
 
+    // Metoda wywoływana w momencie kliknięcia selecta kategorii - otwiera się okno dialogowe z wyborem kategori
     private void showCategoryDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(AddEditProductActivity.this);
 
@@ -277,8 +267,9 @@ public class AddEditProductActivity extends AppCompatActivity {
             }
         });
         builder.show();
-
     }
+
+    // Metoda wywoływana w momencie kliknięcia przycisku "Zapisz"
     private void onSaveButtonClick(View v) {
         Manufacturer manufacturer = manufacturerList.stream().filter(man -> man.getName().equals(selectedManufacturer))
                 .findFirst().orElse(null);
@@ -292,8 +283,9 @@ public class AddEditProductActivity extends AppCompatActivity {
 
         Intent replyIntent = new Intent();
 
-        // Wiecej warunków
+        // Walidacja formularza
         if(IsFormValid(categoryIds, manufacturer, unit)){
+            // Przesłanie danych do activity
             replyIntent.putExtra(EXTRA_EDIT_MANUFACTURER_ID, String.valueOf(manufacturer.getManufacturerId()));
             replyIntent.putExtra(EXTRA_EDIT_CATEGORY_ID, categoryIds);
             replyIntent.putExtra(EXTRA_EDIT_PRODUCT_NAME, productName.getText().toString());
@@ -307,6 +299,7 @@ public class AddEditProductActivity extends AppCompatActivity {
         }
     }
 
+    // Metoda sprawdzająca czy dane w formularzu są poprawne
     private boolean IsFormValid(long[] catIds, Manufacturer man, MeasureUnit unit){
         if(catIds.length == 0 ){
             FocusListener(R.id.text_input_product_category, selectCategory);
@@ -342,6 +335,8 @@ public class AddEditProductActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    // Metoda dodająca FocusListener na elemencie formularza
     private void FocusListener(int id, TextView textView){
         TextInputLayout textInputLayout = findViewById(id);
         textInputLayout.setHelperText(getString(R.string.required_error));

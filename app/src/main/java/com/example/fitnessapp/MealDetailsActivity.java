@@ -1,5 +1,12 @@
 package com.example.fitnessapp;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -7,28 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.example.fitnessapp.Database.Models.Category;
-import com.example.fitnessapp.Database.Models.Manufacturer;
 import com.example.fitnessapp.Database.Models.MealWithRelations;
 import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductWithRelations;
-import com.example.fitnessapp.Database.ViewModels.ProductCategoryViewModel;
-import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
-import com.example.fitnessapp.ui.products.ProductsFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,18 +38,21 @@ public class MealDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
 
-        productRecyclerView = findViewById(R.id.product_recycler_view);
-        final ProductAdapter adapter = new ProductAdapter();
-        productRecyclerView.setAdapter(adapter);
-        productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        // Pobranie elementów widoku
         mealDate = findViewById(R.id.meal_date);
         mealCategory = findViewById(R.id.meal_category);
         mealCalories = findViewById(R.id.total_calories);
         mealProteins = findViewById(R.id.total_proteins);
         mealCarbohydrates = findViewById(R.id.total_carbohydrates);
         mealFats = findViewById(R.id.total_fats);
+        productRecyclerView = findViewById(R.id.product_recycler_view);
 
+        // Przypisanie adaptera produktów
+        final ProductAdapter adapter = new ProductAdapter();
+        productRecyclerView.setAdapter(adapter);
+        productRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Pobranie wartości przekazanych do Activity
         Intent intent = getIntent();
         if (intent.hasExtra("EXTRA_MEAL_DETAILS")) {
             meal = (MealWithRelations) intent.getSerializableExtra("EXTRA_MEAL_DETAILS");
@@ -72,9 +64,9 @@ public class MealDetailsActivity extends AppCompatActivity {
         mealCarbohydrates.setText(getResources().getString(R.string.total_carbohydrates, String.valueOf(meal.meal.getTotalCarbohydrates())));
         mealFats.setText(getResources().getString(R.string.total_fat, String.valueOf(meal.meal.getTotalFat())));
 
+        // Pobranie listy produktów z bazy
         List<ProductWithRelations> products = new ArrayList<>();
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-
         productViewModel.getAll().observe(this, new Observer<List<ProductWithRelations>>() {
             @Override
             public void onChanged(List<ProductWithRelations> allProducts) {
@@ -90,6 +82,8 @@ public class MealDetailsActivity extends AppCompatActivity {
             }
         });
     }
+
+    // Holder produktu
     private class ProductHolder extends RecyclerView.ViewHolder {
 
         private ProductWithRelations product;
@@ -103,6 +97,7 @@ public class MealDetailsActivity extends AppCompatActivity {
         public ProductHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.meal_details_product_list_item, parent, false));
 
+            // Pobranie elementów widoku
             productNameTextView = itemView.findViewById(R.id.product_name);
             productManufacturerTextView = itemView.findViewById(R.id.product_manufacturer);
             calorificValueTextView = itemView.findViewById(R.id.product_calorificValue);
@@ -111,6 +106,7 @@ public class MealDetailsActivity extends AppCompatActivity {
             fatsValueTextView = itemView.findViewById(R.id.product_fatsValue);
         }
 
+        // Bindowanie produktu
         public void bind(ProductWithRelations product){
             this.product = product;
             productNameTextView.setText(getResources().getString(R.string.product_name_label, product.product.getName()));
@@ -122,6 +118,7 @@ public class MealDetailsActivity extends AppCompatActivity {
         }
     }
 
+    // Adapter produktu
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder>{
         private List<ProductWithRelations> products;
 
