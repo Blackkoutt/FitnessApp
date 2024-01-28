@@ -3,102 +3,42 @@
 		{
 			"id": 1,
 			"title": "Jak szybko i bezpiecznie schudnąć?",
-			"description": "Opis pierwszego posta...",
+			"description": "W dzisiejszym społeczeństwie, w którym zdrowy styl życia i utrzymanie odpowiedniej wagi stają się coraz ważniejsze, pytanie \"Jak szybko i bezpiecznie schudnąć?\" pojawia się często. Ten artykuł oferuje praktyczne wskazówki i podejścia, które pomagają osiągnąć cel utraty wagi w sposób zrównoważony i bezpieczny dla zdrowia.",
 			"author": "Jan Kowalski",
-			"publication_date": "06.01.2024",
+			"publication_date": "28.01.2024",
 			"video": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/PYZI18eJURA?si=JYf-Q_lvYGTyPwMa\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
 			"comments": [
 				{
-					"author": "a",
-					"content": "b",
-					"id": 14,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "sfdf",
-					"content": "fdfsf",
-					"id": 12,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "eee",
-					"content": "eeee",
-					"id": 11,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "fsdf",
-					"content": "dsfsf",
-					"id": 10,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "aaa",
-					"content": "aaa",
-					"id": 9,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "hhh",
-					"content": "hhh",
-					"id": 7,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "aaa",
-					"content": "aaaa",
-					"id": 5,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "dd",
-					"content": "ddd",
-					"id": 2,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "fdsf",
-					"content": "fsdfds",
+					"author": "Marek Kowalski",
+					"content": "Super!",
 					"id": 1,
+					"publication_date": "28.01.2024"
+				},
+				{
+					"author": "Anna Wiśniewska",
+					"content": "Pomocny artykuł",
+					"id": 0,
 					"publication_date": "28.01.2024"
 				}
 			]
 		},
 		{
 			"id": 2,
-			"title": "Inny post",
-			"description": "Opis drugiego posta...",
-			"author": "Jan Kowalski",
+			"title": "Zmień swoją dietę już dziś!",
+			"description": "Czasami drobna zmiana w jedzeniu może przynieść ogromne rezultaty dla Twojego zdrowia i samopoczucia.",
+			"author": "Piotr Nowak",
 			"publication_date": "06.01.2024",
-			"video": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/PYZI18eJURA?si=JYf-Q_lvYGTyPwMa\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
+			"video": "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/2kCOXLkbsKw?si=1YG3-dQZvFvyLnOD\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>",
 			"comments": [
 				{
-					"author": "ttt",
-					"content": "tttt",
-					"id": 8,
+					"author": "Anonymous",
+					"content": "Od dzisiaj zmieniam dietę",
+					"id": 1,
 					"publication_date": "28.01.2024"
 				},
 				{
-					"author": "ccc",
-					"content": "cccc",
-					"id": 7,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "o",
-					"content": "o",
-					"id": 3,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "i",
-					"content": "i",
-					"id": 2,
-					"publication_date": "28.01.2024"
-				},
-				{
-					"author": "fsdf",
-					"content": "dsfsd",
+					"author": "Tomasz Nowicki",
+					"content": "Super poradnik!",
 					"id": 0,
 					"publication_date": "28.01.2024"
 				}
