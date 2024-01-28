@@ -119,11 +119,45 @@ tools:context=".ui.meals.MealsFragment">
         android:layout_weight="1"
         >
     </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:id="@+id/calories_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Spożyte kalorie: "
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/limit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Limit kaloryczny: "
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_marginBottom="5dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/limit_exceeded"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/limit_exceeded"
+        android:textColor="@color/red"
+        android:textAlignment="center"
+        android:layout_marginBottom="10dp"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        />
     <Button
         android:id="@+id/new_meal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dodaj posiek"
+        android:text="@string/add_meal_button"
         android:layout_gravity="center"
         android:textSize="20sp"/>
     <androidx.recyclerview.widget.RecyclerView

@@ -23,6 +23,7 @@ public class ProductRepository {
         products = productDao.getAll();
     }
     public LiveData<List<ProductWithRelations>> getAllProducts(){return products; }
+
     public long insert(Product product)
     {
         final CountDownLatch latch = new CountDownLatch(1);
@@ -40,9 +41,11 @@ public class ProductRepository {
         long new_id = insertedId.get();
         return insertedId.get();
     }
+
     public void update(Product product){
         ProductDatabase.databaseWriteExecutor.execute(()->productDao.update(product));
     }
+
     public void delete(Product product){
         ProductDatabase.databaseWriteExecutor.execute(()->productDao.delete(product));
     }

@@ -1,7 +1,5 @@
 package com.example.fitnessapp.Database;
 
-import static android.provider.Settings.System.getString;
-
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -12,6 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.fitnessapp.Database.Dao.CaloricLimitDao;
 import com.example.fitnessapp.Database.Dao.CategoryDao;
 import com.example.fitnessapp.Database.Dao.ManufacturerDao;
 import com.example.fitnessapp.Database.Dao.MealCategoryDao;
@@ -21,6 +20,7 @@ import com.example.fitnessapp.Database.Dao.MeasureUnitDao;
 import com.example.fitnessapp.Database.Dao.ProductCategoryDao;
 import com.example.fitnessapp.Database.Dao.ProductDao;
 import com.example.fitnessapp.Database.Dao.ProductDetailsDao;
+import com.example.fitnessapp.Database.Models.CaloricLimit;
 import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.Converters;
 import com.example.fitnessapp.Database.Models.Manufacturer;
@@ -31,7 +31,6 @@ import com.example.fitnessapp.Database.Models.MeasureUnit;
 import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductCategory;
 import com.example.fitnessapp.Database.Models.ProductDetails;
-import com.example.fitnessapp.Database.Models.ProductWithRelations;
 import com.example.fitnessapp.R;
 
 import java.util.ArrayList;
@@ -48,11 +47,12 @@ import java.util.concurrent.Executors;
                 Manufacturer.class,
                 MeasureUnit.class,
                 ProductCategory.class,
-                ProductDetails.class
+                ProductDetails.class,
+                CaloricLimit.class
             },
-            version = 3,
+            version = 5,
             autoMigrations = {
-                @AutoMigration(from = 1, to = 3)
+                @AutoMigration(from = 4, to = 5)
             },
             exportSchema = true)
 @TypeConverters({Converters.class})
@@ -63,6 +63,7 @@ public abstract class ProductDatabase extends RoomDatabase {
     public abstract ProductDao productDao();
     public abstract MealDao mealDao();
     public abstract MealCategoryDao mealCategoryDao();
+    public abstract CaloricLimitDao caloricLimitDao();
     public abstract MealProductDao mealProductDao();
     public abstract CategoryDao categoryDao();
     public abstract ManufacturerDao manufacturerDao();
@@ -82,6 +83,7 @@ public abstract class ProductDatabase extends RoomDatabase {
         return databaseInstance;
     }
 
+    // Seedowanie bazy przy tworzeniu - ponowna instalacja aplikacji i jej uruchomienie powoduje wywołanie tej metody
     private static final RoomDatabase.Callback newCallback1 = new RoomDatabase.Callback(){
 
         @Override
@@ -113,7 +115,8 @@ public abstract class ProductDatabase extends RoomDatabase {
                 productDAO.resetTableId();
                 productDetailsDAO.clearTable();
                 productDetailsDAO.resetTableId();*/
-                ;
+
+                // Dodanie katelorii posiłków
                 MealCategory mealCategory1 = new MealCategory(_context.getResources().getString(R.string.breakfast));
                 MealCategory mealCategory2 = new MealCategory(_context.getResources().getString(R.string.second_breakfast));
                 MealCategory mealCategory3 = new MealCategory(_context.getResources().getString(R.string.lunch));
@@ -127,17 +130,17 @@ public abstract class ProductDatabase extends RoomDatabase {
                 mealCategoryDao.insert(mealCategory5);
                 mealCategoryDao.insert(mealCategory6);
 
-                // Kategoria
+                // Dodanie kategorii produktów
                 Category category = new Category("Napój");
                 long categoryId = categoryDAO.insert(category);
                 Category category1 = new Category("Nabiał");
                 long categoryId1 = categoryDAO.insert(category1);
 
-                // Producent
+                // Dodanie producenta
                 Manufacturer manufacturer = new Manufacturer("Hortex");
                 long manufacturerId = manufacturerDAO.insert(manufacturer);
 
-                // Jednostka miary
+                // Dodanie jednostek miary
                 MeasureUnit measureUnit1 = new MeasureUnit("ml");
                 long unitId1 = measureUnitDAO.insert(measureUnit1);
 
@@ -147,14 +150,15 @@ public abstract class ProductDatabase extends RoomDatabase {
                 MeasureUnit measureUnit3 = new MeasureUnit("g");
                 long unitId3 = measureUnitDAO.insert(measureUnit3);
 
-                // Produkt
+                // Dodanie produktu
                 Product product = new Product("Sok", manufacturerId, unitId1);
                 long productId = productDAO.insert(product);
 
-                // Szczegóły produktu
+                // Dodanie szczegółów produktu
                 ProductDetails productDetails = new ProductDetails(30.9f, 10.2f, 2.9f, 3.1f, productId);
                 long detailsId = productDetailsDAO.insert(productDetails);
 
+                // Dodanie kateogii do produktu
                 List<Long> categoryIdsList = new ArrayList<>();
                 categoryIdsList.add(categoryId);
                 for(long catID : categoryIdsList){

@@ -3,14 +3,25 @@ package com.example.fitnessapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -38,6 +49,7 @@ import com.example.fitnessapp.Database.ViewModels.MealCategoryViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductCategoryViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
+import com.example.fitnessapp.ui.meals.MealsFragment;
 import com.example.fitnessapp.ui.products.ProductsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -68,6 +80,8 @@ public class AddEditMealActivity extends AppCompatActivity {
     private ProductViewModel productViewModel;
     private List<ProductWithRelations> selectedProducts;
     private FloatingActionButton saveButton;
+    private float calorificLimit;
+    private float actualTotalCalories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,29 +145,36 @@ public class AddEditMealActivity extends AppCompatActivity {
                 // Not needed in this example
             }
         });
-        headerTextView.setText(R.string.add_meal);
+
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            headerTextView.setText(R.string.edit_meal);
-            MealWithRelations givenMeal = (MealWithRelations) extras.getSerializable(EXTRA_MEAL);
-            selectMealCategory.setText(givenMeal.mealCategory.getName());
-            selectedCategory = givenMeal.mealCategory.getName();
+            String requestCode = extras.getString(MealsFragment.REQUEST_CODE_ADD_EDIT_MEAL);
+            actualTotalCalories = extras.getFloat(MealsFragment.EXTRA_TOTAL_CALORIFIC);
+            calorificLimit = extras.getFloat(MealsFragment.EXTRA_LIMIT);
+            if(requestCode == "ADD_MEAL"){
+                headerTextView.setText(R.string.add_meal);
+            }
+            else if (requestCode == "EDIT_MEAL"){
+                headerTextView.setText(R.string.edit_meal);
+                MealWithRelations givenMeal = (MealWithRelations) extras.getSerializable(EXTRA_MEAL);
+                selectMealCategory.setText(givenMeal.mealCategory.getName());
+                selectedCategory = givenMeal.mealCategory.getName();
 
-            productViewModel.getAll().observe(this, new Observer<List<ProductWithRelations>>() {
-                @Override
-                public void onChanged(List<ProductWithRelations> allProducts) {
-                    for(ProductWithRelations productWR : allProducts){
-                        for(Product product : givenMeal.products){
-                            if(productWR.product.getProductId() ==  product.getProductId()){
-                                selectedProducts.add(productWR);
+                productViewModel.getAll().observe(this, new Observer<List<ProductWithRelations>>() {
+                    @Override
+                    public void onChanged(List<ProductWithRelations> allProducts) {
+                        for(ProductWithRelations productWR : allProducts){
+                            for(Product product : givenMeal.products){
+                                if(productWR.product.getProductId() ==  product.getProductId()){
+                                    selectedProducts.add(productWR);
+                                }
                             }
+
                         }
-
                     }
-                }
-            });
-
+                });
+            }
         }
 
     }
@@ -286,10 +307,43 @@ public class AddEditMealActivity extends AppCompatActivity {
             if(!selectedProducts.contains(product)){
                 cardView.setCardBackgroundColor(getResources().getColor(R.color.green));
                 selectedProducts.add(product);
+                actualTotalCalories+=product.details.getCalorificValue();
+
+                if(calorificLimit!=0 && actualTotalCalories > calorificLimit){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                        if (ContextCompat.checkSelfPermission(AddEditMealActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(AddEditMealActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
+                        }
+                    }
+
+
+                    String channelID = "CHANNEL_ID_NOTIFICATION";
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), channelID);
+                    builder.setSmallIcon(R.drawable.notification_image_24);
+                    builder.setContentTitle(getString(R.string.limit_exceeded))
+                        .setContentText(getString(R.string.notification_info, String.valueOf(calorificLimit), String.valueOf(actualTotalCalories)))
+                        .setAutoCancel(true)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    NotificationManager notificationManager =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                    // Jeśli wersja jest większa niż Oreo
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                        NotificationChannel notificationChannel = notificationManager.getNotificationChannel(channelID);
+                        if(notificationChannel == null)
+                        {
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            notificationChannel = new NotificationChannel(channelID, "Description", importance);
+                            notificationChannel.setLightColor(Color.GREEN);
+                            notificationChannel.enableVibration(true);
+                            notificationManager.createNotificationChannel(notificationChannel);
+                        }
+                    }
+                    notificationManager.notify(0, builder.build());
+                }
             }
             else{
                 cardView.setCardBackgroundColor(getResources().getColor(R.color.white));
                 selectedProducts.remove(product);
+                actualTotalCalories-=product.details.getCalorificValue();
             }
         }
 

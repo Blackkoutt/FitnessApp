@@ -13,11 +13,16 @@
 
     <item
         android:id="@+id/navigation_meals"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/dining_24"
         android:title="@string/title_meals" />
     <item
         android:id="@+id/navigation_stepCounter"
         android:icon="@drawable/baseline_steps_counter"
         android:title="Steps" />
+
+    <item
+        android:id="@+id/navigation_bmi_calculator"
+        android:icon="@drawable/calculator_24"
+        android:title="@string/bmi_calculator" />
 
 </menu>

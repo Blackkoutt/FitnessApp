@@ -16,5 +16,17 @@
     <color name="red">#f50000</color>
     <color name="green">#0ecc00</color>
 
+    <color name="blue_700">#012e78</color>
+    <color name="blue_500">#004ecf</color>
+    <color name="blue_green">#029c73</color>
+    <color name="green_base">#029c21</color>
+    <color name="yellow">#d9e000</color>
+    <color name="orange">#e0ac00</color>
+    <color name="red_base">#cf0202</color>
+    <color name="dark_red">#6b0101</color>
+
+
+
+
 
 </resources>

@@ -6,7 +6,6 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity(tableName = "meal")
 public class Meal implements Serializable {

@@ -1,22 +1,22 @@
 
 w
-java:S2293õ"YReplace the type specification in this constructor call with the diamond operator ("<>").(œ¹Á€8Œú™“Ô1
+java:S2293ó"YReplace the type specification in this constructor call with the diamond operator ("<>").(œ¹Á€8Œú™“Ô1
 y
-java:S1192Ü"[Use already-defined constant 'EXTRA_PRODUCT_DETAILS' instead of duplicating its value here.(ÑŠ¼¶8ú™“Ô1
+java:S1192Ú"[Use already-defined constant 'EXTRA_PRODUCT_DETAILS' instead of duplicating its value here.(ÑŠ¼¶8ú™“Ô1
 m	java:S117]"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ı‰Ã¾8ÆÉæÁÓ1
 m	java:S117n"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(éø“·8ú™“Ô1
 K
 java:S1604•"(Make this anonymous inner class a lambda(“«ì×ıÿÿÿÿ8ÆÉæÁÓ1
 K
-java:S1604Â"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8ÆÉæÁÓ1
+java:S1604À"(Make this anonymous inner class a lambda(ü›êëşÿÿÿÿ8ÆÉæÁÓ1
 K
-java:S1604Ì"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8ÆÉæÁÓ1
+java:S1604Ê"(Make this anonymous inner class a lambda(‘ê‚¢ıÿÿÿÿ8ÆÉæÁÓ1
 F
-java:S1604»"(Make this anonymous inner class a lambda(”™ûÈ8ÆÉæÁÓ1
+java:S1604¹"(Make this anonymous inner class a lambda(”™ûÈ8ÆÉæÁÓ1
 :
-java:S1643"Use a StringBuilder instead.(’¤½ç8ú™“Ô1
+java:S1643‹"Use a StringBuilder instead.(’¤½ç8ú™“Ô1
 9
-java:S1643"Use a StringBuilder instead.(ƒã¤}8çŸÜ•Ô1
+java:S1643"Use a StringBuilder instead.(ƒã¤}8çŸÜ•Ô1
 l
 java:S1874G"JDon't override a deprecated method or explicitly mark it as "@Deprecated".(™­²©ùÿÿÿÿ8òÉæÁÓ1
 Z
@@ -30,23 +30,22 @@ java:S3252~"gUse static access with "com.google.android.material.snackbar.BaseT
 ]
 java:S1161ƒ":Add the "@Override" annotation above this method signature(î•Éğûÿÿÿÿ8õÉæÁÓ1
 \
-java:S1874›">Remove this use of "startActivityForResult"; it is deprecated.(À€íÕ8şÉæÁÓ1
-^	java:S125™"<This block of commented-out lines of code should be removed.(ôÂé¹üÿÿÿÿ8şÉæÁÓ1
+java:S1874™">Remove this use of "startActivityForResult"; it is deprecated.(À€íÕ8şÉæÁÓ1
 F
-java:S1185¢"(Remove this method to simply inherit it.(±íòÑ8ÿÉæÁÓ1
-^	java:S125¬"<This block of commented-out lines of code should be removed.(¨ç¼»ûÿÿÿÿ8åú™“Ô1
-Y	java:S125±"<This block of commented-out lines of code should be removed.(¡£™Ö8Àè¬—Ô1
-^	java:S125·"<This block of commented-out lines of code should be removed.(“½Œ»úÿÿÿÿ8æú™“Ô1
+java:S1185 "(Remove this method to simply inherit it.(±íòÑ8ÿÉæÁÓ1
+^	java:S125ª"<This block of commented-out lines of code should be removed.(¨ç¼»ûÿÿÿÿ8åú™“Ô1
+Y	java:S125¯"<This block of commented-out lines of code should be removed.(¡£™Ö8Àè¬—Ô1
+^	java:S125µ"<This block of commented-out lines of code should be removed.(“½Œ»úÿÿÿÿ8æú™“Ô1
 …
-java:S3252É"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8„ÊæÁÓ1
+java:S3252Ç"gUse static access with "com.google.android.material.snackbar.BaseTransientBottomBar" for "LENGTH_LONG".(½ÑÕ²8„ÊæÁÓ1
 ¤
-java:S1186Î"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8„ÊæÁÓ1
+java:S1186Ì"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(»ŠÇ¾ıÿÿÿÿ8„ÊæÁÓ1
 d
-java:S1126å"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8óú™“Ô1
-Y	java:S125ï"<This block of commented-out lines of code should be removed.(’Í„Ÿ8…ÊæÁÓ1
+java:S1126ã"AReplace this if-then-else statement by a single return statement.(¬âÉÚıÿÿÿÿ8óú™“Ô1
+Y	java:S125í"<This block of commented-out lines of code should be removed.(’Í„Ÿ8…ÊæÁÓ1
 [
-java:S1874„">Remove this use of "startActivityForResult"; it is deprecated.(Å¥Ş 8†ÊæÁÓ1
+java:S1874‚">Remove this use of "startActivityForResult"; it is deprecated.(Å¥Ş 8†ÊæÁÓ1
 T
 java:S1068@"2Remove this unused "editedCategory" private field.(½¼’ùÿÿÿÿ8‰ÊæÁÓ1
 F
-java:S1068š"(Remove this unused "mans" private field.(¤Š…8‰ÊæÁÓ1
+java:S1068˜"(Remove this unused "mans" private field.(¤Š…8‰ÊæÁÓ1

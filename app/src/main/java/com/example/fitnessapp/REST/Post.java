@@ -44,7 +44,4 @@ public class Post implements Serializable {
     public String getVideoFrame(){
         return this.videoFrame;
     }
-    //@SerializedName("comments")
-    //private List<Comment> comment;
-
 }

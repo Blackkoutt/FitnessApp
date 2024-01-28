@@ -45,9 +45,4 @@ public class ProductDetails implements Serializable {
     public void setProtein(float value){
         this.protein=value;
     }
-    /*private int productId;
-    public int getProductId(){return productId;}
-    public void setProductId(int id){
-        this.productId=id;
-    }*/
 }

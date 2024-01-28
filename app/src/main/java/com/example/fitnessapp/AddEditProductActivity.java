@@ -25,6 +25,7 @@ import com.example.fitnessapp.Database.ViewModels.MeasureUnitViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductDetailsViewModel;
 import com.example.fitnessapp.Database.ViewModels.ProductViewModel;
 import com.example.fitnessapp.R;
+import com.example.fitnessapp.ui.meals.MealsFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

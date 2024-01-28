@@ -4,9 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.fitnessapp.Database.Dao.CategoryDao;
 import com.example.fitnessapp.Database.Dao.MeasureUnitDao;
-import com.example.fitnessapp.Database.Models.Category;
 import com.example.fitnessapp.Database.Models.MeasureUnit;
 import com.example.fitnessapp.Database.ProductDatabase;
 

@@ -7,12 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.fitnessapp.Database.Models.Meal;
-import com.example.fitnessapp.Database.Models.MealProduct;
 import com.example.fitnessapp.Database.Models.MealWithRelations;
-import com.example.fitnessapp.Database.Models.Product;
-import com.example.fitnessapp.Database.Models.ProductWithRelations;
 import com.example.fitnessapp.Database.Repositories.MealRepository;
-import com.example.fitnessapp.Database.Repositories.ProductRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -27,12 +23,15 @@ public class MealViewModel extends AndroidViewModel {
     }
     public LiveData<List<MealWithRelations>> getAll() {return meals;}
     public LiveData<List<MealWithRelations>> getAllByDate(LocalDate date) {return mealRepository.getAllMealsByDate(date);}
+
     public long insert (Meal meal){
         return mealRepository.insert(meal);
     }
+
     public void update(Meal meal){
         mealRepository.update(meal);
     }
+
     public void delete(Meal meal){
         mealRepository.delete(meal);
     }

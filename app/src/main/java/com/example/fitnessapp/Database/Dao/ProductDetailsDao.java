@@ -8,9 +8,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.fitnessapp.Database.Models.Category;
-import com.example.fitnessapp.Database.Models.MeasureUnit;
-import com.example.fitnessapp.Database.Models.Product;
 import com.example.fitnessapp.Database.Models.ProductDetails;
 
 import java.util.List;

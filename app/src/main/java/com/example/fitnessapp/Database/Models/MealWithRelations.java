@@ -7,6 +7,7 @@ import androidx.room.Relation;
 import java.io.Serializable;
 import java.util.List;
 
+// Klasa definiująca posiłek z relacjami
 public class MealWithRelations implements Serializable {
     @Embedded
     public Meal meal;
@@ -17,6 +18,8 @@ public class MealWithRelations implements Serializable {
             entityColumn = "mealCategoryId"
     )
     public MealCategory mealCategory;
+
+    // Relacja N:N
     @Relation(
             parentColumn = "mealId",
             entityColumn = "productId",

@@ -11,8 +11,6 @@ import androidx.room.Update;
 
 import com.example.fitnessapp.Database.Models.Meal;
 import com.example.fitnessapp.Database.Models.MealWithRelations;
-import com.example.fitnessapp.Database.Models.Product;
-import com.example.fitnessapp.Database.Models.ProductWithRelations;
 
 import java.time.LocalDate;
 import java.util.List;
