@@ -48,7 +48,7 @@ public class StepCounterService extends Service implements SensorEventListener {
         Notification notification = new NotificationCompat.Builder(this, "StepCounterChannel")
                 .setContentTitle("Step Counter Service")
                 .setContentText("Counting steps in background")
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                .setSmallIcon(R.drawable.baseline_steps_counter)
                 .build();
         startForeground(1, notification);
         return START_STICKY;
